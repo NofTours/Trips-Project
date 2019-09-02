@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <section class="col-md-auto">
+      <p class="alert alert-dark" style="margin-bottom: 10px">
+        <strong>home....</strong>
+        Here are all the calls to the server.
+      </p>
+      <div class="alert alert-success">
+        <label>Get without parameters(Returns all GET users):</label>
+        <div *ngFor="let value of getUsersFromServer">
+          <label>{{value}}</label>
+        </div>
+      </div>
+
+      <div class="alert alert-danger">
+        <label>Get with parameter - id(Returns GET user by index id):</label>
+        <input [(ngModel)]="getId" type="number" max="3" min="1" />
+        <button [appButtonHover]="userByIdtext.textContent" #userByIdtext (click)="getUserById()">Get User</button>
+        <label>{{getUserByIdFromServer}}</label>
+      </div>
+
+      <div class="alert alert-info">
+        <label>Get with parameter - value(Returns UPPERCASE value):</label>
+        <input type="text" [(ngModel)]="getValue" />
+        <button [appButtonHover]="upperCasetext.textContent" #upperCasetext (click)="getUpperCaseValue()">To UpperCase</button>
+        <label>{{toUpperValueFromServer}}</label>
+      </div>
+
+      <div class="alert alert-warning">
+        <label>POST with parameter - id(Returns POST user by index id):</label>
+        <input [(ngModel)]="postId" type="number" max="3" min="1" />
+        <button [appButtonHover]="posttext.textContent" #posttext (click)="postUserById()">Post User</button>
+        <label>{{postUserByIdFromServer}}</label>
+      </div>
+    </section>
+  </div>
+</div>

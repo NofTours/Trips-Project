@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <section class="col-md-auto">
+            <form (ngSubmit)="onSubmitForm()" #signupForm="ngForm" class="text-left border border-light p-5">
+                <p [ngStyle]="{'color':(submitted==true)?'red':'black'}">
+                    <strong>
+                        Please fill in your information:
+                    </strong>
+                </p>
+                <div appWarning *ngIf="!submitted&&cname.invalid&&cname.touched">
+                    Please enter contact name.
+                </div>
+                <div appWarning *ngIf="submitted && cname.errors && cname.errors.required">
+                    Contact name is required.
+                </div>
+                <div>
+                    Contact Name:
+                    <input [(ngModel)]="newUser.contactName" name="contactName" #cname="ngModel" required
+                        class="form-control mb-4">
+                </div>
+                <div appWarning *ngIf="(!submitted||(submitted&&email.value!=''))&&email.invalid&&email.touched">
+                    Please enter a valid email.
+                </div>
+                <div appWarning *ngIf="submitted&&email.value==''&&email.errors?.required">
+                    Email is required.
+                </div>
+                <div>
+                    Email:
+                    <input [(ngModel)]="newUser.email" name="email" #email="ngModel" email required
+                        class="form-control mb-4" placeholder="example@example.com">
+                </div>
+                <div appWarning
+                    *ngIf="(!submitted||(submitted&&phone1.value!=''))&&phone1.invalid&&phone1.errors&&phone1.touched">
+                    The phone number should be at least 7 characters long.
+                </div>
+                <div appWarning *ngIf="submitted&&phone1.errors?.required&&phone1.value==''">
+                    Phone number is required.
+                </div>
+                <div>
+                    Phone 1:
+                    <input [(ngModel)]="newUser.phone1" name="phone1"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'');" #phone1="ngModel" minlength="7" required
+                        class="form-control mb-4">
+                </div>
+                <div appWarning *ngIf="(!submitted||(submitted&&phone2.value!=''))&&phone2.invalid">
+                    The phone number should be at least 7 characters long.
+                </div>
+                <div>
+                    Phone 2:
+                    <input [(ngModel)]="newUser.phone2" name="phone2" class="form-control mb-4"
+                        placeholder="Optional - phone number in Israel"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'');" #phone2="ngModel" minlength="7">
+                </div>
+                <div appWarning *ngIf="submitted&&password1.errors?.required&&password1.value==''">
+                    Password is required.
+                </div>
+                <div appWarning
+                    *ngIf="(!submitted||(submitted&&password1.value!=''))&&password1.touched&&password1.errors">
+                    Password should be at least 8 characters long.
+                </div>
+                <div appWarning *ngIf=" (password2.dirty||password2.touched)&&password1.value!=password2.value">
+                    Passwords must match.
+                </div>
+                <div>
+                    Password:
+                    <input type="password" [(ngModel)]="newUser.password" name="password" #password1="ngModel"
+                        required minlength="8" class="form-control mb-4">
+                    Confirm Password:
+                    
+                    <input type="password" ngModel name="confirmPwd" required #password2="ngModel"
+                        class="form-control mb-4">
+                </div>                
+                <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
+</div>
+
+<div *ngIf="validForm">
+    User's details:
+    
+    <div>{{newUser.id}}</div>
+    <div>{{newUser.contactName}}</div>
+    <div>{{newUser.email}}</div>
+    <div>{{newUser.phone}}</div>
+    <div>{{newUser.password.pwd}}</div>
+
+</div>

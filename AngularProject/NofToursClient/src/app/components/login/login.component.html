@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <section class="col-md-auto">
+      <form (ngSubmit)="onSubmitForm()" #signupForm="ngForm" class="text-left border border-light p-5">
+        <div appWarning *ngIf="submitted && auth==false">
+          Email or password are incorrect.
+        </div>
+        <p>
+          Sign in:
+        </p>
+        <div>
+          Email:
+          <div appWarning *ngIf="femail.errors?.invalid && femail.touched">
+            Please enter a valid email address.
+          </div>
+          <div appWarning *ngIf="submitted && femail.errors?.required">
+            The email is required.
+          </div>
+          <input class="form-control mb-4" [(ngModel)]="email" name="email" #femail="ngModel" required email
+            placeholder="example@example.com">
+        </div>
+        <div>
+          Password:
+          <div appWarning *ngIf="submitted && fpassword.errors?.required ">
+            The password is required.
+          </div>
+          <input type="password" [(ngModel)]="password" name="password" #fpassword="ngModel" class="form-control mb-4"
+            required>
+        </div>        
+        <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<div *ngIf="validForm">
+  User's details:
+  
+  <div>{{email}}</div>
+  <div>{{password}}</div>
+</div>
