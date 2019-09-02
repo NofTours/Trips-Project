@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+    <EntitySetMapping Name="BookedTrips">
+      <EntityTypeMapping TypeName="dbModel.BookedTrips">
+        <MappingFragment StoreEntitySet="BookedTrips">
+          <ScalarProperty Name="CodeTrip" ColumnName="CodeTrip" />
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+          <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
+          <ScalarProperty Name="Polyline" ColumnName="Polyline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendar">
+      <EntityTypeMapping TypeName="dbModel.Calendar">
+        <MappingFragment StoreEntitySet="Calendar">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DayStatus" ColumnName="DayStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="dbModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="CodeClient" ColumnName="CodeClient" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="LeavingAddress" ColumnName="LeavingAddress" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipment">
+      <EntityTypeMapping TypeName="dbModel.Equipment">
+        <MappingFragment StoreEntitySet="Equipment">
+          <ScalarProperty Name="CodeEquipment" ColumnName="CodeEquipment" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquipmentSites">
+      <EntityTypeMapping TypeName="dbModel.EquipmentSites">
+        <MappingFragment StoreEntitySet="EquipmentSites">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="CodeEquipment" ColumnName="CodeEquipment" />
+          <ScalarProperty Name="CodeSite" ColumnName="CodeSite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sites">
+      <EntityTypeMapping TypeName="dbModel.Sites">
+        <MappingFragment StoreEntitySet="Sites">
+          <ScalarProperty Name="CodeSite" ColumnName="CodeSite" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="AddressGMaps" ColumnName="AddressGMaps" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="OpeningHour" ColumnName="OpeningHour" />
+          <ScalarProperty Name="ClosingHour" ColumnName="ClosingHour" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="EstimatedStay" ColumnName="EstimatedStay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="dbModel.Trips">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="CodeTrip" ColumnName="CodeTrip" />
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+          <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
+          <ScalarProperty Name="Polyline" ColumnName="Polyline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TripSite">
+      <EntityTypeMapping TypeName="dbModel.TripSite">
+        <MappingFragment StoreEntitySet="TripSite">
+          <ScalarProperty Name="CodeTripSite" ColumnName="CodeTripSite" />
+          <ScalarProperty Name="SiteCode" ColumnName="SiteCode" />
+          <ScalarProperty Name="TripCode" ColumnName="TripCode" />
+          <ScalarProperty Name="OrderInTrip" ColumnName="OrderInTrip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

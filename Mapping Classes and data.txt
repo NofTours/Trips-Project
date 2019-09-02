@@ -1,0 +1,13 @@
+1. DAL - should contain a mapper class: 
+* mapping between DB objects to CommomLayer objects and vice versa.
+
+2. WEB API receives an object from angular: 
+	* Angular has exact matching ts objects to the commonL objects
+	* Web Api interprets them automatically as commonL objects.(parmeter in function).		
+
+
+
+TO DO this week:
+
+@ Finish Mapper class in DataLayer to map objects between DB objects to CommomLayer objects and vice versa.
+@ Finish basic Common classes in common layer.
