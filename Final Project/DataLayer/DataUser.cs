@@ -9,7 +9,7 @@ namespace DataLayer
 {
     public static class DataUser
     {
-        static tripsDbEntities1 db = new tripsDbEntities1();
+        static dbEntities db = new dbEntities();
         //* TODO move to static function that will try to create connection to db.
 
 
@@ -19,11 +19,33 @@ namespace DataLayer
             
             if (result.Count() > 0)
                 return false; //* User already exists
-            Client client = Mapper.UserToDB(user);
+            Clients client = Mapper.UserToDB(user);
             db.Clients.Add(client);
             
             String list = db.Clients.ToString();
-            db.SaveChanges();
+            try
+            {
+                //db.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT [dbo].[Clients] ON");
+                db.SaveChanges();
+                //db.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT [dbo].[Clients] OFF");            
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
             return true;           
         } 
     }

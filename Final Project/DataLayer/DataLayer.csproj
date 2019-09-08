@@ -52,59 +52,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookedTrip.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+    <Compile Include="BookedTrips.cs">
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Calendar.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Clients.cs">
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Equipment.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentSite.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+    <Compile Include="EquipmentSites.cs">
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Mapper.cs" />
-    <Compile Include="NofToursDBModel.Context.cs">
+    <Compile Include="DataUser.cs" />
+    <Compile Include="NofToursDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NofToursDBModel.Context.tt</DependentUpon>
+      <DependentUpon>NofToursDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="NofToursDBModel.cs">
+    <Compile Include="NofToursDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="NofToursDBModel.Designer.cs">
+    <Compile Include="NofToursDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NofToursDBModel.edmx</DependentUpon>
+      <DependentUpon>NofToursDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Site.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sites.cs">
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Trip.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+    <Compile Include="Trips.cs">
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
     <Compile Include="TripSite.cs">
-      <DependentUpon>NofToursDBModel.tt</DependentUpon>
+      <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataUser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="NofToursDBModel.edmx">
+    <EntityDeploy Include="NofToursDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NofToursDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>NofToursDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="NofToursDBModel.edmx.diagram">
-      <DependentUpon>NofToursDBModel.edmx</DependentUpon>
+    <None Include="NofToursDB.edmx.diagram">
+      <DependentUpon>NofToursDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -114,15 +115,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NofToursDBModel.Context.tt">
+    <Content Include="NofToursDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NofToursDBModel.edmx</DependentUpon>
-      <LastGenOutput>NofToursDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>NofToursDB.edmx</DependentUpon>
+      <LastGenOutput>NofToursDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="NofToursDBModel.tt">
+    <Content Include="NofToursDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NofToursDBModel.edmx</DependentUpon>
-      <LastGenOutput>NofToursDBModel.cs</LastGenOutput>
+      <DependentUpon>NofToursDB.edmx</DependentUpon>
+      <LastGenOutput>NofToursDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

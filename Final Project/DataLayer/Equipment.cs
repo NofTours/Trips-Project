@@ -17,13 +17,13 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equipment()
         {
-            this.EquipmentSites = new HashSet<EquipmentSite>();
+            this.EquipmentSites = new HashSet<EquipmentSites>();
         }
     
         public int CodeEquipment { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EquipmentSite> EquipmentSites { get; set; }
+        public virtual ICollection<EquipmentSites> EquipmentSites { get; set; }
     }
 }

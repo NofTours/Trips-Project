@@ -2,16 +2,16 @@
 <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="BookedTrip">
     <Key>
-      <PropertyRef Name="CodeTrip" />
+      <PropertyRef Name="TripId" />
     </Key>
-    <Property Name="CodeTrip" Type="Int32" Nullable="false" />
-    <Property Name="ClientCode" Type="Int32" Nullable="false" />
+    <Property Name="TripId" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TotalTripHours" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Polyline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Client" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="BookedTrip" ToRole="Client" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_BookedTrips_ToClients" FromRole="BookedTrips" ToRole="Clients" />
   </EntityType>
   <EntityType Name="Calendar">
     <Key>
@@ -20,6 +20,20 @@
     <Property Name="Code" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="DayStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeavingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumPeople" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BookedTrips" Relationship="Self.FK_BookedTrips_ToClients" FromRole="Clients" ToRole="BookedTrips" />
+    <NavigationProperty Name="Trips" Relationship="Self.FK_Trips_ToClients" FromRole="Clients" ToRole="Trips" />
   </EntityType>
   <EntityType Name="Equipment">
     <Key>
@@ -58,17 +72,17 @@
   </EntityType>
   <EntityType Name="Trip">
     <Key>
-      <PropertyRef Name="CodeTrip" />
+      <PropertyRef Name="TripId" />
     </Key>
-    <Property Name="CodeTrip" Type="Int32" Nullable="false" />
-    <Property Name="ClientCode" Type="Int32" Nullable="false" />
+    <Property Name="TripId" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TotalTripHours" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Polyline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
     <NavigationProperty Name="TripSites" Relationship="Self.FK_TripSite_ToTrips" FromRole="Trips" ToRole="TripSite" />
-    <NavigationProperty Name="Client" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trip" ToRole="Client" />
   </EntityType>
   <EntityType Name="TripSite">
     <Key>
@@ -76,11 +90,35 @@
     </Key>
     <Property Name="CodeTripSite" Type="Int32" Nullable="false" />
     <Property Name="SiteCode" Type="Int32" Nullable="false" />
-    <Property Name="TripCode" Type="Int32" Nullable="false" />
+    <Property Name="TripId" Type="Int32" Nullable="false" />
     <Property Name="OrderInTrip" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Site" Relationship="Self.FK_TripSite_ToSites" FromRole="TripSite" ToRole="Sites" />
     <NavigationProperty Name="Trip" Relationship="Self.FK_TripSite_ToTrips" FromRole="TripSite" ToRole="Trips" />
   </EntityType>
+  <Association Name="FK_BookedTrips_ToClients">
+    <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+    <End Role="BookedTrips" Type="Self.BookedTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="BookedTrips">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trips_ToClients">
+    <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+    <End Role="Trips" Type="Self.Trip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="Trips">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EquipmentSites_ToEquipment">
     <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
     <End Role="EquipmentSites" Type="Self.EquipmentSite" Multiplicity="*" />
@@ -122,21 +160,30 @@
     <End Role="TripSite" Type="Self.TripSite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Trips">
-        <PropertyRef Name="CodeTrip" />
+        <PropertyRef Name="TripId" />
       </Principal>
       <Dependent Role="TripSite">
-        <PropertyRef Name="TripCode" />
+        <PropertyRef Name="TripId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="tripsDbEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="tripsDBEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BookedTrips" EntityType="Self.BookedTrip" />
     <EntitySet Name="Calendars" EntityType="Self.Calendar" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
     <EntitySet Name="Equipments" EntityType="Self.Equipment" />
     <EntitySet Name="EquipmentSites" EntityType="Self.EquipmentSite" />
     <EntitySet Name="Sites" EntityType="Self.Site" />
     <EntitySet Name="Trips" EntityType="Self.Trip" />
     <EntitySet Name="TripSites" EntityType="Self.TripSite" />
+    <AssociationSet Name="FK_BookedTrips_ToClients" Association="Self.FK_BookedTrips_ToClients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="BookedTrips" EntitySet="BookedTrips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trips_ToClients" Association="Self.FK_Trips_ToClients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
     <AssociationSet Name="FK_EquipmentSites_ToEquipment" Association="Self.FK_EquipmentSites_ToEquipment">
       <End Role="Equipment" EntitySet="Equipments" />
       <End Role="EquipmentSites" EntitySet="EquipmentSites" />
@@ -153,52 +200,5 @@
       <End Role="Trips" EntitySet="Trips" />
       <End Role="TripSite" EntitySet="TripSites" />
     </AssociationSet>
-    <EntitySet Name="Clients" EntityType="dbModel.Client" />
-    <AssociationSet Name="FK_BookedTrips_ToClients" Association="dbModel.FK_BookedTrips_ToClients">
-      <End Role="Client" EntitySet="Clients" />
-      <End Role="BookedTrip" EntitySet="BookedTrips" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Trips_ToClients" Association="dbModel.FK_Trips_ToClients">
-      <End Role="Client" EntitySet="Clients" />
-      <End Role="Trip" EntitySet="Trips" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Client">
-    <Key>
-      <PropertyRef Name="CodeClient" />
-    </Key>
-    <Property Name="CodeClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Phone1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Phone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LeavingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NumPeople" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="BookedTrips" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="Client" ToRole="BookedTrip" />
-    <NavigationProperty Name="Trips" Relationship="dbModel.FK_Trips_ToClients" FromRole="Client" ToRole="Trip" />
-  </EntityType>
-  <Association Name="FK_BookedTrips_ToClients">
-    <End Type="dbModel.Client" Role="Client" Multiplicity="1" />
-    <End Type="dbModel.BookedTrip" Role="BookedTrip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Client">
-        <PropertyRef Name="CodeClient" />
-      </Principal>
-      <Dependent Role="BookedTrip">
-        <PropertyRef Name="ClientCode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Trips_ToClients">
-    <End Type="dbModel.Client" Role="Client" Multiplicity="1" />
-    <End Type="dbModel.Trip" Role="Trip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Client">
-        <PropertyRef Name="CodeClient" />
-      </Principal>
-      <Dependent Role="Trip">
-        <PropertyRef Name="ClientCode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

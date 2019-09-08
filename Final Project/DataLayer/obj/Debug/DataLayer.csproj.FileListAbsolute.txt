@@ -51,3 +51,17 @@ C:\Users\OWNER\Desktop\Trips Project\Final Project\DataLayer\obj\Debug\DataLayer
 C:\Users\OWNER\Desktop\Trips Project\Final Project\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
 C:\Users\OWNER\Desktop\Trips Project\Final Project\DataLayer\obj\Debug\DataLayer.dll
 C:\Users\OWNER\Desktop\Trips Project\Final Project\DataLayer\obj\Debug\DataLayer.pdb
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\CommonLayer.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\CommonLayer.pdb
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\DataLayer\obj\Debug\DataLayer.pdb

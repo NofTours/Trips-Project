@@ -1,7 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { RegisterComponent } from '../register/register.component';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild("signupForm") form: NgForm;
+  @ViewChild("signupForm", {static: false}) form: NgForm;
   constructor(private route: Router) { 
     this.email="";
     this.password="";

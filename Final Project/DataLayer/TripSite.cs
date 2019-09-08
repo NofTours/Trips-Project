@@ -16,10 +16,10 @@ namespace DataLayer
     {
         public int CodeTripSite { get; set; }
         public int SiteCode { get; set; }
-        public int TripCode { get; set; }
+        public int TripId { get; set; }
         public int OrderInTrip { get; set; }
     
-        public virtual Site Site { get; set; }
-        public virtual Trip Trip { get; set; }
+        public virtual Sites Sites { get; set; }
+        public virtual Trips Trips { get; set; }
     }
 }

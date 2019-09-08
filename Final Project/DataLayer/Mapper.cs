@@ -10,9 +10,9 @@ namespace DataLayer
     static class Mapper
     {
         /****************Client***********************/ 
-        public static Client UserToDB(CommonClient commonClient)
+        public static Clients UserToDB(CommonClient commonClient)
             {
-            Client dBClient = new Client()
+            Clients dBClient = new Clients()
             {
                 ContactName = commonClient.ContactName,
                 Email = commonClient.Email,
@@ -24,7 +24,7 @@ namespace DataLayer
             return dBClient;
         }
 
-        public static CommonClient UserToCommon(Client dBClient)
+        public static CommonClient UserToCommon(Clients dBClient)
         {
             CommonClient commonClient = new CommonClient()
             {
@@ -39,9 +39,9 @@ namespace DataLayer
         }
 
         /****************BookedTrip***********************/
-        public static BookedTrip BookedTripToDB(CommonBookedTrip commonBookedTrip)
+        public static BookedTrips BookedTripToDB(CommonBookedTrip commonBookedTrip)
         {
-            BookedTrip dBBookedTrip = new BookedTrip()
+            BookedTrips dBBookedTrip = new BookedTrips()
             {
                 BeginTime = commonBookedTrip.BeginTime,
                 BookingStatus = commonBookedTrip.BookingStatus,
@@ -52,7 +52,7 @@ namespace DataLayer
             return dBBookedTrip;
         }
 
-        public static CommonBookedTrip BookedTripToCommon(BookedTrip dBBookedTrip)
+        public static CommonBookedTrip BookedTripToCommon(BookedTrips dBBookedTrip)
         {
             CommonBookedTrip commonBookedTrip = new CommonBookedTrip()
             {
@@ -106,9 +106,9 @@ namespace DataLayer
             return commonEquipment;
         }
         /****************Site***********************/
-        public static Site SiteToDB(CommonSite commonSite)
+        public static Sites SiteToDB(CommonSite commonSite)
         {
-            Site site = new Site()
+            Sites site = new Sites()
             {
                 Name = commonSite.Name,
                 Description = commonSite.Description,
@@ -123,7 +123,7 @@ namespace DataLayer
             return site;
         }
 
-        public static CommonSite SiteToCommon(Site site)
+        public static CommonSite SiteToCommon(Sites site)
         {
             CommonSite commonSite = new CommonSite()
             {
@@ -140,9 +140,9 @@ namespace DataLayer
             return commonSite;
         }
         /****************Trip***********************/
-         public static Trip TripToDB(CommonTrip commonTrip)
+         public static Trips TripToDB(CommonTrip commonTrip)
         {
-            Trip trip = new Trip()
+            Trips trip = new Trips()
             {
                 BeginTime = commonTrip.BeginTime,
                 BookingStatus = commonTrip.BookingStatus,
@@ -153,7 +153,7 @@ namespace DataLayer
             return trip;
         }
 
-        public static CommonTrip TripToCommon(Trip trip)
+        public static CommonTrip TripToCommon(Trips trip)
         {
             CommonTrip commonTrip = new CommonTrip()
             {

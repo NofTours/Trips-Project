@@ -14,3 +14,8 @@ C:\Users\OWNER\Desktop\Trips Project\Final Project\CommonLayer\obj\Debug\CommonL
 C:\Users\OWNER\Desktop\Trips Project\Final Project\CommonLayer\obj\Debug\CommonLayer.csproj.CoreCompileInputs.cache
 C:\Users\OWNER\Desktop\Trips Project\Final Project\CommonLayer\obj\Debug\CommonLayer.dll
 C:\Users\OWNER\Desktop\Trips Project\Final Project\CommonLayer\obj\Debug\CommonLayer.pdb
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\CommonLayer\bin\Debug\CommonLayer.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\CommonLayer\bin\Debug\CommonLayer.pdb
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.csproj.CoreCompileInputs.cache
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.dll
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.pdb

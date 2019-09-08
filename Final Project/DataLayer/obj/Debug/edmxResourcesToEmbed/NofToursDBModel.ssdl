@@ -2,10 +2,10 @@
 <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BookedTrips">
     <Key>
-      <PropertyRef Name="CodeTrip" />
+      <PropertyRef Name="TripId" />
     </Key>
-    <Property Name="CodeTrip" Type="int" Nullable="false" />
-    <Property Name="ClientCode" Type="int" Nullable="false" />
+    <Property Name="TripId" Type="int" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="BeginTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -22,9 +22,9 @@
   </EntityType>
   <EntityType Name="Clients">
     <Key>
-      <PropertyRef Name="CodeClient" />
+      <PropertyRef Name="ClientId" />
     </Key>
-    <Property Name="CodeClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Phone1" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Phone2" Type="varchar" MaxLength="50" />
@@ -64,10 +64,10 @@
   </EntityType>
   <EntityType Name="Trips">
     <Key>
-      <PropertyRef Name="CodeTrip" />
+      <PropertyRef Name="TripId" />
     </Key>
-    <Property Name="CodeTrip" Type="int" Nullable="false" />
-    <Property Name="ClientCode" Type="int" Nullable="false" />
+    <Property Name="TripId" Type="int" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="BeginTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -80,7 +80,7 @@
     </Key>
     <Property Name="CodeTripSite" Type="int" Nullable="false" />
     <Property Name="SiteCode" Type="int" Nullable="false" />
-    <Property Name="TripCode" Type="int" Nullable="false" />
+    <Property Name="TripId" Type="int" Nullable="false" />
     <Property Name="OrderInTrip" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_BookedTrips_ToClients">
@@ -88,10 +88,10 @@
     <End Role="BookedTrips" Type="Self.BookedTrips" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Clients">
-        <PropertyRef Name="CodeClient" />
+        <PropertyRef Name="ClientId" />
       </Principal>
       <Dependent Role="BookedTrips">
-        <PropertyRef Name="ClientCode" />
+        <PropertyRef Name="ClientId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -124,10 +124,10 @@
     <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Clients">
-        <PropertyRef Name="CodeClient" />
+        <PropertyRef Name="ClientId" />
       </Principal>
       <Dependent Role="Trips">
-        <PropertyRef Name="ClientCode" />
+        <PropertyRef Name="ClientId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -148,10 +148,10 @@
     <End Role="TripSite" Type="Self.TripSite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Trips">
-        <PropertyRef Name="CodeTrip" />
+        <PropertyRef Name="TripId" />
       </Principal>
       <Dependent Role="TripSite">
-        <PropertyRef Name="TripCode" />
+        <PropertyRef Name="TripId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
