@@ -1,0 +1,6 @@
+Just so we remember:
+the reason the entity framework didn't work with the primary key in each table:
+- The pk name must contain: "Id"
+- It must be declared as Identity(m,n)
+
+Batsheva m.
