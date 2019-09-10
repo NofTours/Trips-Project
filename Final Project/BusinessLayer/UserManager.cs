@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,10 @@ namespace BusinessLayer
             }
             if (DataUser.Register(client) == false)
             {
-                Console.WriteLine("User " + client.Email + " already exists.");
+                Debug.WriteLine("User " + client.Email + " already exists.");
                 return false;
             }
-            Console.WriteLine("User " + client.Email + " was added successfully.");
+            Debug.WriteLine("User " + client.Email + " was added successfully.");
             return true;
         }
     }

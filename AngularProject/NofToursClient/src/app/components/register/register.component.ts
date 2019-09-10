@@ -12,7 +12,7 @@ import { WebApiService } from 'src/app/services/web-api.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @ViewChild("signupForm") form: NgForm;
+  @ViewChild("signupForm",{static:false}) form: NgForm;
 
   constructor(private userService: UsersService, private route: Router, private webApi: WebApiService) {
     this.newUser = new CommonClient("", "", "", "", "");
