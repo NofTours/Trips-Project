@@ -14,8 +14,8 @@ namespace DataLayer
     
     public partial class TripSite
     {
-        public int CodeTripSite { get; set; }
-        public int SiteCode { get; set; }
+        public int TripSiteId { get; set; }
+        public int SiteId { get; set; }
         public int TripId { get; set; }
         public int OrderInTrip { get; set; }
     

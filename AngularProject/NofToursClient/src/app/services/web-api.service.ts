@@ -37,6 +37,19 @@ export class WebApiService {
      this.http.post(this.baseUrl + "/api/Register", commomClient).subscribe(data=>{console.log(data)});
   }
 
+  doUserLogin(email: String, password: String): Observable<Boolean>
+  {
+    debugger;
+    // const response = await fetch(this.baseUrl, {
+    //   method: "post",
+    //   body: JSON.stringify({
+    //     email,
+    //     password
+    //   })
+    return this.http.post<Boolean>(this.baseUrl + "/api/Login", {email, password});
+    
+  }
+
 
 
 }

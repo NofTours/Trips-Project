@@ -20,7 +20,7 @@ namespace DataLayer
             this.EquipmentSites = new HashSet<EquipmentSites>();
         }
     
-        public int CodeEquipment { get; set; }
+        public int EquipmentId { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

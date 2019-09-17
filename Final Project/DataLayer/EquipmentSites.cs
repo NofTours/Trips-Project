@@ -14,9 +14,9 @@ namespace DataLayer
     
     public partial class EquipmentSites
     {
-        public int Code { get; set; }
-        public int CodeEquipment { get; set; }
-        public int CodeSite { get; set; }
+        public int EquipmentSitesId { get; set; }
+        public int EquipmentId { get; set; }
+        public int SiteId { get; set; }
     
         public virtual Equipment Equipment { get; set; }
         public virtual Sites Sites { get; set; }

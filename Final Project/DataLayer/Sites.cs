@@ -21,7 +21,7 @@ namespace DataLayer
             this.TripSite = new HashSet<TripSite>();
         }
     
-        public int CodeSite { get; set; }
+        public int SiteId { get; set; }
         public string Name { get; set; }
         public string Area { get; set; }
         public string AddressGMaps { get; set; }

@@ -19,9 +19,9 @@
         </EntityType>
         <EntityType Name="Calendar">
           <Key>
-            <PropertyRef Name="Code" />
+            <PropertyRef Name="CalendarId" />
           </Key>
-          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="CalendarId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="DayStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -40,24 +40,24 @@
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
-            <PropertyRef Name="CodeEquipment" />
+            <PropertyRef Name="EquipmentId" />
           </Key>
-          <Property Name="CodeEquipment" Type="int" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="EquipmentSites">
           <Key>
-            <PropertyRef Name="Code" />
+            <PropertyRef Name="EquipmentSitesId" />
           </Key>
-          <Property Name="Code" Type="int" Nullable="false" />
-          <Property Name="CodeEquipment" Type="int" Nullable="false" />
-          <Property Name="CodeSite" Type="int" Nullable="false" />
+          <Property Name="EquipmentSitesId" Type="int" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sites">
           <Key>
-            <PropertyRef Name="CodeSite" />
+            <PropertyRef Name="SiteId" />
           </Key>
-          <Property Name="CodeSite" Type="int" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AddressGMaps" Type="nvarchar(max)" Nullable="false" />
@@ -82,10 +82,10 @@
         </EntityType>
         <EntityType Name="TripSite">
           <Key>
-            <PropertyRef Name="CodeTripSite" />
+            <PropertyRef Name="TripSiteId" />
           </Key>
-          <Property Name="CodeTripSite" Type="int" Nullable="false" />
-          <Property Name="SiteCode" Type="int" Nullable="false" />
+          <Property Name="TripSiteId" Type="int" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
           <Property Name="OrderInTrip" Type="int" Nullable="false" />
         </EntityType>
@@ -106,10 +106,10 @@
           <End Role="EquipmentSites" Type="Self.EquipmentSites" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipment">
-              <PropertyRef Name="CodeEquipment" />
+              <PropertyRef Name="EquipmentId" />
             </Principal>
             <Dependent Role="EquipmentSites">
-              <PropertyRef Name="CodeEquipment" />
+              <PropertyRef Name="EquipmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -118,10 +118,10 @@
           <End Role="EquipmentSites" Type="Self.EquipmentSites" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sites">
-              <PropertyRef Name="CodeSite" />
+              <PropertyRef Name="SiteId" />
             </Principal>
             <Dependent Role="EquipmentSites">
-              <PropertyRef Name="CodeSite" />
+              <PropertyRef Name="SiteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -142,10 +142,10 @@
           <End Role="TripSite" Type="Self.TripSite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sites">
-              <PropertyRef Name="CodeSite" />
+              <PropertyRef Name="SiteId" />
             </Principal>
             <Dependent Role="TripSite">
-              <PropertyRef Name="SiteCode" />
+              <PropertyRef Name="SiteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -199,160 +199,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="BookedTrips">
-          <Key>
-            <PropertyRef Name="TripId" />
-          </Key>
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TotalTripHours" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Polyline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clients" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="BookedTrips" ToRole="Clients" />
-        </EntityType>
-        <EntityType Name="Calendar">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DayStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Equipment">
-          <Key>
-            <PropertyRef Name="CodeEquipment" />
-          </Key>
-          <Property Name="CodeEquipment" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="EquipmentSites" Relationship="Self.FK_EquipmentSites_ToEquipment" FromRole="Equipment" ToRole="EquipmentSites" />
-        </EntityType>
-        <EntityType Name="EquipmentSites">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="CodeEquipment" Type="Int32" Nullable="false" />
-          <Property Name="CodeSite" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Equipment" Relationship="Self.FK_EquipmentSites_ToEquipment" FromRole="EquipmentSites" ToRole="Equipment" />
-          <NavigationProperty Name="Sites" Relationship="Self.FK_EquipmentSites_ToSites" FromRole="EquipmentSites" ToRole="Sites" />
-        </EntityType>
-        <EntityType Name="Sites">
-          <Key>
-            <PropertyRef Name="CodeSite" />
-          </Key>
-          <Property Name="CodeSite" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AddressGMaps" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OpeningHour" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="ClosingHour" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Category" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EstimatedStay" Type="Time" Precision="7" />
-          <NavigationProperty Name="EquipmentSites" Relationship="Self.FK_EquipmentSites_ToSites" FromRole="Sites" ToRole="EquipmentSites" />
-          <NavigationProperty Name="TripSite" Relationship="Self.FK_TripSite_ToSites" FromRole="Sites" ToRole="TripSite" />
-        </EntityType>
-        <EntityType Name="Trips">
-          <Key>
-            <PropertyRef Name="TripId" />
-          </Key>
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="BookingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TotalTripHours" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Polyline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="TripSite" Relationship="Self.FK_TripSite_ToTrips" FromRole="Trips" ToRole="TripSite" />
-          <NavigationProperty Name="Clients" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
-        </EntityType>
-        <EntityType Name="TripSite">
-          <Key>
-            <PropertyRef Name="CodeTripSite" />
-          </Key>
-          <Property Name="CodeTripSite" Type="Int32" Nullable="false" />
-          <Property Name="SiteCode" Type="Int32" Nullable="false" />
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="OrderInTrip" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Sites" Relationship="Self.FK_TripSite_ToSites" FromRole="TripSite" ToRole="Sites" />
-          <NavigationProperty Name="Trips" Relationship="Self.FK_TripSite_ToTrips" FromRole="TripSite" ToRole="Trips" />
-        </EntityType>
-        <Association Name="FK_EquipmentSites_ToEquipment">
-          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
-          <End Role="EquipmentSites" Type="Self.EquipmentSites" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Equipment">
-              <PropertyRef Name="CodeEquipment" />
-            </Principal>
-            <Dependent Role="EquipmentSites">
-              <PropertyRef Name="CodeEquipment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EquipmentSites_ToSites">
-          <End Role="Sites" Type="Self.Sites" Multiplicity="1" />
-          <End Role="EquipmentSites" Type="Self.EquipmentSites" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sites">
-              <PropertyRef Name="CodeSite" />
-            </Principal>
-            <Dependent Role="EquipmentSites">
-              <PropertyRef Name="CodeSite" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TripSite_ToSites">
-          <End Role="Sites" Type="Self.Sites" Multiplicity="1" />
-          <End Role="TripSite" Type="Self.TripSite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sites">
-              <PropertyRef Name="CodeSite" />
-            </Principal>
-            <Dependent Role="TripSite">
-              <PropertyRef Name="SiteCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TripSite_ToTrips">
-          <End Role="Trips" Type="Self.Trips" Multiplicity="1" />
-          <End Role="TripSite" Type="Self.TripSite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Trips">
-              <PropertyRef Name="TripId" />
-            </Principal>
-            <Dependent Role="TripSite">
-              <PropertyRef Name="TripId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BookedTrips" EntityType="Self.BookedTrips" />
-          <EntitySet Name="Calendar" EntityType="Self.Calendar" />
-          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
-          <EntitySet Name="EquipmentSites" EntityType="Self.EquipmentSites" />
-          <EntitySet Name="Sites" EntityType="Self.Sites" />
-          <EntitySet Name="Trips" EntityType="Self.Trips" />
-          <EntitySet Name="TripSite" EntityType="Self.TripSite" />
-          <AssociationSet Name="FK_EquipmentSites_ToEquipment" Association="Self.FK_EquipmentSites_ToEquipment">
-            <End Role="Equipment" EntitySet="Equipment" />
-            <End Role="EquipmentSites" EntitySet="EquipmentSites" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EquipmentSites_ToSites" Association="Self.FK_EquipmentSites_ToSites">
-            <End Role="Sites" EntitySet="Sites" />
-            <End Role="EquipmentSites" EntitySet="EquipmentSites" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TripSite_ToSites" Association="Self.FK_TripSite_ToSites">
-            <End Role="Sites" EntitySet="Sites" />
-            <End Role="TripSite" EntitySet="TripSite" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TripSite_ToTrips" Association="Self.FK_TripSite_ToTrips">
-            <End Role="Trips" EntitySet="Trips" />
-            <End Role="TripSite" EntitySet="TripSite" />
-          </AssociationSet>
+          <EntitySet Name="BookedTrips" EntityType="dbModel.BookedTrips" />
+          <EntitySet Name="Calendar" EntityType="dbModel.Calendar" />
           <EntitySet Name="Clients" EntityType="dbModel.Clients" />
+          <EntitySet Name="Equipment" EntityType="dbModel.Equipment" />
+          <EntitySet Name="EquipmentSites" EntityType="dbModel.EquipmentSites" />
+          <EntitySet Name="Sites" EntityType="dbModel.Sites" />
+          <EntitySet Name="Trips" EntityType="dbModel.Trips" />
+          <EntitySet Name="TripSite" EntityType="dbModel.TripSite" />
           <AssociationSet Name="FK_BookedTrips_ToClients" Association="dbModel.FK_BookedTrips_ToClients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="BookedTrips" EntitySet="BookedTrips" />
@@ -361,7 +216,44 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Trips" EntitySet="Trips" />
           </AssociationSet>
-          </EntityContainer>
+          <AssociationSet Name="FK_EquipmentSites_ToEquipment" Association="dbModel.FK_EquipmentSites_ToEquipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentSites" EntitySet="EquipmentSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentSites_ToSites" Association="dbModel.FK_EquipmentSites_ToSites">
+            <End Role="Sites" EntitySet="Sites" />
+            <End Role="EquipmentSites" EntitySet="EquipmentSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripSite_ToSites" Association="dbModel.FK_TripSite_ToSites">
+            <End Role="Sites" EntitySet="Sites" />
+            <End Role="TripSite" EntitySet="TripSite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripSite_ToTrips" Association="dbModel.FK_TripSite_ToTrips">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripSite" EntitySet="TripSite" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BookedTrips">
+          <Key>
+            <PropertyRef Name="TripId" />
+          </Key>
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalTripHours" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Polyline" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="BookedTrips" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="CalendarId" />
+          </Key>
+          <Property Name="CalendarId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DayStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientId" />
@@ -376,6 +268,66 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BookedTrips" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="Clients" ToRole="BookedTrips" />
           <NavigationProperty Name="Trips" Relationship="dbModel.FK_Trips_ToClients" FromRole="Clients" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="EquipmentId" />
+          </Key>
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EquipmentSites" Relationship="dbModel.FK_EquipmentSites_ToEquipment" FromRole="Equipment" ToRole="EquipmentSites" />
+        </EntityType>
+        <EntityType Name="EquipmentSites">
+          <Key>
+            <PropertyRef Name="EquipmentSitesId" />
+          </Key>
+          <Property Name="EquipmentSitesId" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="dbModel.FK_EquipmentSites_ToEquipment" FromRole="EquipmentSites" ToRole="Equipment" />
+          <NavigationProperty Name="Sites" Relationship="dbModel.FK_EquipmentSites_ToSites" FromRole="EquipmentSites" ToRole="Sites" />
+        </EntityType>
+        <EntityType Name="Sites">
+          <Key>
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressGMaps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OpeningHour" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ClosingHour" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EstimatedStay" Type="Time" Precision="7" />
+          <NavigationProperty Name="EquipmentSites" Relationship="dbModel.FK_EquipmentSites_ToSites" FromRole="Sites" ToRole="EquipmentSites" />
+          <NavigationProperty Name="TripSite" Relationship="dbModel.FK_TripSite_ToSites" FromRole="Sites" ToRole="TripSite" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="TripId" />
+          </Key>
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalTripHours" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Polyline" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
+          <NavigationProperty Name="TripSite" Relationship="dbModel.FK_TripSite_ToTrips" FromRole="Trips" ToRole="TripSite" />
+        </EntityType>
+        <EntityType Name="TripSite">
+          <Key>
+            <PropertyRef Name="TripSiteId" />
+          </Key>
+          <Property Name="TripSiteId" Type="Int32" Nullable="false" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="OrderInTrip" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sites" Relationship="dbModel.FK_TripSite_ToSites" FromRole="TripSite" ToRole="Sites" />
+          <NavigationProperty Name="Trips" Relationship="dbModel.FK_TripSite_ToTrips" FromRole="TripSite" ToRole="Trips" />
         </EntityType>
         <Association Name="FK_BookedTrips_ToClients">
           <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
@@ -401,6 +353,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EquipmentSites_ToEquipment">
+          <End Type="dbModel.Equipment" Role="Equipment" Multiplicity="1" />
+          <End Type="dbModel.EquipmentSites" Role="EquipmentSites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="EquipmentId" />
+            </Principal>
+            <Dependent Role="EquipmentSites">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentSites_ToSites">
+          <End Type="dbModel.Sites" Role="Sites" Multiplicity="1" />
+          <End Type="dbModel.EquipmentSites" Role="EquipmentSites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sites">
+              <PropertyRef Name="SiteId" />
+            </Principal>
+            <Dependent Role="EquipmentSites">
+              <PropertyRef Name="SiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripSite_ToSites">
+          <End Type="dbModel.Sites" Role="Sites" Multiplicity="1" />
+          <End Type="dbModel.TripSite" Role="TripSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sites">
+              <PropertyRef Name="SiteId" />
+            </Principal>
+            <Dependent Role="TripSite">
+              <PropertyRef Name="SiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripSite_ToTrips">
+          <End Type="dbModel.Trips" Role="Trips" Multiplicity="1" />
+          <End Type="dbModel.TripSite" Role="TripSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="TripId" />
+            </Principal>
+            <Dependent Role="TripSite">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -410,78 +410,22 @@
           <EntitySetMapping Name="BookedTrips">
             <EntityTypeMapping TypeName="dbModel.BookedTrips">
               <MappingFragment StoreEntitySet="BookedTrips">
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
-                <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
                 <ScalarProperty Name="Polyline" ColumnName="Polyline" />
+                <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Calendar">
             <EntityTypeMapping TypeName="dbModel.Calendar">
               <MappingFragment StoreEntitySet="Calendar">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="DayStatus" ColumnName="DayStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Equipment">
-            <EntityTypeMapping TypeName="dbModel.Equipment">
-              <MappingFragment StoreEntitySet="Equipment">
-                <ScalarProperty Name="CodeEquipment" ColumnName="CodeEquipment" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EquipmentSites">
-            <EntityTypeMapping TypeName="dbModel.EquipmentSites">
-              <MappingFragment StoreEntitySet="EquipmentSites">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="CodeEquipment" ColumnName="CodeEquipment" />
-                <ScalarProperty Name="CodeSite" ColumnName="CodeSite" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sites">
-            <EntityTypeMapping TypeName="dbModel.Sites">
-              <MappingFragment StoreEntitySet="Sites">
-                <ScalarProperty Name="CodeSite" ColumnName="CodeSite" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="AddressGMaps" ColumnName="AddressGMaps" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="OpeningHour" ColumnName="OpeningHour" />
-                <ScalarProperty Name="ClosingHour" ColumnName="ClosingHour" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="EstimatedStay" ColumnName="EstimatedStay" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trips">
-            <EntityTypeMapping TypeName="dbModel.Trips">
-              <MappingFragment StoreEntitySet="Trips">
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
-                <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
-                <ScalarProperty Name="Polyline" ColumnName="Polyline" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TripSite">
-            <EntityTypeMapping TypeName="dbModel.TripSite">
-              <MappingFragment StoreEntitySet="TripSite">
-                <ScalarProperty Name="CodeTripSite" ColumnName="CodeTripSite" />
-                <ScalarProperty Name="SiteCode" ColumnName="SiteCode" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="OrderInTrip" ColumnName="OrderInTrip" />
+                <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -496,6 +440,62 @@
                 <ScalarProperty Name="Phone1" ColumnName="Phone1" />
                 <ScalarProperty Name="ContactName" ColumnName="ContactName" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="dbModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentSites">
+            <EntityTypeMapping TypeName="dbModel.EquipmentSites">
+              <MappingFragment StoreEntitySet="EquipmentSites">
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+                <ScalarProperty Name="EquipmentSitesId" ColumnName="EquipmentSitesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="dbModel.Sites">
+              <MappingFragment StoreEntitySet="Sites">
+                <ScalarProperty Name="EstimatedStay" ColumnName="EstimatedStay" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ClosingHour" ColumnName="ClosingHour" />
+                <ScalarProperty Name="OpeningHour" ColumnName="OpeningHour" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AddressGMaps" ColumnName="AddressGMaps" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="dbModel.Trips">
+              <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="Polyline" ColumnName="Polyline" />
+                <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripSite">
+            <EntityTypeMapping TypeName="dbModel.TripSite">
+              <MappingFragment StoreEntitySet="TripSite">
+                <ScalarProperty Name="OrderInTrip" ColumnName="OrderInTrip" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="TripSiteId" ColumnName="TripSiteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

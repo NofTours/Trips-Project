@@ -14,7 +14,7 @@ namespace DataLayer
     
     public partial class Calendar
     {
-        public int Code { get; set; }
+        public int CalendarId { get; set; }
         public System.DateTime Date { get; set; }
         public string DayStatus { get; set; }
     }
