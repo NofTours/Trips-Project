@@ -16,10 +16,10 @@
         <AssociationConnector Association="dbModel.FK_EquipmentSites_ToSites" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.FK_TripSite_ToSites" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.FK_TripSite_ToTrips" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dbModel.Clients" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="dbModel.Clients" Width="1.5" PointX="0.75" PointY="2.625" />
         <AssociationConnector Association="dbModel.FK_BookedTrips_ToClients" />
         <AssociationConnector Association="dbModel.FK_Trips_ToClients" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

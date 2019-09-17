@@ -36,6 +36,7 @@
           <Property Name="LeavingAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NumPeople" Type="varchar" MaxLength="4" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -360,7 +361,7 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Trips" EntitySet="Trips" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientId" />
@@ -372,6 +373,7 @@
           <Property Name="LeavingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NumPeople" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BookedTrips" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="Clients" ToRole="BookedTrips" />
           <NavigationProperty Name="Trips" Relationship="dbModel.FK_Trips_ToClients" FromRole="Clients" ToRole="Trips" />
         </EntityType>
@@ -399,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -486,6 +488,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="dbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LeavingAddress" ColumnName="LeavingAddress" />

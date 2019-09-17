@@ -11,13 +11,9 @@ namespace BusinessLayer
 {
     public static class UserManager
     {
-        public static void TestFunc(CommonClient client)
-        {
-            Register(client);
-        }
         public static Boolean Register(CommonClient client)
         {
-            if (client.Phone2 == "")
+            if (client.Phone2 == "")//* Phone2 is optional
             {
                 client.Phone2 = null;
             }
@@ -28,6 +24,20 @@ namespace BusinessLayer
             }
             Debug.WriteLine("User " + client.Email + " was added successfully.");
             return true;
+        }
+
+        public static Boolean Login(CommonClient client)
+        {
+            if (client.Email != "" /*&& client.Password != ""*/)//* Email & pswd cannot be empty.
+            {
+                if (DataUser.Login(client) == false)
+                {
+                    Debug.WriteLine("Email: " + client.Email + "or password are incorrect");
+                    return false;
+                }
+                Debug.WriteLine("User: " + client.Email + " logged in successfully.");
+                return true;
+            }
         }
     }
 }

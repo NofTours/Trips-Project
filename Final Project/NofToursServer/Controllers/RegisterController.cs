@@ -44,9 +44,9 @@ namespace NofToursServer.Controllers
         }
         
         // POST: api/Register 
-        public void Post([FromBody]CommonClient client)
+        public Boolean Post([FromBody]CommonClient client)
         {
-            UserManager.TestFunc(client);           
+            return UserManager.Register(client);           
         }
 
         

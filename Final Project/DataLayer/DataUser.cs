@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,41 +14,61 @@ namespace DataLayer
         static dbEntities db = new dbEntities();
         //* TODO move to static function that will try to create connection to db.
 
+        public static Boolean UserExists(CommonClient user)
+        {
+            try
+            {
+                var result = (from c in db.Clients where c.Email == user.Email select c).FirstOrDefault();
+                //* Try to select this user from db.
+                if (result != null)
+                    return true; //* User exists
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message + " " + e.StackTrace);//* maybe rather throw back...
+            }
+            return false;
+        }
 
+        //* TODO - check online how to validate db w EF - before any work with it - maybe add transactions...
         public static Boolean Register(CommonClient user)
         {
-            var result = (from c in db.Clients where c.Email == user.Email select c).ToList();
+            if (UserExists(user))
+                return false; //* If user exists-do not register again.                     
             
-            if (result.Count() > 0)
-                return false; //* User already exists
             Clients client = Mapper.UserToDB(user);
+            
             db.Clients.Add(client);
             
             String list = db.Clients.ToString();
             try
             {
-                //db.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT [dbo].[Clients] ON");
                 db.SaveChanges();
-                //db.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT [dbo].[Clients] OFF");            
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (DbEntityValidationException dbEx)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting
-                        // the current instance as InnerException
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                Debug.WriteLine(dbEx.Message);
             }
-            return true;           
+            return true;//* User added succeessfully           
         } 
+
+        public static Boolean Login(CommonClient user)
+        {
+          try
+            {
+                var result = (from c in db.Clients where 
+                             (c.Email == user.Email && c.Password == user.Password) select c).FirstOrDefault();
+                //* Try to find this user in the db.
+                if (result != null)
+                    return true; //* email & password are correct
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message + " " + e.StackTrace);
+            }
+            return false;//* either email/pswd are incorrect / user doesn't exist
+                
+            
+        }
     }
 }

@@ -19,7 +19,8 @@ namespace DataLayer
                 Phone1 = commonClient.Phone1,
                 Phone2 = commonClient.Phone2,
                 LeavingAddress = commonClient.LeavingAddress,
-                NumPeople = commonClient.NumPeople
+                NumPeople = commonClient.NumPeople,
+                Password = commonClient.
             };
             return dBClient;
         }
