@@ -16,13 +16,20 @@ import { ShortStrPipe } from './pipes/short-str.pipe';
 import { UserComponent } from './components/user/user.component';
 import { BgColorDirective } from './directives/bg-color.directive';
 import { UserUpdatesComponent } from './components/user-updates/user-updates.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NewcalendarComponent } from './components/newcalendar/newcalendar.component';
+import { ExampleComponent } from './components/example/example.component';
+;
+
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'admin/:user', component: AdminComponent}
+  {path: 'admin/:user', component: AdminComponent},
+  {path: 'calendar', component: NewcalendarComponent},
+  {path: 'example', component: ExampleComponent}
 ];
 
 @NgModule({
@@ -38,13 +45,16 @@ export const ROUTES: Routes = [
     ShortStrPipe,
     UserComponent,
     BgColorDirective,
-    UserUpdatesComponent
+    UserUpdatesComponent,
+    NewcalendarComponent,
+    ExampleComponent
     
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(ROUTES),
+    NgbModule,
     HttpClientModule
     
   ],
