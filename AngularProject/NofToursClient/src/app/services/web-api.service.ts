@@ -31,23 +31,18 @@ export class WebApiService {
   }
 
   doPostUserById(commomClient: CommonClient)
-  {    
-    
+  {        
    debugger 
      this.http.post(this.baseUrl + "/api/Register", commomClient).subscribe(data=>{console.log(data)});
   }
 
-  doUserLogin(email: String, password: String): Observable<Boolean>
+  doUserLogin(email: string, password: string): Observable<Boolean>
   {
-    debugger;
-    // const response = await fetch(this.baseUrl, {
-    //   method: "post",
-    //   body: JSON.stringify({
-    //     email,
-    //     password
-    //   })
-    return this.http.post<Boolean>(this.baseUrl + "/api/Login", {email, password});
-    
+    var login = {
+      email: email,
+      password: password
+    }
+  return this.http.post<Boolean>(this.baseUrl + "/api/Login", login);    
   }
 
 

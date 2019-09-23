@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { WebApiService } from 'src/app/services/web-api.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,28 +15,36 @@ export class LoginComponent implements OnInit {
     this.password="";
     this.validForm = false;
   }
-  email:String;
-  password:String;
+  email:string;
+  password:string;
   validForm:boolean;
   submitted = false;
-  auth=false;
+  gotResponse = false;
 
   ngOnInit() {
   }
 
   onSubmitForm(){
-    this.submitted = true;
-  if (!this.form.invalid) {
-    if(this.webApi.doUserLogin(this.email, this.password))//* Check in server if email & password are correct
-      this.route.navigate(['/MyTrips', this.email]);//* TODO create correct link to MyTrips page
-    else this.auth = false;
-   this.auth=true;
+    this.submitted = true;    
+    if (!this.form.invalid) {
+      this.webApi.doUserLogin(this.email, this.password)//* Check in server if email & password are correct
+        .subscribe(data => {
+          console.log(data);
+          if (data == true)
+            this.route.navigate(['/myTrips', this.email]);//* TODO create correct link to MyTrips page                        
+          else{
+          debugger
+          this.gotResponse = true;
+          // this.submitted = false;
+          this.email = "";
+          this.password = "";
+          this.form.reset();
+          return;   
+          }     
+        })
    //this.validForm=true;
-    }
-     
-    this.validForm=false;
-    return;
-    //this.form.reset();      
+  }
+  this.validForm = false;
   }
 
 

@@ -22,7 +22,8 @@ export const ROUTES: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'admin/:user', component: AdminComponent}
+  {path: 'admin/:user', component: AdminComponent},
+  {path: 'myTrips/:user', component: AdminComponent}  
 ];
 
 @NgModule({
