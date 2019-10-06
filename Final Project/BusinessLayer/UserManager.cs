@@ -26,18 +26,19 @@ namespace BusinessLayer
             return true;
         }
 
-        public static Boolean Login(CommonClient client)
+        public static Boolean Login(string email, string password)
         {
-            if (client.Email != "" /*&& client.Password != ""*/)//* Email & pswd cannot be empty.
-            {
-                if (DataUser.Login(client) == false)
+            //if (email != "" && password != "")//* Email & pswd cannot be empty.
+            //{
+                if (DataUser.Login(email, password) == false)
                 {
-                    Debug.WriteLine("Email: " + client.Email + "or password are incorrect");
+                    Debug.WriteLine("Email: " + email + "or password are incorrect");
                     return false;
                 }
-                Debug.WriteLine("User: " + client.Email + " logged in successfully.");
+                Debug.WriteLine("User: " + email + " logged in successfully.");
                 return true;
-            }
+            //}
+            //return false;
         }
     }
 }

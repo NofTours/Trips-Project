@@ -1,3 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+<<<<<<< HEAD
 body{ background:blue url('resources/20180726_211118.jpg') fixed;}
 
+=======
+body { background: #000000 url('bg.png') fixed; }
+>>>>>>> 964f1bf6abb856bc22c3895e240dc042ac43deed

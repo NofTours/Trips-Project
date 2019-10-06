@@ -52,12 +52,12 @@ namespace DataLayer
             return true;//* User added succeessfully           
         } 
 
-        public static Boolean Login(CommonClient user)
+        public static Boolean Login(string email, string password)
         {
           try
             {
                 var result = (from c in db.Clients where 
-                             (c.Email == user.Email && c.Password == user.Password) select c).FirstOrDefault();
+                             (c.Email == email && c.Password == password) select c).FirstOrDefault();
                 //* Try to find this user in the db.
                 if (result != null)
                     return true; //* email & password are correct
