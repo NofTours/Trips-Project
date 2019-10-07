@@ -16,7 +16,10 @@ import { ShortStrPipe } from './pipes/short-str.pipe';
 import { UserComponent } from './components/user/user.component';
 import { BgColorDirective } from './directives/bg-color.directive';
 import { UserUpdatesComponent } from './components/user-updates/user-updates.component';
-import { ReactiveFormsModule }    from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NewcalendarComponent } from './components/newcalendar/newcalendar.component';
+import { ExampleComponent } from './components/example/example.component';
+;
 
 
 export const ROUTES: Routes = [
@@ -25,7 +28,12 @@ export const ROUTES: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin/:user', component: AdminComponent},
-  {path: 'myTrips/:user', component: AdminComponent}
+<<<<<<< HEAD
+  {path: 'calendar', component: NewcalendarComponent},
+  {path: 'example', component: ExampleComponent}
+=======
+  {path: 'myTrips/:user', component: AdminComponent}  
+>>>>>>> 964f1bf6abb856bc22c3895e240dc042ac43deed
 ];
 
 @NgModule({
@@ -41,17 +49,22 @@ export const ROUTES: Routes = [
     ShortStrPipe,
     UserComponent,
     BgColorDirective,
-    UserUpdatesComponent    
+    UserUpdatesComponent,
+    NewcalendarComponent,
+    ExampleComponent
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(ROUTES),
-    HttpClientModule,
-    ReactiveFormsModule
+    NgbModule,
+    HttpClientModule
     
   ],
   providers: [WebApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+//platformBrowserDynamic().bootstrapModule(AppModule);
