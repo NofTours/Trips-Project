@@ -27,11 +27,11 @@ namespace DataLayer
     
         public virtual DbSet<BookedTrips> BookedTrips { get; set; }
         public virtual DbSet<Calendar> Calendar { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<EquipmentSites> EquipmentSites { get; set; }
         public virtual DbSet<Sites> Sites { get; set; }
         public virtual DbSet<Trips> Trips { get; set; }
         public virtual DbSet<TripSite> TripSite { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
     }
 }

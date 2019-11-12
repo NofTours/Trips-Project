@@ -30,10 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonLayer">
+    <Reference Include="CommonLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CommonLayer\bin\Debug\CommonLayer.dll</HintPath>
     </Reference>
-    <Reference Include="DataLayer">
+    <Reference Include="DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DataLayer\bin\Debug\DataLayer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">

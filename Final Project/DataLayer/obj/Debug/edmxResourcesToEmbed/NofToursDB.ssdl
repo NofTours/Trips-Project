@@ -31,7 +31,8 @@
     <Property Name="LeavingAddress" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="NumPeople" Type="varchar" MaxLength="4" />
-    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HashedPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salt" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Equipment">
     <Key>

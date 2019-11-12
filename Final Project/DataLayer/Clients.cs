@@ -28,7 +28,8 @@ namespace DataLayer
         public string LeavingAddress { get; set; }
         public string Email { get; set; }
         public string NumPeople { get; set; }
-        public string Password { get; set; }
+        public string HashedPassword { get; set; }
+        public string Salt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookedTrips> BookedTrips { get; set; }

@@ -28,8 +28,8 @@ namespace DataLayer
         public string TotalTripHours { get; set; }
         public string Polyline { get; set; }
     
-        public virtual Clients Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TripSite> TripSite { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

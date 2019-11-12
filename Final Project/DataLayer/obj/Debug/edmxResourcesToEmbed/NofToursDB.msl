@@ -23,20 +23,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Clients">
-      <EntityTypeMapping TypeName="dbModel.Clients">
-        <MappingFragment StoreEntitySet="Clients">
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="LeavingAddress" ColumnName="LeavingAddress" />
-          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Equipment">
       <EntityTypeMapping TypeName="dbModel.Equipment">
         <MappingFragment StoreEntitySet="Equipment">
@@ -90,6 +76,21 @@
           <ScalarProperty Name="TripId" ColumnName="TripId" />
           <ScalarProperty Name="SiteId" ColumnName="SiteId" />
           <ScalarProperty Name="TripSiteId" ColumnName="TripSiteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="dbModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+          <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LeavingAddress" ColumnName="LeavingAddress" />
+          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -20,7 +20,7 @@ namespace DataLayer
                 Phone2 = commonClient.Phone2,
                 LeavingAddress = commonClient.LeavingAddress,
                 NumPeople = commonClient.NumPeople,
-                Password = commonClient.Password
+                HashedPassword = commonClient.Password
             };
             return dBClient;
         }

@@ -8,6 +8,7 @@ namespace CommonLayer
 {
     public class CommonClient
     {
+        public int ClientId { get; set; }
         public string ContactName { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
@@ -15,6 +16,7 @@ namespace CommonLayer
         public string Email { get; set; }
         public string NumPeople { get; set; }
         public string Password { get; set; }
+        
     }
 
 }

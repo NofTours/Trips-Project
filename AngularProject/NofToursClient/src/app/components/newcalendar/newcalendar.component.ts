@@ -17,11 +17,15 @@ export class NewcalendarComponent implements OnInit {
   }
   model: NgbDateStruct;
   date: {year: number, month: number};
-
+  value:Date;
   constructor(private calendar: NgbCalendar) {
   }
 
   selectToday() {
     this.model = this.calendar.getToday();
+  }
+  select(event:Date)
+  {
+this.value=event;
   }
 }

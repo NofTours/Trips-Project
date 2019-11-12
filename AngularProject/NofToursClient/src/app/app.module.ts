@@ -28,12 +28,9 @@ export const ROUTES: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin/:user', component: AdminComponent},
-<<<<<<< HEAD
   {path: 'calendar', component: NewcalendarComponent},
-  {path: 'example', component: ExampleComponent}
-=======
+  {path: 'example', component: ExampleComponent},
   {path: 'myTrips/:user', component: AdminComponent}  
->>>>>>> 964f1bf6abb856bc22c3895e240dc042ac43deed
 ];
 
 @NgModule({

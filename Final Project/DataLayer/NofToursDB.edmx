@@ -36,7 +36,8 @@
           <Property Name="LeavingAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NumPeople" Type="varchar" MaxLength="4" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HashedPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salt" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -202,20 +203,11 @@
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BookedTrips" EntityType="dbModel.BookedTrips" />
           <EntitySet Name="Calendar" EntityType="dbModel.Calendar" />
-          <EntitySet Name="Clients" EntityType="dbModel.Clients" />
           <EntitySet Name="Equipment" EntityType="dbModel.Equipment" />
           <EntitySet Name="EquipmentSites" EntityType="dbModel.EquipmentSites" />
           <EntitySet Name="Sites" EntityType="dbModel.Sites" />
           <EntitySet Name="Trips" EntityType="dbModel.Trips" />
           <EntitySet Name="TripSite" EntityType="dbModel.TripSite" />
-          <AssociationSet Name="FK_BookedTrips_ToClients" Association="dbModel.FK_BookedTrips_ToClients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="BookedTrips" EntitySet="BookedTrips" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Trips_ToClients" Association="dbModel.FK_Trips_ToClients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Trips" EntitySet="Trips" />
-          </AssociationSet>
           <AssociationSet Name="FK_EquipmentSites_ToEquipment" Association="dbModel.FK_EquipmentSites_ToEquipment">
             <End Role="Equipment" EntitySet="Equipment" />
             <End Role="EquipmentSites" EntitySet="EquipmentSites" />
@@ -232,7 +224,16 @@
             <End Role="Trips" EntitySet="Trips" />
             <End Role="TripSite" EntitySet="TripSite" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Clients" EntityType="dbModel.Clients" />
+          <AssociationSet Name="FK_BookedTrips_ToClients" Association="dbModel.FK_BookedTrips_ToClients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="BookedTrips" EntitySet="BookedTrips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trips_ToClients" Association="dbModel.FK_Trips_ToClients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="BookedTrips">
           <Key>
             <PropertyRef Name="TripId" />
@@ -253,21 +254,6 @@
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DayStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Clients">
-          <Key>
-            <PropertyRef Name="ClientId" />
-          </Key>
-          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LeavingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumPeople" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BookedTrips" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="Clients" ToRole="BookedTrips" />
-          <NavigationProperty Name="Trips" Relationship="dbModel.FK_Trips_ToClients" FromRole="Clients" ToRole="Trips" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -315,8 +301,8 @@
           <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalTripHours" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Polyline" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clients" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
           <NavigationProperty Name="TripSite" Relationship="dbModel.FK_TripSite_ToTrips" FromRole="Trips" ToRole="TripSite" />
+          <NavigationProperty Name="Clients" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
         </EntityType>
         <EntityType Name="TripSite">
           <Key>
@@ -329,30 +315,6 @@
           <NavigationProperty Name="Sites" Relationship="dbModel.FK_TripSite_ToSites" FromRole="TripSite" ToRole="Sites" />
           <NavigationProperty Name="Trips" Relationship="dbModel.FK_TripSite_ToTrips" FromRole="TripSite" ToRole="Trips" />
         </EntityType>
-        <Association Name="FK_BookedTrips_ToClients">
-          <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="dbModel.BookedTrips" Role="BookedTrips" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="BookedTrips">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Trips_ToClients">
-          <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="dbModel.Trips" Role="Trips" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="Trips">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EquipmentSites_ToEquipment">
           <End Type="dbModel.Equipment" Role="Equipment" Multiplicity="1" />
           <End Type="dbModel.EquipmentSites" Role="EquipmentSites" Multiplicity="*" />
@@ -401,6 +363,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeavingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumPeople" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HashedPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookedTrips" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="Clients" ToRole="BookedTrips" />
+          <NavigationProperty Name="Trips" Relationship="dbModel.FK_Trips_ToClients" FromRole="Clients" ToRole="Trips" />
+        </EntityType>
+        <Association Name="FK_BookedTrips_ToClients">
+          <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="dbModel.BookedTrips" Role="BookedTrips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="BookedTrips">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trips_ToClients">
+          <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="dbModel.Trips" Role="Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -426,20 +428,6 @@
                 <ScalarProperty Name="DayStatus" ColumnName="DayStatus" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="dbModel.Clients">
-              <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LeavingAddress" ColumnName="LeavingAddress" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -496,6 +484,21 @@
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="SiteId" ColumnName="SiteId" />
                 <ScalarProperty Name="TripSiteId" ColumnName="TripSiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="dbModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+                <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LeavingAddress" ColumnName="LeavingAddress" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

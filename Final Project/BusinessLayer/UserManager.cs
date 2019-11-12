@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using CommonLayer;
 using DataLayer;
-
 namespace BusinessLayer
 {
     public static class UserManager

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommonLayer;
-
+using System.Security;
 namespace DataLayer
 {
     public static class DataUser
@@ -37,12 +37,14 @@ namespace DataLayer
                 return false; //* If user exists-do not register again.                     
             
             Clients client = Mapper.UserToDB(user);
-            
-            db.Clients.Add(client);
-            
-            String list = db.Clients.ToString();
+                         
             try
             {
+                byte[] salt = Hash.GenerateSalt();
+                string hashedPwd = Hash.ComputeHash(client.HashedPassword, salt);
+                client.HashedPassword = hashedPwd;
+                client.Salt = Convert.ToBase64String(salt);
+                db.Clients.Add(client);
                 db.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
@@ -56,11 +58,10 @@ namespace DataLayer
         {
           try
             {
-                var result = (from c in db.Clients where 
-                             (c.Email == email && c.Password == password) select c).FirstOrDefault();
-                //* Try to find this user in the db.
-                if (result != null)
-                    return true; //* email & password are correct
+                Clients cl = (from c in db.Clients where c.Email == email select c).FirstOrDefault();
+                if (cl != null)
+                    if (Hash.VerifyPassword(password, cl.HashedPassword, cl.Salt)==true)
+                        return true;
             }
             catch(Exception e)
             {
