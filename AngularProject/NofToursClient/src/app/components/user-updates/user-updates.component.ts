@@ -9,8 +9,8 @@ import { CommonClient } from "src/app/models/user/CommonClient";
 })
 export class UserUpdatesComponent implements OnInit, OnChanges {
 
-  @Input() userAdded: CommonClient;
-  @Input() userDeleted: CommonClient;
+  @Input() userUpdatesAdded: CommonClient;
+  @Input() userUpdatesDeleted: CommonClient;
 
   changeLog: string[] = [];
   add: string;
@@ -31,10 +31,10 @@ export class UserUpdatesComponent implements OnInit, OnChanges {
     }
     this.changeLog.push(log.join(', '));
 
-    if(this.userAdded!=undefined)
-       this.add = this.userAdded.contactName + " user was added.";
-    if(this.userDeleted!=undefined)    
-      this.delete = this.userDeleted.contactName + " user was deleted.";
+    if(this.userUpdatesAdded!=undefined)
+       this.add = this.userUpdatesAdded.contactName + " user was added.";
+    if(this.userUpdatesDeleted!=undefined)    
+      this.delete = this.userUpdatesDeleted.contactName + " user was deleted.";
   }
   constructor() { }
   ngOnInit() {

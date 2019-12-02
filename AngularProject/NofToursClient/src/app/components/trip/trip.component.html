@@ -1,0 +1,11 @@
+
+<div class="example-box" cdkDrag>
+  <form >
+  <p>Date: {{trip.date.toDateString()}}</p>
+  <p>Begin Time: {{trip.beginTime}}</p>
+  <p>BookingStatus: {{trip.bookingStatus}}</p>
+  <p>Total Trip Hours: {{trip.totalTripHours}}</p>
+  <p *ngFor="let site of trip.sites">{{site.beginTime}}</p>
+</form>
+<button (click)="saveTrip()">save trip</button>
+</div>

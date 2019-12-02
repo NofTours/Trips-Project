@@ -145,12 +145,24 @@ namespace DataLayer
         {
             Trips trip = new Trips()
             {
+                ClientId=commonTrip.ClientId,
                 BeginTime = commonTrip.BeginTime,
                 BookingStatus = commonTrip.BookingStatus,
                 Date = commonTrip.Date,
                 TotalTripHours = commonTrip.TotalTripHours,
-                Polyline = commonTrip.Polyline
+                Polyline = commonTrip.Polyline,
             };
+            foreach (int siteId in commonTrip.TripSites)
+            {
+               // Sites newSite = SiteToDB(site);
+                TripSite tripSite = new TripSite()
+                {
+                    SiteId = siteId,
+                    TripId = trip.TripId,
+                    OrderInTrip = 1
+                };
+                trip.TripSite.Add(tripSite);
+            }
             return trip;
         }
 

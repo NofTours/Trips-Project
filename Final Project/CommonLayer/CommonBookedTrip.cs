@@ -8,7 +8,7 @@ namespace CommonLayer
 {
     public class CommonBookedTrip
     {
-        //    public int CodeTrip { get; set; }
+        //    public int TripId { get; set; }
         //    public int ClientCode { get; set; }
             public System.DateTime Date { get; set; }
             public System.TimeSpan BeginTime { get; set; }

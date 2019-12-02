@@ -25,3 +25,4 @@ C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\Com
 C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.csproj.CoreCompileInputs.cache
 C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.dll
 C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.pdb
+C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\CommonLayer\obj\Debug\CommonLayer.csprojAssemblyReference.cache

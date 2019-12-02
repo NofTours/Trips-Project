@@ -59,10 +59,11 @@
     <Compile Include="Calendar.cs">
       <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Clients.cs">
       <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataSite.cs" />
+    <Compile Include="DataTrip.cs" />
     <Compile Include="Equipment.cs">
       <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>

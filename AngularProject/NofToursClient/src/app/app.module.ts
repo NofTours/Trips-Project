@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -19,6 +20,14 @@ import { UserUpdatesComponent } from './components/user-updates/user-updates.com
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewcalendarComponent } from './components/newcalendar/newcalendar.component';
 import { ExampleComponent } from './components/example/example.component';
+import { BookTripComponent } from './components/book-trip/book-trip.component';
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import { TripComponent } from './components/trip/trip.component';
+//import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SiteComponent } from './components/site/site.component';
+import {DragDropModule} from 'primeng/dragdrop';
+import {PanelModule} from 'primeng/panel';
+import {TableModule} from 'primeng/table';
 ;
 
 
@@ -28,9 +37,10 @@ export const ROUTES: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin/:user', component: AdminComponent},
-  {path: 'calendar', component: NewcalendarComponent},
+  {path: 'booktrip', component: BookTripComponent},
   {path: 'example', component: ExampleComponent},
-  {path: 'myTrips/:user', component: AdminComponent}  
+  {path: 'myTrips/:user', component: AdminComponent},
+  {path: 'sites', component: SiteComponent}   
 ];
 
 @NgModule({
@@ -48,16 +58,23 @@ export const ROUTES: Routes = [
     BgColorDirective,
     UserUpdatesComponent,
     NewcalendarComponent,
-    ExampleComponent
+    ExampleComponent,
+    BookTripComponent,
+    TimePickerComponent,
+    TripComponent,
+    SiteComponent
     
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(ROUTES),
     NgbModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    DragDropModule,
+    PanelModule,
+    TableModule
   ],
   providers: [WebApiService],
   bootstrap: [AppComponent]

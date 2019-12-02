@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http'; 
 import { Observable } from 'rxjs';
 import { CommonClient } from "../models/user/CommonClient";
+import { trip } from '../models/trip/trip';
+
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +47,8 @@ export class WebApiService {
   return this.http.post<Boolean>(this.baseUrl + "/api/Login", login);    
   }
 
-
-
+  doTripSave(trip: trip)
+  {
+    return this.http.post<Boolean>(this.baseUrl + "/api/Trips", trip);
+  }
 }

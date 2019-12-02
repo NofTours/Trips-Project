@@ -1,0 +1,53 @@
+
+<h3 class="first">Drag Only</h3>
+<div pDraggable="sites"  dragHandle=".ui-panel-titlebar">
+    <p-panel header="Drag Header">
+        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
+        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+    </p-panel>
+</div>
+
+<h3>Drag and Drop to Table</h3>
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-g-nopad drag-column">
+        <ul style="margin:0;padding:0">
+            <li *ngFor="let site of availableSites" class="ui-helper-clearfix" pDraggable="sites"
+                (onDragStart)="dragStart($event,site)" (onDragEnd)="dragEnd($event)">
+                <i class="fa fa-arrows fa-2x" style="float:right;margin-top:8px"></i>
+                <img src="../../../assets/img/Massada.png" style="float:left; height:20px; width: 20px;" draggable="false">
+                <div style="margin:8px 0 0 8px;float:left">{{site.Name}} - {{site.AddressGMaps}}</div>
+            </li>
+        </ul>
+    </div>
+    <div class="ui-g-12 ui-md-6 drop-column" pDroppable="sites" 
+        (onDrop)="drop($event)" [ngClass]="{'ui-highlight-car':draggedSite}">
+        <p-table [value]="selectedSites">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Area</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>OpeningHour</th>
+                    <th>ClosingHour</th>
+                    <th>EstimatedStay</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-selectedSite>
+                <tr pDraggable>
+                    <td>{{selectedSite.Name}}</td>
+                    <td>{{selectedSite.Area}}</td>
+                    <td>{{selectedSite.Price}}</td>
+                    <td>{{selectedSite.Category}}</td>
+                    <td>{{selectedSite.Description}}</td>
+                    <td>{{selectedSite.OpeningHour}}</td>
+                    <td>{{selectedSite.ClosingHour}}</td>
+                    <td>{{selectedSite.EstimatedStay}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

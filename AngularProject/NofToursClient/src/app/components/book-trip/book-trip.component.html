@@ -1,0 +1,22 @@
+
+<p><b>So when are you available?</b></p>
+
+<app-newcalendar (chosenDate)="saveDateToTrip($event)"></app-newcalendar>
+<br>
+ <app-time-picker #timePicker></app-time-picker> 
+ <div class="intro-button mx-auto">
+    <button class="btn btn-primary btn-xl" (click)="saveTimeToTrip(timePicker.getTime())">continue</button>
+</div>
+<br>
+<div class="alert alert-info" [hidden]="hidden">
+   Your chosen date and time are:<br>
+   Date:{{this.trip.date.toString() | date:'short'}} 
+</div>
+<app-trip></app-trip>
+
+<div class="intro-button mx-auto">
+      <button class="btn btn-primary btn-xl" (click)="getSites()">getSites</button>
+</div>
+<div *ngFor="let site of sites">
+   <label>{{site.Name}}</label>
+ </div>

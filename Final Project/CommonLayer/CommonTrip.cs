@@ -8,12 +8,13 @@ namespace CommonLayer
 {
     public class CommonTrip
     {
-        public int CodeTrip { get; set; }
-        public int ClientCode { get; set; }
+        public int TripId { get; set; }
+        public int ClientId { get; set; }
         public System.DateTime Date { get; set; }
         public System.TimeSpan BeginTime { get; set; }
         public string BookingStatus { get; set; }
         public string TotalTripHours { get; set; }
         public string Polyline { get; set; }
+        public ICollection<int> TripSites { get; set; }
     }
 }
