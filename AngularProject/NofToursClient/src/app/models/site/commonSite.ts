@@ -9,6 +9,7 @@ export interface CommonSite
     ClosingHour:string;
     Category:string;
     EstimatedStay:string;// in c# nullable timespan
+    Equipment:string[];
     // equipment?
     // tripCommonSite?
 }

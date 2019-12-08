@@ -23,12 +23,17 @@ import { ExampleComponent } from './components/example/example.component';
 import { BookTripComponent } from './components/book-trip/book-trip.component';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
 import { TripComponent } from './components/trip/trip.component';
-//import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule as CDKDragDropModule } from '@angular/cdk/drag-drop';
 import { SiteComponent } from './components/site/site.component';
 import {DragDropModule} from 'primeng/dragdrop';
 import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
-;
+import {PickListModule} from 'primeng/picklist';
+import {OrderListModule} from 'primeng/orderlist';
+import {DataViewModule} from 'primeng/dataview';
+
+import {ListboxModule} from 'primeng/listbox';
+
 
 
 export const ROUTES: Routes = [
@@ -74,7 +79,12 @@ export const ROUTES: Routes = [
     HttpClientModule,
     DragDropModule,
     PanelModule,
-    TableModule
+    TableModule,
+    CDKDragDropModule,
+    PickListModule,
+    OrderListModule,
+    ListboxModule,
+    DataViewModule
   ],
   providers: [WebApiService],
   bootstrap: [AppComponent]

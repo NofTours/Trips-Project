@@ -15,7 +15,6 @@ export class trip
     constructor(     
         clientId:number,
         date: Date,
-        // beginTime:{hours:number,minutes:number,seconds:number},
         beginTime:string,
         bookingStatus: string,
         totalTripHours: string,

@@ -12,7 +12,7 @@ namespace BusinessLayer
         public static List<CommonSite> RetrieveSites()
         {
             List<CommonSite> sites = new List<CommonSite>();
-            sites.AddRange(DataSite.RetrieveSites());
+            sites.AddRange(DataSite.RetrieveSites());               
             return sites;
         }
     }

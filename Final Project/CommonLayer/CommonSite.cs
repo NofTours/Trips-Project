@@ -18,5 +18,12 @@ namespace CommonLayer
         public System.TimeSpan ClosingHour { get; set; }
         public string Category { get; set; }
         public Nullable<System.TimeSpan> EstimatedStay { get; set; }
+
+        public List<string> Equipment { get; set; }
+
+        //public ICollection<CommonEquipmentSite> EquipmentSites { get; set; }
+        //public ICollection<CommonTripSite> TripSite { get; set; }
+
+
     }
 }

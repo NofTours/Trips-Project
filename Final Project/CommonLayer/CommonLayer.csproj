@@ -44,8 +44,10 @@
     <Compile Include="CommonClient.cs" />
     <Compile Include="CommonCalendar.cs" />
     <Compile Include="CommonEquipment.cs" />
+    <Compile Include="CommonEquipmentSite.cs" />
     <Compile Include="CommonSite.cs" />
     <Compile Include="CommonTrip.cs" />
+    <Compile Include="CommonTripSite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

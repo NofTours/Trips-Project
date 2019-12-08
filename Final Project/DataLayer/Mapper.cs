@@ -9,9 +9,9 @@ namespace DataLayer
 {
     static class Mapper
     {
-        /****************Client***********************/ 
+        /****************Client***********************/
         public static Clients UserToDB(CommonClient commonClient)
-            {
+        {
             Clients dBClient = new Clients()
             {
                 ContactName = commonClient.ContactName,
@@ -48,7 +48,7 @@ namespace DataLayer
                 BookingStatus = commonBookedTrip.BookingStatus,
                 Date = commonBookedTrip.Date,
                 Polyline = commonBookedTrip.Polyline,
-                TotalTripHours = commonBookedTrip.TotalTripHours 
+                TotalTripHours = commonBookedTrip.TotalTripHours
             };
             return dBBookedTrip;
         }
@@ -73,7 +73,7 @@ namespace DataLayer
             Calendar calendar = new Calendar()
             {
                 Date = commonCalendar.Date,
-                DayStatus = commonCalendar.DayStatus               
+                DayStatus = commonCalendar.DayStatus
             };
             return calendar;
         }
@@ -92,7 +92,7 @@ namespace DataLayer
         public static Equipment EquipmentToDB(CommonEquipment commonEquipment)
         {
             Equipment equipment = new Equipment()
-            {   
+            {
                 Name = commonEquipment.Name
             };
             return equipment;
@@ -106,6 +106,31 @@ namespace DataLayer
             };
             return commonEquipment;
         }
+        /****************EquipmentSite***********************/
+        public static EquipmentSites EquipmentSiteToDB(CommonEquipmentSite commonEquipmentSite)
+        {
+            EquipmentSites EquipmentSite = new EquipmentSites()
+            {
+                EquipmentId = commonEquipmentSite.EquipmentId,
+                SiteId = commonEquipmentSite.SiteId
+                //Sites = SiteToDB(commonEquipmentSite.Sites),
+                //Equipment = EquipmentToDB(commonEquipmentSite.Equipment)
+            };
+            return EquipmentSite;
+        }
+
+        public static CommonEquipmentSite EquipmentSiteToCommon(EquipmentSites equipmentSite)
+        {
+            CommonEquipmentSite commonEquipmentSite = new CommonEquipmentSite()
+            {
+                EquipmentId = equipmentSite.EquipmentId,
+                SiteId = equipmentSite.SiteId
+                //Sites = SiteToCommon(equipmentSite.Sites),
+                //Equipment = EquipmentToCommon(equipmentSite.Equipment)
+            };
+            return commonEquipmentSite;
+        }
+
         /****************Site***********************/
         public static Sites SiteToDB(CommonSite commonSite)
         {
@@ -119,8 +144,24 @@ namespace DataLayer
                 OpeningHour = commonSite.OpeningHour,
                 ClosingHour = commonSite.ClosingHour,
                 EstimatedStay = commonSite.EstimatedStay,
-                Price = commonSite.Price                             
+                Price = commonSite.Price,
+
             };
+            foreach (String e in commonSite.Equipment)
+            {
+                site.EquipmentSites = new List<EquipmentSites>();
+                EquipmentSites equipmentSites = new EquipmentSites
+                {
+                    SiteId = site.SiteId,
+                    EquipmentId = DataEquipment.GetEquipmentIdByName(e)
+                };
+                site.EquipmentSites.Add(equipmentSites);
+            }
+            //foreach(CommonTripSite ts in commonSite.TripSite)
+            //{
+            //    site.TripSite = new List<TripSite>();
+            //    site.TripSite.Add(TripSiteToDB(ts));
+            //}
             return site;
         }
 
@@ -138,30 +179,42 @@ namespace DataLayer
                 EstimatedStay = site.EstimatedStay,
                 Price = site.Price
             };
+            foreach (EquipmentSites e in site.EquipmentSites)
+            {
+                commonSite.Equipment = new List<string>();
+                commonSite.Equipment.Add(DataEquipment.GetEquipmentNameById(e.EquipmentId));
+                //commonSite.EquipmentSites = new List<CommonEquipmentSite>();
+                //commonSite.EquipmentSites.Add(EquipmentSiteToCommon(e));
+            }
+            //foreach (TripSite ts in site.TripSite)
+            //{
+            //    commonSite.TripSite = new List<CommonTripSite>();
+            //    commonSite.TripSite.Add(TripSiteToCommon(ts));
+            //}
             return commonSite;
         }
         /****************Trip***********************/
-         public static Trips TripToDB(CommonTrip commonTrip)
+        public static Trips TripToDB(CommonTrip commonTrip)
         {
             Trips trip = new Trips()
             {
-                ClientId=commonTrip.ClientId,
+                ClientId = commonTrip.ClientId,
                 BeginTime = commonTrip.BeginTime,
                 BookingStatus = commonTrip.BookingStatus,
                 Date = commonTrip.Date,
                 TotalTripHours = commonTrip.TotalTripHours,
                 Polyline = commonTrip.Polyline,
             };
-            foreach (int siteId in commonTrip.TripSites)
+            foreach(int siteId in commonTrip.TripSites)
             {
-               // Sites newSite = SiteToDB(site);
+                trip.TripSite = new List<TripSite>();
                 TripSite tripSite = new TripSite()
                 {
-                    SiteId = siteId,
                     TripId = trip.TripId,
-                    OrderInTrip = 1
+                    SiteId = siteId
                 };
                 trip.TripSite.Add(tripSite);
+
             }
             return trip;
         }
@@ -176,7 +229,45 @@ namespace DataLayer
                 TotalTripHours = trip.TotalTripHours,
                 Polyline = trip.Polyline
             };
+            foreach (TripSite ts in trip.TripSite)
+            {
+                commonTrip.TripSites = new List<int>();
+                commonTrip.TripSites.Add(ts.SiteId);
+            }
             return commonTrip;
+        }
+
+        /****************TripSite***********************/
+        public static TripSite TripSiteToDB(CommonTripSite commonTripSite)
+        {
+                TripSite tripSite = new TripSite()
+                {
+                    SiteId = commonTripSite.SiteId,
+                    TripId = commonTripSite.TripId,
+                    OrderInTrip = commonTripSite.OrderInTrip
+                    //Sites = SiteToDB(commonTripSite.Sites),
+                    //Trips = TripToDB(commonTripSite.Trips)
+
+                };
+         
+            return tripSite;
+        }
+
+        public static CommonTripSite TripSiteToCommon(TripSite tripSite)
+        {
+            CommonTripSite commonTripSite = new CommonTripSite()
+            {
+                SiteId = tripSite.SiteId,
+                TripId = tripSite.TripId,
+                OrderInTrip = tripSite.OrderInTrip
+                //Sites = SiteToCommon(tripSite.Sites),
+                //Trips = TripToCommon(tripSite.Trips)
+            };
+
+            return commonTripSite;
         }
     }
 }
+
+
+

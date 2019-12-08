@@ -11,43 +11,65 @@
 
 <h3>Drag and Drop to Table</h3>
 <div class="ui-g">
-    <div class="ui-g-12 ui-md-6 ui-g-nopad drag-column">
+    <!-- <div class="ui-g-12 ui-md-6 ui-g-nopad drag-column" filter="filter" filterBy="Name" filterPlaceholder="Filter by name">
         <ul style="margin:0;padding:0">
-            <li *ngFor="let site of availableSites" class="ui-helper-clearfix" pDraggable="sites"
+            <li *ngFor="let site of availableSites" class="ui-helper-clearfix" pDraggable="sites" 
                 (onDragStart)="dragStart($event,site)" (onDragEnd)="dragEnd($event)">
                 <i class="fa fa-arrows fa-2x" style="float:right;margin-top:8px"></i>
                 <img src="../../../assets/img/Massada.png" style="float:left; height:20px; width: 20px;" draggable="false">
                 <div style="margin:8px 0 0 8px;float:left">{{site.Name}} - {{site.AddressGMaps}}</div>
             </li>
         </ul>
-    </div>
+    </div>  -->
+
+    <p-dataView [value]="availableSites"  
+     filterBy="Name" #dv dragdrop="true" pDraggable="sites">
+     <p-header>
+            <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target.value, 'contains')">
+        </p-header>
+    <ng-template let-site pTemplate="listItem">
+        <div class="ui-helper-clearfix" pDraggable="sites"
+        (onDragStart)="dragStart($event,site)" (onDragEnd)="dragEnd($event)" >
+            <img src="../../../assets/img/Massada.png" style="display:inline-block;margin:2px 0 2px 2px" width="48" draggable="false">
+            <div style="margin:8px 0 0 8px;float: right;">{{site.Name}} - {{site.Price}}</div>
+        </div>
+        
+    </ng-template>
+</p-dataView>
+
     <div class="ui-g-12 ui-md-6 drop-column" pDroppable="sites" 
         (onDrop)="drop($event)" [ngClass]="{'ui-highlight-car':draggedSite}">
         <p-table [value]="selectedSites">
+               
             <ng-template pTemplate="header">
                 <tr>
                     <th>Name</th>
                     <th>Area</th>
                     <th>Price</th>
                     <th>Category</th>
-                    <th>Description</th>
+                    <!-- <th>Description</th>
                     <th>OpeningHour</th>
                     <th>ClosingHour</th>
-                    <th>EstimatedStay</th>
+                    <th>EstimatedStay</th> -->
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-selectedSite>
-                <tr pDraggable>
+                <ng-template pTemplate="body" let-selectedSite >                   
+                <tr pDraggable pDroppable (onDragStart)="dragStart2($event,selectedSite)" (onDrop)="cdkdrop($event)" >
+                        <!--  -->
                     <td>{{selectedSite.Name}}</td>
                     <td>{{selectedSite.Area}}</td>
                     <td>{{selectedSite.Price}}</td>
                     <td>{{selectedSite.Category}}</td>
-                    <td>{{selectedSite.Description}}</td>
+                    <!-- <td>{{selectedSite.Description}}</td>
                     <td>{{selectedSite.OpeningHour}}</td>
                     <td>{{selectedSite.ClosingHour}}</td>
-                    <td>{{selectedSite.EstimatedStay}}</td>
+                    <td>{{selectedSite.EstimatedStay}}</td> -->
                 </tr>
             </ng-template>
         </p-table>
     </div>
 </div>
+
+<ul>
+    <li *ngFor="let selectedSite of selectedSites">{{selectedSite.Equipment}}</li>
+</ul>

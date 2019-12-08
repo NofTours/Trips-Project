@@ -62,6 +62,7 @@
     <Compile Include="Clients.cs">
       <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataEquipment.cs" />
     <Compile Include="DataSite.cs" />
     <Compile Include="DataTrip.cs" />
     <Compile Include="Equipment.cs">
