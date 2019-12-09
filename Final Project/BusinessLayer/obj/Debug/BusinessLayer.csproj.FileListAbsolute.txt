@@ -57,7 +57,6 @@ C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\bin\Debug\DataL
 C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\bin\Debug\DataLayer.dll.config
 C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\bin\Debug\EntityFramework.xml
 C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
 C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
 C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.dll
@@ -78,3 +77,4 @@ C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\Bus
 C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.pdb
 C:\Users\בת שבע יפהן\Desktop\repository\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.csprojAssemblyReference.cache
+C:\Users\OWNER\Desktop\Trips-Project\Final Project\BusinessLayer\obj\Debug\BusinessLayer.csprojAssemblyReference.cache

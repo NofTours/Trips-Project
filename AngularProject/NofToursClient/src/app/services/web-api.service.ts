@@ -32,10 +32,10 @@ export class WebApiService {
     return this.http.get<string>(this.baseUrl + "/api/Register?value=" + "value");
   }
 
-  doPostUserById(commomClient: CommonClient)
+  doPostUserById(commomClient: CommonClient): Observable<Boolean>
   {        
    debugger 
-     this.http.post(this.baseUrl + "/api/Register", commomClient).subscribe(data=>{console.log(data)});
+   return this.http.post<Boolean>(this.baseUrl + "/api/Register", commomClient);
   }
 
   doUserLogin(email: string, password: string): Observable<Boolean>
