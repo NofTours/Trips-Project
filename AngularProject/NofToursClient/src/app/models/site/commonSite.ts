@@ -1,5 +1,6 @@
 export interface CommonSite
 {
+    SiteId:number;
     Name: string;
     Area: string;
     AddressGMaps: string;

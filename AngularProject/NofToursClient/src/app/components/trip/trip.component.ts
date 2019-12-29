@@ -11,20 +11,10 @@ import { WebApiService } from 'src/app/services/web-api.service';
 export class TripComponent implements OnInit {
 
   trip:trip;
-  tripSites:number[]=[];
  
   constructor(private webApi: WebApiService) {
-    this.tripSites.push(0);
-    this.trip=new trip(12,new Date(),"02:05:19",
-    // {hours:8,minutes:0,seconds:0},
-    "booked","5","20",this.tripSites);
    }
 
-   saveTrip()
-   {
-    this.webApi.doTripSave(this.trip).subscribe(data => {
-      console.log(data);})
-   }
   ngOnInit() {
   }
 }

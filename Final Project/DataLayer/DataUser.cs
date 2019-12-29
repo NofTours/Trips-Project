@@ -14,6 +14,24 @@ namespace DataLayer
         static dbEntities db = new dbEntities();
         //* TODO move to static function that will try to create connection to db.
 
+        public static Boolean Login(string email, string password)
+        {
+            try
+            {
+                Clients cl = (from c in db.Clients where c.Email == email select c).FirstOrDefault();
+                if (cl != null)
+                    if (Hash.VerifyPassword(password, cl.HashedPassword, cl.Salt) == true)
+                        return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message + " " + e.StackTrace);
+            }
+            return false;//* either email/pswd are incorrect / user doesn't exist
+
+
+        }
+
         public static Boolean UserExists(CommonClient user)
         {
             try
@@ -52,24 +70,18 @@ namespace DataLayer
                 Debug.WriteLine(dbEx.Message);
             }
             return true;//* User added succeessfully           
-        } 
+        }
 
-        public static Boolean Login(string email, string password)
+        public static int GetUserIdByEmail(string email)
         {
-          try
-            {
-                Clients cl = (from c in db.Clients where c.Email == email select c).FirstOrDefault();
-                if (cl != null)
-                    if (Hash.VerifyPassword(password, cl.HashedPassword, cl.Salt)==true)
-                        return true;
-            }
-            catch(Exception e)
-            {
-                Debug.WriteLine(e.Message + " " + e.StackTrace);
-            }
-            return false;//* either email/pswd are incorrect / user doesn't exist
-                
-            
+            int id = (from c in db.Clients where c.Email == email select c.ClientId).FirstOrDefault();
+            return id;
+        }
+
+        public static Clients GetUserById(int id)
+        {
+            Clients client = (from c in db.Clients where c.ClientId == id select c).FirstOrDefault();
+            return client;
         }
     }
 }

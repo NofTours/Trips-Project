@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit {
         .subscribe(data => {
           console.log(data);
           if (data == true)
-            this.route.navigate(['/myTrips', this.email]);//* TODO create correct link to MyTrips page                        
+          {
+            sessionStorage.setItem("UserEmail",this.email);
+            this.route.navigate(['/booktrip']);//* TODO create correct link to MyTrips page   
+          }                     
           else{
-          debugger
           this.gotResponse = true;
-          // this.submitted = false;
           this.email = "";
           this.password = "";
           this.form.reset();

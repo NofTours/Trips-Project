@@ -1,3 +1,7 @@
+<p><b>How many people are in your group?</b></p>
+
+<input type="number" [(ngModel)]="numOfPeople" min="1" max="20">
+<p>Selected number: {{numOfPeople ?numOfPeople : 'none'}}</p>
 
 <p><b>So when are you available?</b></p>
 
@@ -8,15 +12,12 @@
     <button class="btn btn-primary btn-xl" (click)="saveTimeToTrip(timePicker.getTime())">continue</button>
 </div>
 <br>
+
+<p><b>How many people are in your group?</b></p>
+<input type="number" [(ngModel)]="numOfPeople" min="1" max="20">
+<p>Selected number: {{numOfPeople ?numOfPeople : 'none'}}</p>
 <div class="alert alert-info" [hidden]="hidden">
    Your chosen date and time are:<br>
-   Date:{{this.trip.date.toString() | date:'short'}} 
+   Date:{{this.tripService.getTripDate() | date:'short'}} 
 </div>
-<app-trip></app-trip>
 
-<div class="intro-button mx-auto">
-      <button class="btn btn-primary btn-xl" (click)="getSites()">getSites</button>
-</div>
-<div *ngFor="let site of sites">
-   <label>{{site.Name}}</label>
- </div>

@@ -19,7 +19,6 @@ namespace DataLayer
         {
             Equipment equipment = (from e in db.Equipment where e.Name == equipmentName select e).FirstOrDefault();
             return equipment.EquipmentId;
-
         }
     }
 }

@@ -1,15 +1,15 @@
 
 import { CommonSite } from "../site/commonSite";
+import { Time } from "@angular/common";
 export class trip
 {
-    clientId:number;
-    date: Date;
-    // beginTime: {hours:number,minutes:number,seconds:number};
-    beginTime: string;
-    bookingStatus: string;
-    totalTripHours: string;
+    clientId:number;//trip service intializes
+    date: Date;//book trip
+    beginTime: string;//book trip
+    bookingStatus: string;// trip conclusion
+    totalTripHours: string;// trip conclusion
     polyline: string;
-    tripSites: number[];
+    tripSites: number[];//save on db according to client id and site id - info from site componenet
 
     
     constructor(     

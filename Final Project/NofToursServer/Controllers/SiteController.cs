@@ -17,15 +17,10 @@ namespace NofToursServer.Controllers
             return SiteManager.RetrieveSites();
         }
 
-        // GET: api/Site/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Site
-        public void Post([FromBody]string value)
+        public ICollection<CommonSite> Post([FromBody] Search paramsList)
         {
+            return SiteManager.RetrieveSitesBySearch(paramsList);         
         }
 
         // PUT: api/Site/5

@@ -38,34 +38,7 @@ namespace DataLayer
             };
             return commonClient;
         }
-
-        /****************BookedTrip***********************/
-        public static BookedTrips BookedTripToDB(CommonBookedTrip commonBookedTrip)
-        {
-            BookedTrips dBBookedTrip = new BookedTrips()
-            {
-                BeginTime = commonBookedTrip.BeginTime,
-                BookingStatus = commonBookedTrip.BookingStatus,
-                Date = commonBookedTrip.Date,
-                Polyline = commonBookedTrip.Polyline,
-                TotalTripHours = commonBookedTrip.TotalTripHours
-            };
-            return dBBookedTrip;
-        }
-
-        public static CommonBookedTrip BookedTripToCommon(BookedTrips dBBookedTrip)
-        {
-            CommonBookedTrip commonBookedTrip = new CommonBookedTrip()
-            {
-                BeginTime = dBBookedTrip.BeginTime,
-                BookingStatus = dBBookedTrip.BookingStatus,
-                Date = dBBookedTrip.Date,
-                Polyline = dBBookedTrip.Polyline,
-                TotalTripHours = dBBookedTrip.TotalTripHours
-            };
-            return commonBookedTrip;
-        }
-
+ 
         /****************Calendar***********************/
 
         public static Calendar CalendarToDB(CommonCalendar commonCalendar)
@@ -136,6 +109,7 @@ namespace DataLayer
         {
             Sites site = new Sites()
             {
+                SiteId=commonSite.SiteId,
                 Name = commonSite.Name,
                 Description = commonSite.Description,
                 Category = commonSite.Category,
@@ -169,6 +143,7 @@ namespace DataLayer
         {
             CommonSite commonSite = new CommonSite()
             {
+                SiteId=site.SiteId,
                 Name = site.Name,
                 Description = site.Description,
                 Category = site.Category,
@@ -204,6 +179,7 @@ namespace DataLayer
                 Date = commonTrip.Date,
                 TotalTripHours = commonTrip.TotalTripHours,
                 Polyline = commonTrip.Polyline,
+
             };
             foreach(int siteId in commonTrip.TripSites)
             {
@@ -216,6 +192,7 @@ namespace DataLayer
                 trip.TripSite.Add(tripSite);
 
             }
+           // trip.Clients = DataUser.GetUserById(commonTrip.ClientId);
             return trip;
         }
 

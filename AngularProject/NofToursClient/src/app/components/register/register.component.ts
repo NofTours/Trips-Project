@@ -39,7 +39,8 @@ export class RegisterComponent implements OnInit {
       //if user found relocate to homepage/mytrips
       this.auth = true;
       this.validForm = true;
-      this.route.navigate(['/admin',this.newUser.contactName]);
+      sessionStorage.setItem("UserEmail",this.newUser.email);
+      this.route.navigate(['/booktrip']);
     }
 
     this.submitted = true;

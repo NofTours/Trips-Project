@@ -31,8 +31,10 @@ import {TableModule} from 'primeng/table';
 import {PickListModule} from 'primeng/picklist';
 import {OrderListModule} from 'primeng/orderlist';
 import {DataViewModule} from 'primeng/dataview';
-
+import {DropdownModule} from 'primeng/dropdown';
 import {ListboxModule} from 'primeng/listbox';
+import {CardModule} from 'primeng/card';
+
 
 
 
@@ -67,8 +69,7 @@ export const ROUTES: Routes = [
     BookTripComponent,
     TimePickerComponent,
     TripComponent,
-    SiteComponent
-    
+    SiteComponent  
   ],
   imports: [
     BrowserModule,
@@ -84,7 +85,9 @@ export const ROUTES: Routes = [
     PickListModule,
     OrderListModule,
     ListboxModule,
-    DataViewModule
+    DataViewModule,
+    DropdownModule,
+    CardModule
   ],
   providers: [WebApiService],
   bootstrap: [AppComponent]

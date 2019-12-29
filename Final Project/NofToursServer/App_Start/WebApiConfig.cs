@@ -21,6 +21,11 @@ namespace NofToursServer
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "Action",
+                routeTemplate: "api/{controller}/{action}/{GetByCategory}"
+            );
+
             var corsAttr = new EnableCorsAttribute("http://localhost:4200", "*", "*");
             config.EnableCors(corsAttr);
         }

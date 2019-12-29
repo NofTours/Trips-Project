@@ -39,5 +39,10 @@ namespace BusinessLayer
             //}
             //return false;
         }
+
+        public static int GetUserIdByEmail(string email)
+        {
+            return DataUser.GetUserIdByEmail(email);
+        }
     }
 }

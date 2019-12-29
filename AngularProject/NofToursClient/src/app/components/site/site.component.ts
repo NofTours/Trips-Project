@@ -1,12 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonSite } from 'src/app/models/site/commonSite';
 import { SitesService } from 'src/app/services/sites.service';
+import { TripService } from 'src/app/services/trip.service';
+import { Search } from 'src/app/models/Search/Search';
+
+
 //import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
-@Component({
+
+ interface area {
+    name: string;
+  }
+  
+ interface category {
+    name: string;
+  }
+ 
+  
+  @Component({
   selector: 'app-site',
   templateUrl: './site.component.html',
   styleUrls: ['./site.component.css']
 })
+
 export class SiteComponent implements OnInit {
  
  availableSites: CommonSite[];
@@ -16,15 +31,34 @@ export class SiteComponent implements OnInit {
  draggedSite: CommonSite;
 
  draggedSite2: CommonSite;
-  
 
- constructor(private SiteService: SitesService) {
+ areas:area[];
+
+ categories:category[];
+
+ searchInfo:Search;
+
+ constructor(private siteService: SitesService,private tripService: TripService) {
+    this.areas=[
+        {name: 'North'},
+        {name: 'South'},
+        {name: 'East'},
+        {name: 'West'}
+      ];
+      this.categories=[
+        {name: 'Water Hike'},
+        {name: 'Hike'},
+        {name: 'Geological Creation'}
+      ]
+     
+    this.searchInfo=new Search("none","none","none");
   }
 
  ngOnInit() {
      this.selectedSites = [];
-     this.SiteService.doGetAllSites().subscribe(response => {
+     this.siteService.getAllSites().subscribe(response => {
       this.availableSites = response, err => { console.log(err);}
+      debugger
     })
  }
 
@@ -32,7 +66,6 @@ export class SiteComponent implements OnInit {
      if(this.draggedSite) {
          let draggedSiteIndex = this.findIndex(this.draggedSite);
          this.selectedSites = [...this.selectedSites, this.draggedSite];// whats ...?
-         debugger
          this.availableSites = this.availableSites.filter((val,i) => i!=draggedSiteIndex);
          this.draggedSite = null;
      }
@@ -75,6 +108,7 @@ findIndex2(site: CommonSite) {
 }
 
 findIndexByName(name: string) {
+    debugger
     let index = -1;
     for(let i = 0; i < this.selectedSites.length; i++) {
         if(name === this.selectedSites[i].Name) {
@@ -84,18 +118,11 @@ findIndexByName(name: string) {
     }
     return index;
 }
- cdkdrop(event:any) {
-    //debugger
+ cdkdrop(event:any) {   
     var prevIndex=(this.findIndex2(this.draggedSite2));
-    //alert("prev"+ prevIndex);
     var currentIndex=(this.findIndexByName(event.target.childNodes[0].data));
-    //alert("cur"+ currentIndex);
     this.moveItemInArray(this.selectedSites,prevIndex,currentIndex);
-    for(let i = 0; i < this.selectedSites.length; i++) {
-        //alert(i+" "+ this.selectedSites[i].Name);
-    }
-    ///alert("after move"+this.selectedSites[0].Name+ this.selectedSites[1].Name);
-  }
+ }
   
   moveItemInArray(array:CommonSite[],index1:number,index2:number)
   {
@@ -105,4 +132,27 @@ findIndexByName(name: string) {
       array[index2]=site;
   }
 
+  changeArea(event: any)
+  {
+      this.searchInfo.Area=event.value.name;
+  }
+  
+  changeCategory(event: any)
+  {
+      this.searchInfo.Category=event.value.name;
+  }
+  search()
+  {
+    this.siteService.getSitesBySearch(this.searchInfo).subscribe(response => {
+    this.availableSites = response, err => { console.log(err);};
+   })
+  }
+
+  saveSitesToTrip()
+{
+    this.tripService.saveSitesToTrip(this.selectedSites);
+    this.tripService.saveTrip();
+}  
 }
+
+

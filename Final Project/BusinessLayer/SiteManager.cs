@@ -15,5 +15,13 @@ namespace BusinessLayer
             sites.AddRange(DataSite.RetrieveSites());               
             return sites;
         }
+
+        public static List<CommonSite> RetrieveSitesBySearch(Search paramsList)
+        {
+            List<CommonSite> sites = new List<CommonSite>();
+            sites.AddRange(DataSite.RetrieveSitesBySearch(paramsList));
+            return sites;
+        }
+
     }
 }
