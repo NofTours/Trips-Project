@@ -31,7 +31,10 @@ import {TableModule} from 'primeng/table';
 import {PickListModule} from 'primeng/picklist';
 import {OrderListModule} from 'primeng/orderlist';
 import {DataViewModule} from 'primeng/dataview';
+<<<<<<< HEAD
 import {DropdownModule} from 'primeng/dropdown';
+=======
+>>>>>>> ba04f082dd63ef3f5b17cc0069ab09cbb0698159
 import {ListboxModule} from 'primeng/listbox';
 import {CardModule} from 'primeng/card';
 
