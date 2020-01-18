@@ -3,7 +3,8 @@ import { CommonSite } from 'src/app/models/site/commonSite';
 import { SitesService } from 'src/app/services/sites.service';
 import { TripService } from 'src/app/services/trip.service';
 import { Search } from 'src/app/models/Search/Search';
-
+import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 //import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -38,28 +39,28 @@ export class SiteComponent implements OnInit {
 
  searchInfo:Search;
 
- constructor(private siteService: SitesService,private tripService: TripService) {
+ called:number;
+
+ constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
         {name: 'North'},
         {name: 'South'},
         {name: 'East'},
         {name: 'West'}
       ];
-      this.categories=[
-        {name: 'Water Hike'},
-        {name: 'Hike'},
-        {name: 'Geological Creation'}
-      ]
-     
-    this.searchInfo=new Search("none","none","none");
+    this.siteService.getCategories().subscribe(response => {
+        this.categories=[];
+        response.forEach(element => {
+           this.categories.push({name:element})}) ,err => { console.log(err);}
+           this.selectedSites = [];
+           this.siteService.getAllSites().subscribe(response => {
+            this.availableSites = response, err => { console.log(err);}
+          })
+     })  
+     this.searchInfo=new Search("none","none","none");
   }
 
  ngOnInit() {
-     this.selectedSites = [];
-     this.siteService.getAllSites().subscribe(response => {
-      this.availableSites = response, err => { console.log(err);}
-      debugger
-    })
  }
 
  drop(event) {
@@ -108,7 +109,6 @@ findIndex2(site: CommonSite) {
 }
 
 findIndexByName(name: string) {
-    debugger
     let index = -1;
     for(let i = 0; i < this.selectedSites.length; i++) {
         if(name === this.selectedSites[i].Name) {
@@ -148,10 +148,19 @@ findIndexByName(name: string) {
    })
   }
 
+  clearSearch()
+  {
+      debugger
+      this.searchInfo.Area="none";
+      this.searchInfo.Category="none";
+  }
+
   saveSitesToTrip()
 {
+    
     this.tripService.saveSitesToTrip(this.selectedSites);
-    this.tripService.saveTrip();
+    // alert(this.tripService.getTripBeginTime()+this.tripService.getTripBookingStatus()+this.tripService.getTripTotalTripHours());
+    this.route.navigate(['/trip']);
 }  
 }
 

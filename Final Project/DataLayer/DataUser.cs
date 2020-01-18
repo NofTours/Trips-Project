@@ -11,6 +11,7 @@ namespace DataLayer
 {
     public static class DataUser
     {
+        
         static dbEntities db = new dbEntities();
         //* TODO move to static function that will try to create connection to db.
 

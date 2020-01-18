@@ -20,6 +20,11 @@ namespace BusinessLayer
             return true;
         }
 
+        public static IEnumerable<CommonTrip> RetrieveTripsByClient(string email)
+        {
+            return DataTrip.RetrieveTripsByClient(email);
+        }
+
         public static Boolean RetrieveTripTemplates(string area)
         {
             return true;

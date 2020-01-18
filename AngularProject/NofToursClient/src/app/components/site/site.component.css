@@ -48,6 +48,7 @@
   }
   .drag-handler{
     color:coral;
+    cursor: pointer;
   }
 
   .search-slt{

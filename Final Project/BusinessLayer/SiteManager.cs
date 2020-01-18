@@ -9,6 +9,7 @@ namespace BusinessLayer
 {
     public static class SiteManager
     {
+        
         public static List<CommonSite> RetrieveSites()
         {
             List<CommonSite> sites = new List<CommonSite>();
@@ -21,6 +22,16 @@ namespace BusinessLayer
             List<CommonSite> sites = new List<CommonSite>();
             sites.AddRange(DataSite.RetrieveSitesBySearch(paramsList));
             return sites;
+        }
+
+        public static List<string> RetrieveCategories()
+        {            
+            return DataSite.RetrieveCategories();
+        }
+
+        public static ICollection<CommonSite> RetrieveSitesById(int[] id)
+        {
+            return DataSite.RetrieveSitesById(id);
         }
 
     }

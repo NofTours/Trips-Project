@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="abd71162e4494a95a39023833eb7e34a" Name="Diagram1">
-        <EntityTypeShape EntityType="dbModel.BookedTrips" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="dbModel.Calendar" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="dbModel.Equipment" Width="1.5" PointX="3" PointY="13" />
         <EntityTypeShape EntityType="dbModel.EquipmentSites" Width="1.5" PointX="5.25" PointY="8.875" />
@@ -17,7 +16,6 @@
         <AssociationConnector Association="dbModel.FK_TripSite_ToSites" />
         <AssociationConnector Association="dbModel.FK_TripSite_ToTrips" />
         <EntityTypeShape EntityType="dbModel.Clients" Width="1.5" PointX="0.75" PointY="2.5" />
-        <AssociationConnector Association="dbModel.FK_BookedTrips_ToClients" />
         <AssociationConnector Association="dbModel.FK_Trips_ToClients" />
         </Diagram>
     </edmx:Diagrams>

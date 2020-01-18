@@ -121,9 +121,9 @@ namespace DataLayer
                 Price = commonSite.Price,
 
             };
+            site.EquipmentSites = new List<EquipmentSites>();
             foreach (String e in commonSite.Equipment)
-            {
-                site.EquipmentSites = new List<EquipmentSites>();
+            {        
                 EquipmentSites equipmentSites = new EquipmentSites
                 {
                     SiteId = site.SiteId,
@@ -154,9 +154,9 @@ namespace DataLayer
                 EstimatedStay = site.EstimatedStay,
                 Price = site.Price
             };
+            commonSite.Equipment = new List<string>();
             foreach (EquipmentSites e in site.EquipmentSites)
-            {
-                commonSite.Equipment = new List<string>();
+            {               
                 commonSite.Equipment.Add(DataEquipment.GetEquipmentNameById(e.EquipmentId));
                 //commonSite.EquipmentSites = new List<CommonEquipmentSite>();
                 //commonSite.EquipmentSites.Add(EquipmentSiteToCommon(e));
@@ -181,9 +181,9 @@ namespace DataLayer
                 Polyline = commonTrip.Polyline,
 
             };
-            foreach(int siteId in commonTrip.TripSites)
-            {
-                trip.TripSite = new List<TripSite>();
+            trip.TripSite = new List<TripSite>();
+            foreach (int siteId in commonTrip.TripSites)
+            {                
                 TripSite tripSite = new TripSite()
                 {
                     TripId = trip.TripId,
@@ -200,15 +200,17 @@ namespace DataLayer
         {
             CommonTrip commonTrip = new CommonTrip()
             {
+                TripId=trip.TripId,
+                ClientId=trip.ClientId,
                 BeginTime = trip.BeginTime,
                 BookingStatus = trip.BookingStatus,
                 Date = trip.Date,
                 TotalTripHours = trip.TotalTripHours,
                 Polyline = trip.Polyline
             };
+            commonTrip.TripSites = new List<int>();
             foreach (TripSite ts in trip.TripSite)
             {
-                commonTrip.TripSites = new List<int>();
                 commonTrip.TripSites.Add(ts.SiteId);
             }
             return commonTrip;

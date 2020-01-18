@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
-    <EntitySetMapping Name="BookedTrips">
-      <EntityTypeMapping TypeName="dbModel.BookedTrips">
-        <MappingFragment StoreEntitySet="BookedTrips">
-          <ScalarProperty Name="Polyline" ColumnName="Polyline" />
-          <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
-          <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
-          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-          <ScalarProperty Name="TripId" ColumnName="TripId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Calendar">
       <EntityTypeMapping TypeName="dbModel.Calendar">
         <MappingFragment StoreEntitySet="Calendar">

@@ -1,31 +1,35 @@
 import { Injectable, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonClient } from "../models/user/CommonClient";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService implements OnInit{
+  baseUrl = "http://localhost:55109";
+  
+  constructor(private http: HttpClient) {
+  }
   ngOnInit() {
   }
 
-  users: CommonClient[];
-  constructor() { 
-    this.users=[
-    new CommonClient("Raffi", "Raffi@fun.com", "999888765", "", "12mk3n"),
-    new CommonClient("Bracha","Bracha@trips.com","3535435435","","ddd9jid"),
-    new CommonClient("Sara","Sara@gmail.com","2423222","","ddejESSYk5Y")];
-    console.log("Added users successfully: "+ this.users);
-   }
-   
-  @Output() userAdded=new EventEmitter<CommonClient>();
-  @Output() userkDeleted=new EventEmitter<CommonClient>()
-
-  getUsers(){
-    return this.users;
+  registerUser(user: CommonClient){
+    return this.http.post<Boolean>(this.baseUrl + "/api/Register", user);
   }
 
-  addUser(user: CommonClient){
-    this.users.push(user);
+  userLogin(email: string, password: string): Observable<Boolean>
+  {
+    var login = {
+      email: email,
+      password: password
+    }
+  return this.http.post<Boolean>(this.baseUrl + "/api/Login", login) ;    
+  }
+
+  getUserId(email:string): Observable<number>
+  {
+    return this.http.get<number>(this.baseUrl + "/api/Client/?email="+email);
   }
 
 }

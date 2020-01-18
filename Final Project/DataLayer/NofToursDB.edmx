@@ -5,23 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BookedTrips">
-          <Key>
-            <PropertyRef Name="TripId" />
-          </Key>
-          <Property Name="TripId" Type="int" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="BeginTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TotalTripHours" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Polyline" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="CalendarId" />
           </Key>
-          <Property Name="CalendarId" Type="int" Nullable="false" />
+          <Property Name="CalendarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="DayStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -43,14 +31,14 @@
           <Key>
             <PropertyRef Name="EquipmentId" />
           </Key>
-          <Property Name="EquipmentId" Type="int" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="EquipmentSites">
           <Key>
             <PropertyRef Name="EquipmentSitesId" />
           </Key>
-          <Property Name="EquipmentSitesId" Type="int" Nullable="false" />
+          <Property Name="EquipmentSitesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EquipmentId" Type="int" Nullable="false" />
           <Property Name="SiteId" Type="int" Nullable="false" />
         </EntityType>
@@ -58,7 +46,7 @@
           <Key>
             <PropertyRef Name="SiteId" />
           </Key>
-          <Property Name="SiteId" Type="int" Nullable="false" />
+          <Property Name="SiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AddressGMaps" Type="nvarchar(max)" Nullable="false" />
@@ -73,7 +61,7 @@
           <Key>
             <PropertyRef Name="TripId" />
           </Key>
-          <Property Name="TripId" Type="int" Nullable="false" />
+          <Property Name="TripId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="BeginTime" Type="time" Precision="7" Nullable="false" />
@@ -85,23 +73,11 @@
           <Key>
             <PropertyRef Name="TripSiteId" />
           </Key>
-          <Property Name="TripSiteId" Type="int" Nullable="false" />
+          <Property Name="TripSiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SiteId" Type="int" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
           <Property Name="OrderInTrip" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_BookedTrips_ToClients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="BookedTrips" Type="Self.BookedTrips" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="BookedTrips">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EquipmentSites_ToEquipment">
           <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
           <End Role="EquipmentSites" Type="Self.EquipmentSites" Multiplicity="*" />
@@ -163,7 +139,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbModelStoreContainer">
-          <EntitySet Name="BookedTrips" EntityType="Self.BookedTrips" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
@@ -171,10 +146,6 @@
           <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripSite" EntityType="Self.TripSite" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BookedTrips_ToClients" Association="Self.FK_BookedTrips_ToClients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="BookedTrips" EntitySet="BookedTrips" />
-          </AssociationSet>
           <AssociationSet Name="FK_EquipmentSites_ToEquipment" Association="Self.FK_EquipmentSites_ToEquipment">
             <End Role="Equipment" EntitySet="Equipment" />
             <End Role="EquipmentSites" EntitySet="EquipmentSites" />
@@ -201,7 +172,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BookedTrips" EntityType="dbModel.BookedTrips" />
           <EntitySet Name="Calendar" EntityType="dbModel.Calendar" />
           <EntitySet Name="Equipment" EntityType="dbModel.Equipment" />
           <EntitySet Name="EquipmentSites" EntityType="dbModel.EquipmentSites" />
@@ -225,28 +195,11 @@
             <End Role="TripSite" EntitySet="TripSite" />
           </AssociationSet>
           <EntitySet Name="Clients" EntityType="dbModel.Clients" />
-          <AssociationSet Name="FK_BookedTrips_ToClients" Association="dbModel.FK_BookedTrips_ToClients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="BookedTrips" EntitySet="BookedTrips" />
-          </AssociationSet>
           <AssociationSet Name="FK_Trips_ToClients" Association="dbModel.FK_Trips_ToClients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Trips" EntitySet="Trips" />
           </AssociationSet>
           </EntityContainer>
-        <EntityType Name="BookedTrips">
-          <Key>
-            <PropertyRef Name="TripId" />
-          </Key>
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="BeginTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TotalTripHours" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Polyline" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clients" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="BookedTrips" ToRole="Clients" />
-        </EntityType>
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="CalendarId" />
@@ -376,21 +329,8 @@
           <Property Name="NumPeople" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="HashedPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Salt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BookedTrips" Relationship="dbModel.FK_BookedTrips_ToClients" FromRole="Clients" ToRole="BookedTrips" />
           <NavigationProperty Name="Trips" Relationship="dbModel.FK_Trips_ToClients" FromRole="Clients" ToRole="Trips" />
         </EntityType>
-        <Association Name="FK_BookedTrips_ToClients">
-          <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="dbModel.BookedTrips" Role="BookedTrips" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="BookedTrips">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Trips_ToClients">
           <End Type="dbModel.Clients" Role="Clients" Multiplicity="1" />
           <End Type="dbModel.Trips" Role="Trips" Multiplicity="*" />
@@ -409,19 +349,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
-          <EntitySetMapping Name="BookedTrips">
-            <EntityTypeMapping TypeName="dbModel.BookedTrips">
-              <MappingFragment StoreEntitySet="BookedTrips">
-                <ScalarProperty Name="Polyline" ColumnName="Polyline" />
-                <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
-                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Calendar">
             <EntityTypeMapping TypeName="dbModel.Calendar">
               <MappingFragment StoreEntitySet="Calendar">

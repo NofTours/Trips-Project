@@ -25,7 +25,6 @@ namespace DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BookedTrips> BookedTrips { get; set; }
         public virtual DbSet<Calendar> Calendar { get; set; }
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<EquipmentSites> EquipmentSites { get; set; }

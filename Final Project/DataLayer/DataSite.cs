@@ -67,5 +67,27 @@ namespace DataLayer
             }
             return siteList;
         }
+
+        public static ICollection<CommonSite> RetrieveSitesById(int[] id)
+        {
+            List<Sites> retrievedSites = new List<Sites>();
+            foreach (int i in id)
+            {
+                Sites site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
+                retrievedSites.Add(site);
+            }           
+            List<CommonSite> siteList = new List<CommonSite>();
+            foreach (Sites site in retrievedSites)
+            {
+                siteList.Add(Mapper.SiteToCommon(site));
+            }
+            return siteList;
+        }
+
+        public static List<string> RetrieveCategories()
+        {
+            var categories = (from c in db.Sites select c.Category).Distinct().ToList();
+            return categories;
+        }
     }
 }

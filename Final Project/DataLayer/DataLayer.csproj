@@ -53,9 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookedTrips.cs">
-      <DependentUpon>NofToursDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Calendar.cs">
       <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>

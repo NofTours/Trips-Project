@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using BusinessLayer;
 using CommonLayer;
+
+
 namespace NofToursServer.Controllers
 {
     public class TripsController : ApiController
@@ -17,9 +19,9 @@ namespace NofToursServer.Controllers
         }
 
         // GET: api/Trips/5
-        public string Get(int id)
-        {
-            return "value";
+        public IEnumerable<CommonTrip> Get(string  email)
+        {        
+            return TripManager.RetrieveTripsByClient(email);
         }
 
         // POST: api/Trips

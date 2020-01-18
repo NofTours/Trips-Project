@@ -10,8 +10,6 @@ import { HomeComponent } from './components/home/home.component';
 import { WarningDirective } from './directives/warning.directive';
 import { ButtonHoverDirective } from './directives/button-hover.directive';
 import { HttpClientModule } from '@angular/common/http'
-import { WebApiService } from './services/web-api.service';
-import { AdminComponent } from './components/admin/admin.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ShortStrPipe } from './pipes/short-str.pipe';
 import { UserComponent } from './components/user/user.component';
@@ -31,12 +29,18 @@ import {TableModule} from 'primeng/table';
 import {PickListModule} from 'primeng/picklist';
 import {OrderListModule} from 'primeng/orderlist';
 import {DataViewModule} from 'primeng/dataview';
-<<<<<<< HEAD
 import {DropdownModule} from 'primeng/dropdown';
-=======
->>>>>>> ba04f082dd63ef3f5b17cc0069ab09cbb0698159
 import {ListboxModule} from 'primeng/listbox';
 import {CardModule} from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+import {MenuModule} from 'primeng/menu';
+import {MenuItem} from 'primeng/api';
+import { MenuComponent } from './components/menu/menu.component';
+import { DataSharingService } from './services/data-sharing.service';
+import { TripService } from './services/trip.service';
+import { SitesService } from './services/sites.service';
+import { UsersService } from './services/users.service';
+import { ViewTripsComponent } from './components/view-trips/view-trips.component';
 
 
 
@@ -46,11 +50,12 @@ export const ROUTES: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'admin/:user', component: AdminComponent},
   {path: 'booktrip', component: BookTripComponent},
   {path: 'example', component: ExampleComponent},
-  {path: 'myTrips/:user', component: AdminComponent},
-  {path: 'sites', component: SiteComponent}   
+  {path: 'sites', component: SiteComponent},
+  {path: 'trip', component: TripComponent},
+  {path: 'viewTrips', component: ViewTripsComponent}
+
 ];
 
 @NgModule({
@@ -61,7 +66,6 @@ export const ROUTES: Routes = [
     HomeComponent,
     WarningDirective,
     ButtonHoverDirective,
-    AdminComponent,
     FilterPipe,
     ShortStrPipe,
     UserComponent,
@@ -72,7 +76,9 @@ export const ROUTES: Routes = [
     BookTripComponent,
     TimePickerComponent,
     TripComponent,
-    SiteComponent  
+    SiteComponent,
+    MenuComponent,
+    ViewTripsComponent  
   ],
   imports: [
     BrowserModule,
@@ -90,9 +96,11 @@ export const ROUTES: Routes = [
     ListboxModule,
     DataViewModule,
     DropdownModule,
-    CardModule
+    CardModule,
+    ButtonModule,
+    MenuModule
   ],
-  providers: [WebApiService],
+  providers: [TripService,SitesService,UsersService,DataSharingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

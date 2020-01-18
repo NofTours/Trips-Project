@@ -25,7 +25,17 @@ export class SitesService {
   }
   getSitesBySearch(searchInfo:Search)
   {
-    debugger
     return this.http.post<CommonSite[]>(this.baseUrl + "/api/Site",searchInfo);
+  }
+
+  getSitesById(id:number[]):Observable<CommonSite[]>
+  {
+    debugger
+    return this.http.post<CommonSite[]>(this.baseUrl + "/api/Site/GetSitesBySiteId",id);
+  }
+
+  getCategories()
+  {
+    return this.http.get<string[]>(this.baseUrl + "/api/Site/id?="+1); 
   }
 }

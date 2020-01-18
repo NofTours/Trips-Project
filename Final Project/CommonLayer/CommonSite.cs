@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CommonLayer
 {
      public class CommonSite
-    {
+    {      
         public int SiteId { get; set; }
         public string Name { get; set; }
         public string Area { get; set; }

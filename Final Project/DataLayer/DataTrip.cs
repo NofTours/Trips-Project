@@ -13,6 +13,7 @@ namespace DataLayer
         static dbEntities db = new dbEntities();
         public static Boolean AddTrip(CommonTrip trip)
         {
+            
             Trips newTrip=Mapper.TripToDB(trip);
             try
             {
@@ -24,7 +25,19 @@ namespace DataLayer
             {
                 Debug.WriteLine(dbEx.Message);
             }
-            return false;
+             return false;            
+        }
+
+        public static IEnumerable<CommonTrip> RetrieveTripsByClient(string email)
+        {
+            int clientId =DataUser.GetUserIdByEmail(email);
+            var trips = (from t in db.Trips where t.ClientId == clientId select t).ToList<Trips>();
+            List<CommonTrip> clientTrips = new List<CommonTrip>();
+            foreach(Trips t in trips)
+            {
+                clientTrips.Add(Mapper.TripToCommon(t));
+            }
+            return clientTrips;
         }
     }
 }

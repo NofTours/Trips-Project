@@ -20,7 +20,6 @@ export class trip
         totalTripHours: string,
         polyline: string,
         tripSites: number[]
-
     )
     {
         this.clientId=clientId;

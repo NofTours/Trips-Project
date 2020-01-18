@@ -1,3 +1,13 @@
+
+<!-- <div class="intro-button mx-auto">
+   <button class="btn btn-primary btn-xl" (click)="viewTrips()">View Your Trips</button>
+</div>
+<ul [hidden]="hidden">
+   <li *ngFor="let trip of clientTrips">
+      <app-trip [trip]="trip"></app-trip>
+   </li>
+</ul> -->
+
 <p><b>How many people are in your group?</b></p>
 
 <input type="number" [(ngModel)]="numOfPeople" min="1" max="20">
@@ -13,11 +23,5 @@
 </div>
 <br>
 
-<p><b>How many people are in your group?</b></p>
-<input type="number" [(ngModel)]="numOfPeople" min="1" max="20">
-<p>Selected number: {{numOfPeople ?numOfPeople : 'none'}}</p>
-<div class="alert alert-info" [hidden]="hidden">
-   Your chosen date and time are:<br>
-   Date:{{this.tripService.getTripDate() | date:'short'}} 
-</div>
+
 
