@@ -73,7 +73,7 @@ namespace DataLayer
             List<Sites> retrievedSites = new List<Sites>();
             foreach (int i in id)
             {
-                Sites site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
+                var site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
                 retrievedSites.Add(site);
             }           
             List<CommonSite> siteList = new List<CommonSite>();

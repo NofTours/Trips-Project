@@ -79,9 +79,10 @@ export class TripService {
   { 
     
     this.saveClientIdToTrip();
+    debugger;
     if(this.trip.clientId!=0)
     {
-    alert("in save trip"+sessionStorage.getItem("UserEmail")+" "+this.trip.clientId);
+    alert("in save trip"+sessionStorage.getItem("UserEmail")+" "+this.trip.clientId+ this.trip.date);
     return this.http.post<Boolean>(this.baseUrl + "/api/Trips",this.trip).subscribe();}
   }
   private pad(i: number): string {
@@ -90,7 +91,7 @@ export class TripService {
 
   getClientTrips()
   {
-    return this.http.get<trip[]>(this.baseUrl+"/api/Trips/?email="+this.email);
+    return this.http.get<trip[]>(this.baseUrl+"/api/Trips/?email="+sessionStorage.getItem("UserEmail"));
   }
 
 }

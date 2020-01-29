@@ -15,6 +15,7 @@ namespace DataLayer
         {
             
             Trips newTrip=Mapper.TripToDB(trip);
+            //newTrip.Date.AddHours(3);
             try
             {
                 db.Trips.Add(newTrip);

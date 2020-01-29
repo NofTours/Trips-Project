@@ -20,7 +20,7 @@ export class ViewTripsComponent implements OnInit {
     this.tripService.getClientTrips().subscribe(response => 
       { 
       response.forEach(element => {//change properties of each element to lowercase in order to fit trip object
-     Object.keys(element).forEach(k => {
+       Object.keys(element).forEach(k => {
        const value = element[k];
        delete element[k];
        element[k[0].toLowerCase()+k.slice(1)] = value;

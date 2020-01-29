@@ -1,16 +1,14 @@
 <div class="alert alert-info">
-  <p>Hello {{this.trip.email}}</p><br>
-  Your chosen date and time are:<br>
-  Date:{{this.trip.date | date:'short'}} 
+  <p>Hello</p><br> 
 </div>
 <div>
   <form>
-  <p>Date: {{this.trip.date}}</p>
+  <p>Date: {{this.trip.date|  date:'shortDate'}}</p>
   <p>Begin Time: {{this.trip.beginTime}}</p>
   <p>BookingStatus: {{this.trip.bookingStatus}}</p>
   <p>Total Trip Hours: {{this.trip.totalTripHours}}</p>
   <p>Sites:</p>
-  <div *ngFor="let site of tripSites">1 {{site.Name}}</div>
+  <div *ngFor="let site of tripSites">{{site.Name}}</div>
   <p>Equipment:</p>
   <div *ngFor="let site of tripSites">{{site.Equipment}}</div>
 </form>
