@@ -10,10 +10,10 @@ namespace DataLayer
 {
     public static class DataTrip
     {
-        static dbEntities db = new dbEntities();
+        //static dbEntities db = new dbEntities();
         public static Boolean AddTrip(CommonTrip trip)
         {
-            
+            dbEntities db = new dbEntities();
             Trips newTrip=Mapper.TripToDB(trip);
             //newTrip.Date.AddHours(3);
             try
@@ -31,6 +31,7 @@ namespace DataLayer
 
         public static IEnumerable<CommonTrip> RetrieveTripsByClient(string email)
         {
+            dbEntities db = new dbEntities();
             int clientId =DataUser.GetUserIdByEmail(email);
             var trips = (from t in db.Trips where t.ClientId == clientId select t).ToList<Trips>();
             List<CommonTrip> clientTrips = new List<CommonTrip>();

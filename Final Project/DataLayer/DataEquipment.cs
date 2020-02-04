@@ -9,10 +9,11 @@ namespace DataLayer
 {
     public static class DataEquipment
     {
-        static dbEntities db = new dbEntities();
+        //static dbEntities db = new dbEntities();
 
         public static String GetEquipmentNameById(int equipmentId)
         {
+            dbEntities db = new dbEntities();
             try { 
             string equipment = (from e in db.Equipment where e.EquipmentId == equipmentId select e.Name).FirstOrDefault();
                 if(equipment!=null)
@@ -26,6 +27,7 @@ namespace DataLayer
         }
         public static int GetEquipmentIdByName(string equipmentName)
         {
+            dbEntities db = new dbEntities();
             try { 
             Equipment equipment = (from e in db.Equipment where e.Name == equipmentName select e).FirstOrDefault();
                 if (equipment!=null)

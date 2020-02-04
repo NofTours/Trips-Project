@@ -12,11 +12,12 @@ namespace DataLayer
     public static class DataUser
     {
         
-        static dbEntities db = new dbEntities();
+        //static dbEntities db = new dbEntities();
         //* TODO move to static function that will try to create connection to db.
 
         public static Boolean Login(string email, string password)
         {
+            dbEntities db = new dbEntities();
             try
             {
                 Clients cl = (from c in db.Clients where c.Email == email select c).FirstOrDefault();
@@ -35,6 +36,7 @@ namespace DataLayer
 
         public static Boolean UserExists(CommonClient user)
         {
+            dbEntities db = new dbEntities();
             try
             {
                 var result = (from c in db.Clients where c.Email == user.Email select c).FirstOrDefault();
@@ -52,6 +54,7 @@ namespace DataLayer
         //* TODO - check online how to validate db w EF - before any work with it - maybe add transactions...
         public static Boolean Register(CommonClient user)
         {
+            dbEntities db = new dbEntities();
             if (UserExists(user))
                 return false; //* If user exists-do not register again.                     
             
@@ -75,12 +78,14 @@ namespace DataLayer
 
         public static int GetUserIdByEmail(string email)
         {
+            dbEntities db = new dbEntities();
             int id = (from c in db.Clients where c.Email == email select c.ClientId).FirstOrDefault();
             return id;
         }
 
         public static Clients GetUserById(int id)
         {
+            dbEntities db = new dbEntities();
             Clients client = (from c in db.Clients where c.ClientId == id select c).FirstOrDefault();
             return client;
         }

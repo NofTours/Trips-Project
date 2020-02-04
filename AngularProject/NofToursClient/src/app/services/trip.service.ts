@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonSite } from '../models/site/commonSite';
 import { Time } from '@angular/common';
 import { UsersService } from './users.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class TripService {
  selectedSites:CommonSite[];
  baseUrl = "http://localhost:55109";
 
-  constructor(private http: HttpClient,private userService:UsersService) 
+  constructor(private http: HttpClient,private userService:UsersService,private route:Router) 
   {   
     this.trip=new trip(0,new Date()," "," "," "," ",new Array<number>());
     this.hourTimeSlice=0;
@@ -44,6 +45,7 @@ export class TripService {
   }
   saveSitesToTrip(selectedSites: CommonSite[])
   {
+    debugger;
      this.selectedSites=selectedSites;
      selectedSites.forEach(site => {
      this.trip.tripSites.push(site.SiteId);
@@ -79,12 +81,20 @@ export class TripService {
   { 
     
     this.saveClientIdToTrip();
-    debugger;
     if(this.trip.clientId!=0)
     {
     alert("in save trip"+sessionStorage.getItem("UserEmail")+" "+this.trip.clientId+ this.trip.date);
-    return this.http.post<Boolean>(this.baseUrl + "/api/Trips",this.trip).subscribe();}
+    return this.http.post<Boolean>(this.baseUrl + "/api/Trips",this.trip).subscribe(data => {
+      console.log(data);
+      if (data == true)
+      {
+        this.route.navigate(['/endPage']);}
+        
+      }
+      );
   }
+}
+
   private pad(i: number): string {
     return i < 10 ? `0${i}` : `${i}`;
   }

@@ -41,7 +41,9 @@ import { TripService } from './services/trip.service';
 import { SitesService } from './services/sites.service';
 import { UsersService } from './services/users.service';
 import { ViewTripsComponent } from './components/view-trips/view-trips.component';
-
+import { CalendarComponent } from './components/calendar/calendar.component';
+import {CalendarModule} from 'primeng/calendar';
+import { EndpageComponent } from './components/endpage/endpage.component';
 
 
 
@@ -54,7 +56,9 @@ export const ROUTES: Routes = [
   {path: 'example', component: ExampleComponent},
   {path: 'sites', component: SiteComponent},
   {path: 'trip', component: TripComponent},
-  {path: 'viewTrips', component: ViewTripsComponent}
+  {path: 'viewTrips', component: ViewTripsComponent},
+  {path: 'calendar', component: CalendarComponent},
+  {path: 'endPage', component: EndpageComponent}
 
 ];
 
@@ -78,7 +82,9 @@ export const ROUTES: Routes = [
     TripComponent,
     SiteComponent,
     MenuComponent,
-    ViewTripsComponent  
+    ViewTripsComponent,
+    CalendarComponent,
+    EndpageComponent  
   ],
   imports: [
     BrowserModule,
@@ -98,7 +104,8 @@ export const ROUTES: Routes = [
     DropdownModule,
     CardModule,
     ButtonModule,
-    MenuModule
+    MenuModule,
+    CalendarModule
   ],
   providers: [TripService,SitesService,UsersService,DataSharingService],
   bootstrap: [AppComponent]

@@ -18,6 +18,7 @@ import {
 export class BookTripComponent implements OnInit {
  
   numOfPeople:number;
+  leavingAddress:Text;
   hidden:boolean;
   constructor(private SitesService: SitesService,private route: Router,
     private tripService:TripService) {   

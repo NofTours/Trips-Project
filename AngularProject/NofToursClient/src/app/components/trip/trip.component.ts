@@ -5,6 +5,7 @@ import { CommonSite } from 'src/app/models/site/commonSite';
 import { TripService } from 'src/app/services/trip.service';
 import { SitesService } from 'src/app/services/sites.service';
 import { element } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip',
@@ -16,7 +17,8 @@ export class TripComponent implements OnInit {
  @Input()
  trip:trip;
  tripSites:CommonSite[];
-  constructor(private tripService:TripService,private siteService:SitesService) {
+ isOld:boolean;
+  constructor(private tripService:TripService,private siteService:SitesService,private route: Router) {
     this.tripSites=[];
    }
 
@@ -25,12 +27,13 @@ export class TripComponent implements OnInit {
     {
      this.trip=this.tripService.getTrip();
      this.tripSites=this.tripService.getTripSites();
+     this.isOld=false;
    }
   else {
     this.siteService.getSitesById(this.trip.tripSites).subscribe(response => {
-      debugger
           this.tripSites=response, err => { console.log(err);};
          })
+         this.isOld=true;
        };
   //   this.trip.tripSites.forEach(element => {
   //    this.siteService.getSitesById(element).subscribe(response => {
@@ -41,6 +44,9 @@ export class TripComponent implements OnInit {
 
   saveTrip()
   {
+    alert("in save trip");
     this.tripService.saveTrip();
+    // this.route.navigate(['/endPage']);
+
   }
 }

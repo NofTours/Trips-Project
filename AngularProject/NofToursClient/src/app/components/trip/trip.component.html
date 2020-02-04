@@ -12,5 +12,5 @@
   <p>Equipment:</p>
   <div *ngFor="let site of tripSites">{{site.Equipment}}</div>
 </form>
-<button (click)="saveTrip()">save trip</button>
+<button [hidden]="isOld" (click)="saveTrip()">save trip</button>
 </div>

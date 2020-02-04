@@ -7,6 +7,8 @@
       <app-trip [trip]="trip"></app-trip>
    </li>
 </ul> -->
+<p><b>What address are we leaving from?</b></p>
+<input type="text" [(ngModel)]="leavingAddress">
 
 <p><b>How many people are in your group?</b></p>
 
@@ -14,7 +16,7 @@
 <p>Selected number: {{numOfPeople ?numOfPeople : 'none'}}</p>
 
 <p><b>So when are you available?</b></p>
-
+<!-- <app-calendar></app-calendar> -->
 <app-newcalendar (chosenDate)="saveDateToTrip($event)"></app-newcalendar>
 <br>
  <app-time-picker #timePicker></app-time-picker> 
