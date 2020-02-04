@@ -14,7 +14,7 @@
 
 <h3>Where do you want to visit?? Drag and drop to table!!</h3>
 <div class="ui-g">
-    <p-dataView [value]="availableSites"  rows="4"
+    <p-dataView [value]="availableSites"  [paginator]="true" paginatorPosition="both" rows="5"
      filterBy="Name" #dv dragdrop="true" pDraggable="sites">
      <p-header>
             <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target.value, 'contains')">
@@ -33,16 +33,11 @@
 <br>
 <br>
 
-<p-card header="Your Sites -Reorder By Dragging...
-" [style]="{width: '850px', height:'700px'}" styleClass="ui-card-shadow">
-    <!-- <div class="alert alert-info">
-        Your chosen date and time are:<br>
-        Date:{{this.tripService.getTripDate() | date:'short'}} 
-     </div> -->
+<p-card  pDroppable="sites" header="Your Sites -All the info you may need..." subheader="You may reorder your trip by dragging site name!" [style]="{width: '1000px', height:'500px'}" styleClass="ui-card-shadow" >
     <div class="ui-g-12 ui-md-6 drop-column" pDroppable="sites" 
-        (onDrop)="drop($event)" [ngClass]="{'ui-highlight-car':draggedSite}">
-        <p-table [value]="selectedSites" [style]="{width: '850px',height:'400px'}">
-               
+        (onDrop)="drop($event)" [ngClass]="{'ui-highlight-car':drasggedSite}">
+        <p-table  [value]="selectedSites" [style]="{width: '950px',height:'700px'}" >
+            <!-- [hidden]="this.selectedSites.length<=0" -->
             <ng-template pTemplate="header">
                 <tr>
                     <th>Order in Trip</th>

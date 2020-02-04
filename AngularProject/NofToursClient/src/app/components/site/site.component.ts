@@ -41,6 +41,7 @@ export class SiteComponent implements OnInit {
 
  called:number;
 
+ 
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
         {name: 'North'},
@@ -57,7 +58,9 @@ export class SiteComponent implements OnInit {
             this.availableSites = response, err => { console.log(err);}
           })
      })  
+     
      this.searchInfo=new Search("none","none","none");
+  
   }
 
  ngOnInit() {
