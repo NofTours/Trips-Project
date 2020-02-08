@@ -41,6 +41,9 @@ export class SiteComponent implements OnInit {
 
  called:number;
 
+ searchHidden:boolean;
+
+ clearSearchHidden:boolean;
  
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
@@ -53,6 +56,7 @@ export class SiteComponent implements OnInit {
         this.categories=[];
         response.forEach(element => {
            this.categories.push({name:element})}) ,err => { console.log(err);}
+           
            this.selectedSites = [];
            this.siteService.getAllSites().subscribe(response => {
             this.availableSites = response, err => { console.log(err);}
@@ -60,6 +64,8 @@ export class SiteComponent implements OnInit {
      })  
      
      this.searchInfo=new Search("none","none","none");
+     this.searchHidden=false;
+     this.clearSearchHidden=true;
   
   }
 
@@ -149,13 +155,17 @@ findIndexByName(name: string) {
     this.siteService.getSitesBySearch(this.searchInfo).subscribe(response => {
     this.availableSites = response, err => { console.log(err);};
    })
+   this.searchHidden=true;
+   this.clearSearchHidden=false;
   }
 
   clearSearch()
   {
-      debugger
+     
       this.searchInfo.Area="none";
       this.searchInfo.Category="none";
+      this.searchHidden=false;
+      this.clearSearchHidden=true;
   }
 
   saveSitesToTrip()
