@@ -94,7 +94,7 @@
                     </ul>
                 </div>
                 <p-footer >
-                    <button *ngIf="selectedSites.length>0" style="margin-top: 4em;" pButton class="ui-button-raised ui-button-rounded ui-button-success" 
+                    <button *ngIf="selectedSites&&selectedSites.length>0" style="margin-top: 4em;" pButton class="ui-button-raised ui-button-rounded ui-button-success" 
                     label="Save My Trip" (click)="saveSitesToTrip()"></button>
                 </p-footer>
             </p-card>
