@@ -5,6 +5,7 @@ import { TripService } from 'src/app/services/trip.service';
 import { Search } from 'src/app/models/Search/Search';
 import { Router } from '@angular/router';
 import { stringify } from 'querystring';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 //import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -44,6 +45,8 @@ export class SiteComponent implements OnInit {
  searchHidden:boolean;
 
  clearSearchHidden:boolean;
+
+ calculatedHeight:string;
  
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
@@ -55,8 +58,7 @@ export class SiteComponent implements OnInit {
     this.siteService.getCategories().subscribe(response => {
         this.categories=[];
         response.forEach(element => {
-           this.categories.push({name:element})}) ,err => { console.log(err);}
-           
+           this.categories.push({name:element})}) ,err => { console.log(err);}           
            this.selectedSites = [];
            this.siteService.getAllSites().subscribe(response => {
             this.availableSites = response, err => { console.log(err);}
@@ -66,6 +68,7 @@ export class SiteComponent implements OnInit {
      this.searchInfo=new Search("none","none","none");
      this.searchHidden=false;
      this.clearSearchHidden=true;
+     this.calculatedHeight='375px';
   
   }
 
@@ -74,10 +77,12 @@ export class SiteComponent implements OnInit {
 
  drop(event) {
      if(this.draggedSite) {
-         let draggedSiteIndex = this.findIndex(this.draggedSite);
-         this.selectedSites = [...this.selectedSites, this.draggedSite];// whats ...?
-         this.availableSites = this.availableSites.filter((val,i) => i!=draggedSiteIndex);
-         this.draggedSite = null;
+        let draggedSiteIndex = this.findIndex(this.draggedSite);
+        this.selectedSites = [...this.selectedSites, this.draggedSite];// whats ...?
+        this.availableSites = this.availableSites.filter((val,i) => i!=draggedSiteIndex);
+        this.draggedSite = null;
+        this.calculatedHeight= (Number(this.calculatedHeight.slice(0,this.calculatedHeight.length-2)) + 50).toString()+'px';
+        
      }
  }
 
@@ -153,7 +158,7 @@ findIndexByName(name: string) {
   search()
   {
     this.siteService.getSitesBySearch(this.searchInfo).subscribe(response => {
-    this.availableSites = response, err => { console.log(err);};
+    this.availableSites = response, err => { console.log(err); };
    })
    this.searchHidden=true;
    this.clearSearchHidden=false;

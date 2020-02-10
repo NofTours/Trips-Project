@@ -1,91 +1,107 @@
-
-<h3 class="first">Basic</h3>
-<div class="p-grid p-justify-center">
-    <div class="p-col" style="padding:2px;">
-         <p-dropdown #area [options]="areas" editable="true" placeholder="Select an area" optionLabel="name"  (onChange)="changeArea($event)"></p-dropdown>  
-    </div>
-    <div class="p-col" style="padding:2px;">
-       <p-dropdown #category  [options]="categories" editable="true" placeholder="Select category" optionLabel="name"  (onChange)="changeCategory($event)"></p-dropdown> 
-    </div>
-    <div class="p-col"  style="padding:2px;">
-        <div>
-        <button type="button" [hidden]="searchHidden" pButton label="Search" (click)="search()"></button>
-        <button type="button" [hidden]="clearSearchHidden" pButton label="Clear Search" (click)="clearSearch();area.clear();category.clear()"></button>
-        </div>
-    </div>
-</div>
-
- 
-<h3>Where do you want to visit?? Drag and drop to table!!</h3>
-<div class="ui-g">
-    <div class="ui-g-12 ui-md-6 ui-g-nopad drag-column">
-    <p-dataView [value]="availableSites"  [paginator]="true" paginatorPosition="both" rows="5"
-     filterBy="Name" #dv dragdrop="true" pDraggable="sites">
-     <p-header>
-            <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target.value, 'contains')">
-        </p-header>
-    <ng-template let-site pTemplate="listItem" >
-        <div class="ui-dataview-content" pDraggable="sites" 
-        (onDragStart)="dragStart($event,site)" (onDragEnd)="dragEnd($event)" >
-            <img src="../../../assets/img/{{site.Name}}.jpg" style="display:inline-block;margin:2px 0 2px 2px;float:left;;" width="48" draggable="false">
-            <div style="margin:8px 0 0 8px;float: left;"><h6>{{site.Name}}</h6>
-                <p>{{site.Description}}</p>
+<div class="p-grid">
+    <p-card class="ui-g-10 ui-md-10 p-col-11" header="Search for sites...">
+        <div class="p-grid p-justify-start">
+            <div class="p-col-2">
+                <p-dropdown #area [options]="areas" editable="true" placeholder="Select an area" optionLabel="name"
+                    (onChange)="changeArea($event)"></p-dropdown>
+            </div>
+            <div class="p-col-2">
+                <p-dropdown #category [options]="categories" editable="true" placeholder="Select category"
+                    optionLabel="name" (onChange)="changeCategory($event)"></p-dropdown>
+            </div>
+            <div class="p-col-2">
+                <div>
+                    <button type="button" [hidden]="searchHidden" pButton label="Search" (click)="search()"></button>
+                    <button type="button" [hidden]="clearSearchHidden" pButton label="Clear Search"
+                        (click)="clearSearch();area.clear();category.clear()"></button>
+                </div>
             </div>
         </div>
-        
-    </ng-template>
-</p-dataView>
-</div>
+        <p-footer class="text-pop-up-top ui-card-subtitle" style="font-size: 1.2em;">Now drag a site and drop in the
+            table!!</p-footer>
+    </p-card>
 
-<br>
-<br>
- 
-<div class="ui-g-12 ui-md-6 drop-column">
-<p-card pDroppable="sites" header="Your Sites -All the info you may need..." subheader="You may reorder your trip by dragging site name!" [style]="{width: '1000px', height:'500px'}" styleClass="ui-card-shadow" >
-    <div  pDroppable="sites" 
-        (onDrop)="drop($event)" [ngClass]="{'ui-highlight-car':drasggedSite}">
-        <p-table  [value]="selectedSites" [style]="{width: '950px',height:'700px'}" >
-            <!-- [hidden]="this.selectedSites.length<=0" -->
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Order in Trip</th>
-                    <th>Name</th>
-                    <th>Area</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>OpeningHour</th>
-                    <th>ClosingHour</th>
-                    <th>EstimatedStay</th>
-                </tr>
-            </ng-template>
-                <ng-template pTemplate="body" let-selectedSite >                   
-                <tr pDraggable pDroppable (onDragStart)="dragStart2($event,selectedSite)" (onDrop)="cdkdrop($event)" dragHandle=".drag-handler" >
-                    <td>{{this.findIndexByName(selectedSite.Name)}}</td>
-                    <td class="drag-handler">{{selectedSite.Name}}</td>
-                    <td>{{selectedSite.Area}}</td>
-                    <td>{{selectedSite.Price}}</td>
-                    <td>{{selectedSite.Category}}</td>
-                    <td>{{selectedSite.Description}}</td>
-                    <td>{{selectedSite.OpeningHour}}</td>
-                    <td>{{selectedSite.ClosingHour}}</td>
-                    <td>{{selectedSite.EstimatedStay}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+
+    <!-- <div class="ui-g"> -->
+    <div class="ui-g-5 ui-md-5 drop-column">
+        <div class="ui-g-5 ui-md-5 drag-column">
+            <p-dataView [value]="availableSites" [paginator]="true" paginatorPosition="both" rows="2" filterBy="Name"
+                #dv dragdrop="true" pDraggable="sites">
+                <p-header>
+                    <input type="search" pInputText placeholder="Search by name"
+                        (input)="dv.filter($event.target.value, 'contains')">
+                </p-header>
+                <ng-template let-site pTemplate="listItem">
+                    <div class="ui-dataview-content" pDraggable="sites" (onDragStart)="dragStart($event,site)"
+                        (onDragEnd)="dragEnd($event)">
+                        <img src="../../../assets/img/{{site.Name}}.jpg"
+                            style="display:inline-block;margin:2px 0 2px 2px;float:left;;" width="48" draggable="false">
+                        <div style="margin:8px 0 0 8px;float: left;">
+                            <h6 class="">{{site.Name}}</h6>
+                            <p>{{site.Description}}</p>
+                        </div>
+                    </div>
+
+                </ng-template>
+            </p-dataView>
+        </div>
+        <!-- </div> -->
+        <!-- <br>
+<br> -->
+        <div class="ui-g-5 ui-md-5 drag-column">
+            <p-card pDroppable="sites" header="Your Sites -All the info you may need..."
+                subheader="You may reorder your trip by dragging site name!" [style]="{width: '935px', height:calculatedHeight}"
+                styleClass="ui-card-shadow">
+                <div class="ui-g-5 ui-md-5 drop-column" pDroppable="sites" (onDrop)="drop($event)"
+                    [ngClass]="{'ui-highlight-car':drasggedSite}">
+                    <p-table [value]="selectedSites">
+                        <!-- [style]="{width: '950px',height:'700px'}"  -->
+                        <!-- [hidden]="this.selectedSites.length<=0" -->
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style='width:50px'>
+                                    <!-- Order in Trip -->
+                                </th>
+                                <th style='width:100px'>Name</th>
+                                <th style='width:80px'>Area</th>
+                                <th style='width:60px'>Price</th>
+                                <th style='width:130px'>Category</th>
+                                <th style='width:230px'>Description</th>
+                                <th style='width:80px'>Opening Hour</th>
+                                <th style='width:70px'>Closing Hour</th>
+                                <th style='width:90px'>Estimated Stay</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-selectedSite>
+                            <tr pDraggable pDroppable (onDragStart)="dragStart2($event,selectedSite)"
+                                (onDrop)="cdkdrop($event)" dragHandle=".drag-handler">
+                                <td>{{this.findIndexByName(selectedSite.Name)}}</td>
+                                <td class="drag-handler">{{selectedSite.Name}}</td>
+                                <td>{{selectedSite.Area}}</td>
+                                <td>{{selectedSite.Price}}</td>
+                                <td>{{selectedSite.Category}}</td>
+                                <td>{{selectedSite.Description}}</td>
+                                <td>{{selectedSite.OpeningHour}}</td>
+                                <td>{{selectedSite.ClosingHour}}</td>
+                                <td>{{selectedSite.EstimatedStay}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div>
+                    <ul>
+                        <li *ngFor="let selectedSite of selectedSites"></li>
+                    </ul>
+                </div>
+                <p-footer >
+                    <button *ngIf="selectedSites&&selectedSites.length>0" style="margin-top: 4em;" pButton class="ui-button-raised ui-button-rounded ui-button-success" 
+                    label="Save My Trip" (click)="saveSitesToTrip()"></button>
+                </p-footer>
+            </p-card>
+        </div>
+
+        <!-- <ul>
+    <li *ngFor="let selectedSite of selectedSites">{{selectedSite.Equipment}}</li>
+</ul> -->
+
     </div>
-    <p-footer>    
-  
-        <ul>
-            <li *ngFor="let selectedSite of selectedSites">{{selectedSite.Equipment}}</li>
-        </ul>
-</p-footer>
-</p-card>
-</div>
-
-<div class="intro-button mx-auto">
-    <button class="btn btn-primary btn-xl" (click)="saveSitesToTrip()">continue</button>
-</div>
-
-
-</div>  
