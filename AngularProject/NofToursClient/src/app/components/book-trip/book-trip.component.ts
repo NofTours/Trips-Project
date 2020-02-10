@@ -33,9 +33,8 @@ export class BookTripComponent implements OnInit {
   saveDateToTrip(chosenDate: Date){
    this.tripService.saveDateToTrip(chosenDate);
   }
-  saveTimeToTrip(chosenTime:Time)
+  continue()
   {
-   this.tripService.saveTimeToTrip(chosenTime);
    this.route.navigate(['/sites']);
   }
 

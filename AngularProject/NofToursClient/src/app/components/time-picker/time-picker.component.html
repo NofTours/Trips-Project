@@ -1,4 +1,7 @@
-<p>time-picker works!</p>
-<ngb-timepicker [(ngModel)]="time" [size]="small"  ></ngb-timepicker>
-<hr>
-<!-- <pre>Selected time: {{time | json}} </pre> -->
+
+<div class="toggle-example">
+    <input type="text" [ngxTimepicker]="toggleTimepicker" [format]="24" [disableClick]="false" readonly> 
+    <ngx-material-timepicker-toggle [for]="toggleTimepicker" ></ngx-material-timepicker-toggle>
+    <ngx-material-timepicker #toggleTimepicker (timeSet)="saveTime($event)">              
+    </ngx-material-timepicker>
+</div>

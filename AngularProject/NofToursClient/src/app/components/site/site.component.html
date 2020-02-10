@@ -18,6 +18,7 @@
  
 <h3>Where do you want to visit?? Drag and drop to table!!</h3>
 <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-g-nopad drag-column">
     <p-dataView [value]="availableSites"  [paginator]="true" paginatorPosition="both" rows="5"
      filterBy="Name" #dv dragdrop="true" pDraggable="sites">
      <p-header>
@@ -34,12 +35,14 @@
         
     </ng-template>
 </p-dataView>
+</div>
 
 <br>
 <br>
  
-<p-card  pDroppable="sites" header="Your Sites -All the info you may need..." subheader="You may reorder your trip by dragging site name!" [style]="{width: '1000px', height:'500px'}" styleClass="ui-card-shadow" >
-    <div class="ui-g-12 ui-md-6 drop-column" pDroppable="sites" 
+<div class="ui-g-12 ui-md-6 drop-column">
+<p-card pDroppable="sites" header="Your Sites -All the info you may need..." subheader="You may reorder your trip by dragging site name!" [style]="{width: '1000px', height:'500px'}" styleClass="ui-card-shadow" >
+    <div  pDroppable="sites" 
         (onDrop)="drop($event)" [ngClass]="{'ui-highlight-car':drasggedSite}">
         <p-table  [value]="selectedSites" [style]="{width: '950px',height:'700px'}" >
             <!-- [hidden]="this.selectedSites.length<=0" -->
@@ -78,11 +81,7 @@
         </ul>
 </p-footer>
 </p-card>
- 
- 
-<!-- <ul>
-    <li *ngFor="let selectedSite of selectedSites">{{selectedSite.Equipment}}</li>
-</ul> -->
+</div>
 
 <div class="intro-button mx-auto">
     <button class="btn btn-primary btn-xl" (click)="saveSitesToTrip()">continue</button>

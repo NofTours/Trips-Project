@@ -1,2 +1,4 @@
-<p>calendar works!</p>
-<p-calendar [(ngModel)]="value" showTime="true" hourFormat="24" dateFormat="dd.mm.yy" [inline]="true" onSelect="saveDateToTrip($event)"></p-calendar>
+ 
+<p-calendar  [style]="{width: '80%'}"  [(ngModel)]="value"  dateFormat="dd.mm.yy" [inline]="true" (onSelect)="saveDateToTrip()"
+[disabledDates]="invalidDates" [disabledDays]="[6]" [readonlyInput]="true" [minDate]="minDate">
+</p-calendar> 

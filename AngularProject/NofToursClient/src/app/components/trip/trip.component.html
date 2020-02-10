@@ -3,14 +3,18 @@
 </div>
 <div>
   <form>
-  <p>Date: {{this.trip.date|  date:'shortDate'}}</p>
+  <p>Date: {{this.trip.date|  date:'dd.MM.yy'}}</p>
   <p>Begin Time: {{this.trip.beginTime}}</p>
   <p>BookingStatus: {{this.trip.bookingStatus}}</p>
   <p>Total Trip Hours: {{this.trip.totalTripHours}}</p>
   <p>Sites:</p>
   <div *ngFor="let site of tripSites">{{site.Name}}</div>
   <p>Equipment:</p>
-  <div *ngFor="let site of tripSites">{{site.Equipment}}</div>
+  <div *ngFor="let site of tripSites">
+      <div *ngFor="let equipment of site.Equipment">
+        {{equipment}}
+      </div>
+  </div>
 </form>
 <button [hidden]="isOld" (click)="saveTrip()">save trip</button>
 </div>

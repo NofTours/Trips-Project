@@ -47,6 +47,6 @@ export class TripComponent implements OnInit {
     alert("in save trip");
     this.tripService.saveTrip();
     // this.route.navigate(['/endPage']);
-
+this.tripSites[0].Equipment.length
   }
 }

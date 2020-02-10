@@ -33,9 +33,8 @@ export class TripService {
   }
   saveTimeToTrip(chosenTime:Time)
   {
-    this.trip.beginTime=chosenTime.hours.toString()+":"+chosenTime.minutes.toString()+":0";
+    this.trip.beginTime=chosenTime.hours.toString()+":"+chosenTime.minutes.toString()+":00";
     this.trip.date.setHours(chosenTime.hours, chosenTime.minutes, 0, 0);//why does this not work?
-    alert(this.trip.date.getHours());
   }
   saveClientIdToTrip()
   {
@@ -45,7 +44,6 @@ export class TripService {
   }
   saveSitesToTrip(selectedSites: CommonSite[])
   {
-    debugger;
      this.selectedSites=selectedSites;
      selectedSites.forEach(site => {
      this.trip.tripSites.push(site.SiteId);
@@ -53,9 +51,8 @@ export class TripService {
      this.hourTimeSlice+=Number(this.time[0]);
      this.minuteTimeSlice+=Number(this.time[1]);
    });
-   if(this.minuteTimeSlice>60)
-   {    
-     debugger
+   if(this.minuteTimeSlice>=60)
+   {        
       this.hourTimeSlice+=Math.floor(this.minuteTimeSlice/60);
       this.minuteTimeSlice-=Math.floor(this.minuteTimeSlice/60)*60;
     }
@@ -83,7 +80,6 @@ export class TripService {
     this.saveClientIdToTrip();
     if(this.trip.clientId!=0)
     {
-    alert("in save trip"+sessionStorage.getItem("UserEmail")+" "+this.trip.clientId+ this.trip.date);
     return this.http.post<Boolean>(this.baseUrl + "/api/Trips",this.trip).subscribe(data => {
       console.log(data);
       if (data == true)

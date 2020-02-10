@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Time } from '@angular/common';
+import { TripService } from 'src/app/services/trip.service';
 
 @Component({
   selector: 'app-time-picker',
@@ -11,18 +12,26 @@ export class TimePickerComponent implements OnInit {
  
   //@Output() chosenTime = new EventEmitter<Time>();
   timeObj:Time={hours:13,minutes:30};
-  time = {hour: 13, minute: 30};
-  constructor() { 
+  time:string[];
+  constructor(private tripService:TripService) { 
 
 }
 
   ngOnInit() {
   }
   
-  getTime(): Time {
-    this.timeObj.hours = this.time.hour;
-    this.timeObj.minutes = this.time.minute;
-    alert(this.timeObj.hours + " " + this.timeObj.minutes);
-    return this.timeObj;
+
+  saveHour(event)
+  {
+    debugger;
+  this.timeObj.hours=event;
+  }
+
+  saveTime(event){
+    this.time=event.split(":");
+    this.timeObj.hours=Number(this.time[0]);
+    this.timeObj.minutes=Number(this.time[1]);
+    debugger;
+    this.tripService.saveTimeToTrip(this.timeObj);
   }
 }
