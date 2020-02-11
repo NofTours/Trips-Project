@@ -33,7 +33,7 @@ export class TripService {
   }
   saveTimeToTrip(chosenTime:Time)
   {
-    this.trip.beginTime=chosenTime.hours.toString()+":"+chosenTime.minutes.toString()+":00";
+    this.trip.beginTime=this.pad(chosenTime.hours)+":"+this.pad(chosenTime.minutes)+":00";
     this.trip.date.setHours(chosenTime.hours, chosenTime.minutes, 0, 0);//why does this not work?
   }
   saveClientIdToTrip()

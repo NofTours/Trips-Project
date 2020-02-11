@@ -18,8 +18,10 @@ export class TripComponent implements OnInit {
  trip:trip;
  tripSites:CommonSite[];
  isOld:boolean;
+ email:string;
   constructor(private tripService:TripService,private siteService:SitesService,private route: Router) {
     this.tripSites=[];
+    this.email=sessionStorage.getItem("UserEmail");
    }
 
   ngOnInit() {
