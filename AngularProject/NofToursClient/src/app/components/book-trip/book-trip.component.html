@@ -7,6 +7,7 @@
       <app-trip [trip]="trip"></app-trip>
    </li>
 </ul> -->
+<h1>Let's Begin!!</h1>
 <p><b>What address are we leaving from?</b></p>
 <input type="text" [(ngModel)]="leavingAddress">
 
@@ -14,14 +15,15 @@
 
 <input type="number" [(ngModel)]="numOfPeople" min="1" max="20">
 <p>Selected number: {{numOfPeople ?numOfPeople : 'none'}}</p>
-<!-- <app-calendar></app-calendar> -->
-<p><b>So when are you available?</b></p>
-<!-- <app-calendar></app-calendar> -->
-<app-newcalendar (chosenDate)="saveDateToTrip($event)"></app-newcalendar>
+<p><b>Select time to begin trip:</b></p>
+<app-time-picker></app-time-picker> 
+<p><b>Select date:</b></p>
+<app-calendar [style]="{'height':'1000px'}"></app-calendar>
+<!-- <app-newcalendar (chosenDate)="saveDateToTrip($event)"></app-newcalendar> -->
 <br>
- <app-time-picker #timePicker></app-time-picker> 
+ 
  <div class="intro-button mx-auto">
-    <button class="btn btn-primary btn-xl" (click)="saveTimeToTrip(timePicker.getTime())">continue</button>
+    <button class="btn btn-primary btn-xl" (click)="continue()">continue</button>
 </div>
 <br>
 
