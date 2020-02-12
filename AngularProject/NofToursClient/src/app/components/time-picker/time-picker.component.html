@@ -1,7 +1,19 @@
 
-<div class="toggle-example">
+<!-- <div class="toggle-example">
+    
     <input type="text" [ngxTimepicker]="toggleTimepicker" [format]="24" [disableClick]="false" readonly> 
-    <ngx-material-timepicker-toggle [for]="toggleTimepicker" ></ngx-material-timepicker-toggle>
+    <ngx-material-timepicker-toggle [for]="toggleTimepicker"  style="line-height: 1.25;" ></ngx-material-timepicker-toggle>
     <ngx-material-timepicker #toggleTimepicker (timeSet)="saveTime($event)">              
     </ngx-material-timepicker>
+</div> -->
+
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-clock" style="line-height: 1.25;"></i></span>
+            <input type="text" [ngxTimepicker]="toggleTimepicker" [format]="24" [disableClick]="false" readonly> 
+             <ngx-material-timepicker #toggleTimepicker (timeSet)="saveTime($event)">              
+    </ngx-material-timepicker>         
+        </div>
+    </div>
 </div>

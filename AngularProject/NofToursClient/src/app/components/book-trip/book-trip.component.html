@@ -1,31 +1,40 @@
 
-<!-- <div class="intro-button mx-auto">
-   <button class="btn btn-primary btn-xl" (click)="viewTrips()">View Your Trips</button>
-</div>
-<ul [hidden]="hidden">
-   <li *ngFor="let trip of clientTrips">
-      <app-trip [trip]="trip"></app-trip>
-   </li>
-</ul> -->
-<h1>Let's Begin!!</h1>
+<p class="items"><b>Select date:</b></p>
+<app-calendar class="center"></app-calendar>
+
+<!-- <form class="center"> -->
+<div class="items">
 <p><b>What address are we leaving from?</b></p>
-<input type="text" [(ngModel)]="leavingAddress">
+<div class="ui-g ui-fluid">
+   <div class="ui-g-4  ui-md-2">
+       <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+        <input type="text" [(ngModel)]="leavingAddress"><br>        
+       </div>
+   </div>
+</div>
+
 
 <p><b>How many people are in your group?</b></p>
+<div class="ui-g ui-fluid">
+    <div class="ui-g-4  ui-md-2">
+        <div class="ui-inputgroup">
+         <span class="ui-inputgroup-addon"><i class="pi pi-users" style="line-height: 1.25;"></i></span>
+         <input type="number" [(ngModel)]="numOfPeople" min="1" max="20">         
+        </div>
+    </div>
+</div>
 
-<input type="number" [(ngModel)]="numOfPeople" min="1" max="20">
-<p>Selected number: {{numOfPeople ?numOfPeople : 'none'}}</p>
-<p><b>Select time to begin trip:</b></p>
-<app-time-picker></app-time-picker> 
-<p><b>Select date:</b></p>
-<app-calendar [style]="{'height':'1000px'}"></app-calendar>
-<!-- <app-newcalendar (chosenDate)="saveDateToTrip($event)"></app-newcalendar> -->
+
+<p><b>select time:</b></p>
+<app-time-picker></app-time-picker>
 <br>
  
  <div class="intro-button mx-auto">
     <button class="btn btn-primary btn-xl" (click)="continue()">continue</button>
 </div>
 <br>
-
-
+</div>
+<!-- </form>
+  -->
 
