@@ -3,7 +3,11 @@
     height: 50%;
     width: 50%;
 }
-
+.btn-color
+{
+    background-color:#007ad9 ;
+    color: white;
+}
 .center {
     display: inherit;
     padding-left: 15%;

@@ -76,7 +76,7 @@ export class TripService {
 
   saveTrip()
   { 
-    
+    debugger
     this.saveClientIdToTrip();
     if(this.trip.clientId!=0)
     {

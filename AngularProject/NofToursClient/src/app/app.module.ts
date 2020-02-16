@@ -45,7 +45,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import {CalendarModule} from 'primeng/calendar';
 import { EndpageComponent } from './components/endpage/endpage.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-
+import {GalleriaModule} from 'primeng/galleria';
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -106,7 +106,8 @@ export const ROUTES: Routes = [
     ButtonModule,
     MenuModule,
     CalendarModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    GalleriaModule
   ],
   providers: [TripService,SitesService,UsersService,DataSharingService],
   bootstrap: [AppComponent]
