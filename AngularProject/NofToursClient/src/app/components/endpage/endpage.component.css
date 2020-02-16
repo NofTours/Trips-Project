@@ -1,0 +1,14 @@
+.image
+{
+    
+    height:313px;
+    width:500px;
+}
+
+img.ui-panel-images
+{
+    
+    height:313px;
+    width:500px;
+    size: inherit;
+}

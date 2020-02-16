@@ -1,18 +1,30 @@
-
+.navclr
+{
+    background-color: #75491b;;
+}
+.navlinkclr
+{
+ color:#007ad9;
+}
 a.navbar-brand {
-    color: #d9f1cb;
+    /* color: #007ad9; */
+    color: white;
     font-size: 1.5rem;
 }
 a.navbar-brand:hover{
-    color: #417523;
+    color: #007ad9;
+ 
 }
-
-.navbar-dark .navbar-nav .active>.nav-link:hover{
-    color: rgb(99, 84, 81);
+ .navbar-nav .active>.nav-link:hover{
+    /* color: rgb(99, 84, 81); */
+    /* color: #007ad9; */
+    color: white;
     font-size: larger;
 }
 
-.navbar-dark .navbar-nav .active>.nav-link{
-    color: rgb(232, 163, 146);
+.navbar-nav .active>.nav-link{
+    /* color: rgb(232, 163, 146); */
+    /* color: #007ad9; */
+    color: white;
 }
 
