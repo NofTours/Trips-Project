@@ -1,8 +1,11 @@
-<p>view-trips works!</p>
-<div *ngIf="clientTrips.length==0">Sorry you don't have any trips planned yet...</div>
-<ul>
-    <li *ngFor="let trip of clientTrips">
-       <app-trip [trip]="trip"></app-trip>
-    </li>
-    <!-- why does it not recognize it as trip type?? -->
- </ul>
+<div class="alert alert-info">
+   <div *ngIf="clientTrips.length>0">{{this.email}}, your saved trips are:</div>
+   <div *ngIf="clientTrips.length==0">Sorry {{this.email}}, you don't have any trips planned yet...</div>
+   <br>
+</div>
+<div >
+   <div *ngFor="let trip of clientTrips">
+      <app-trip [trip]="trip" class="p-grid p-dir-col"></app-trip>
+   </div>
+   <!-- why does it not recognize it as trip type?? -->
+</div>

@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
           this.auth = true;
           this.validForm = true;
           this.dataSharingService.isUserLoggedIn.next(true);
-          this.route.navigate(['/booktrip']);//* TODO create correct link to MyTrips page   
+          this.route.navigate(['/viewTrips']);//* TODO create correct link to MyTrips page   
         }                     
         // else{
         // this.gotResponse = true;

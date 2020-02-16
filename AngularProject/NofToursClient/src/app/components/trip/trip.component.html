@@ -1,20 +1,40 @@
-<div class="alert alert-info">
-  <p>Hello {{this.email}}</p><br> 
-</div>
-<div>
-  <form>
-  <p>Date: {{this.trip.date|  date:'dd.MM.yy'}}</p>
-  <p>Begin Time: {{this.trip.beginTime}}</p>
-  <p>BookingStatus: {{this.trip.bookingStatus}}</p>
-  <p>Total Trip Hours: {{this.trip.totalTripHours}}</p>
-  <p>Sites:</p>
-  <div *ngFor="let site of tripSites">{{site.Name}}</div>
-  <p>Equipment:</p>
-  <div *ngFor="let site of tripSites">
-      <div *ngFor="let equipment of site.Equipment">
-        {{equipment}}
-      </div>
+<div class="ui-g-5 ui-md-5 p-col-3">
+  <div [hidden]="isOld" class="alert alert-info">
+    <div>{{this.email}},</div>
+    <div>please review your trip...</div><br>
   </div>
-</form>
-<button [hidden]="isOld" (click)="saveTrip()">save trip</button>
+  <p-card>
+    <div class="p-grid">
+      <div class="p-col-6">Date: </div>
+      <div class="p-col-6">{{this.trip.date|  date:'dd.MM.yy'}}</div>
+
+      <div class="p-col-6">Begin time: </div>
+      <div class="p-col-6">{{this.trip.beginTime}}</div>
+
+      <div class="p-col-6">Booking status: </div>
+      <div class="p-col-6">{{this.trip.bookingStatus}}</div>
+
+      <div class="p-col-6">Total time:</div>
+      <div class="p-col-6">{{this.trip.totalTripHours}}</div>
+
+      <div class="p-col-6">Sites:</div>
+      <div class="p-col-10" style="margin-left: 3em;" *ngFor="let site of tripSites">
+        {{site.Name}} 
+        <img src="../../../assets/img/{{site.Name}}.jpg" style="display:inline-block;margin:2px 0 2px 2px;float:left;"
+          width="48">
+          
+        </div>
+
+      <div class="p-col-6">Equipment:</div>
+      <div class="p-col-6" style="margin-left: 3em;" *ngFor="let site of tripSites">
+        <div *ngFor="let equipment of site.Equipment">
+          {{equipment}}
+        </div>
+      </div>
+    </div>
+  </p-card>
+  <div style="margin: 1em;">
+    <button pButton class="ui-button-raised ui-button-rounded" icon="pi pi-save" [hidden]="isOld" label="Save Trip"
+      (click)="saveTrip()"></button>
+  </div>
 </div>

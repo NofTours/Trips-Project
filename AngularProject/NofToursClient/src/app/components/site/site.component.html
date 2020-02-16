@@ -50,9 +50,9 @@
 <br> -->
         <div class="ui-g-5 ui-md-5 drag-column">
             <p-card pDroppable="sites" header="Your Sites -All the info you may need..."
-                subheader="You may reorder your trip by dragging site name!" [style]="{width: '935px', height:calculatedHeight}"
-                styleClass="ui-card-shadow">
-                <div class="ui-g-5 ui-md-5 drop-column" pDroppable="sites" (onDrop)="drop($event)"
+                subheader="You may reorder your trip by dragging site name!"
+                [style]="{width: '935px', height:calculatedHeight}" styleClass="ui-card-shadow">
+                <div class="ui-g-10 ui-md-10 drop-column" pDroppable="sites" (onDrop)="drop($event)"
                     [ngClass]="{'ui-highlight-car':drasggedSite}">
                     <p-table [value]="selectedSites">
                         <!-- [style]="{width: '950px',height:'700px'}"  -->
@@ -93,10 +93,11 @@
                         <li *ngFor="let selectedSite of selectedSites"></li>
                     </ul>
                 </div>
-                <p-footer >
-                    <button *ngIf="selectedSites&&selectedSites.length>0" style="margin-top: 4em;" pButton class="ui-button-raised ui-button-rounded ui-button-success" 
-                    label="Save My Trip" (click)="saveSitesToTrip()"></button>
-                </p-footer>
+                <div class="ui-g-11 ui-md-11 p-grid p-justify-center"style="margin: 1em;">
+                    <button *ngIf="selectedSites&&selectedSites.length>0" pButton
+                        class="ui-button-raised ui-button-rounded ui-button-success" label="Next"
+                        icon="pi pi-arrow-circle-right" (click)="saveSitesToTrip()"></button>
+                    </div>
             </p-card>
         </div>
 

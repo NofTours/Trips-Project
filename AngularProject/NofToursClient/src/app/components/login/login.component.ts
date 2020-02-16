@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitForm(){
-    alert("in login submit");
+    // alert("in login submit");
     this.submitted = true;    
     if (!this.form.invalid) {
       this.userService.userLogin(this.email, this.password) 
