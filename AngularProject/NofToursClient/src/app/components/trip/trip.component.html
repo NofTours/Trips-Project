@@ -1,12 +1,11 @@
-<div class="ui-g-5 ui-md-5 p-col-3">
+<div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
   <div [hidden]="isOld" class="alert alert-info">
     <div>{{this.email}},</div>
     <div>please review your trip...</div><br>
   </div>
   <p-card>
     <div class="p-grid">
-      <div class="p-col-6">Date: </div>
-      <div class="p-col-6">{{this.trip.date|  date:'dd.MM.yy'}}</div>
+      <div class="p-col-12 ui-card-title">{{this.trip.date|  date:'EEEE dd.MM.yy'}}</div>
 
       <div class="p-col-6">Begin time: </div>
       <div class="p-col-6">{{this.trip.beginTime}}</div>
@@ -19,11 +18,11 @@
 
       <div class="p-col-6">Sites:</div>
       <div class="p-col-10" style="margin-left: 3em;" *ngFor="let site of tripSites">
-        {{site.Name}} 
+        {{site.Name}}
         <img src="../../../assets/img/{{site.Name}}.jpg" style="display:inline-block;margin:2px 0 2px 2px;float:left;"
           width="48">
-          
-        </div>
+
+      </div>
 
       <div class="p-col-6">Equipment:</div>
       <div class="p-col-6" style="margin-left: 3em;" *ngFor="let site of tripSites">
@@ -33,8 +32,10 @@
       </div>
     </div>
   </p-card>
-  <div style="margin: 1em;">
-    <button pButton class="ui-button-raised ui-button-rounded" icon="pi pi-save" [hidden]="isOld" label="Save Trip"
-      (click)="saveTrip()"></button>
+  <div class="p-grid">
+    <div style="margin-top: 1em;" class="p-col-4 p-offset-4">
+      <button pButton class="ui-button-raised ui-button-rounded" icon="pi pi-save" [hidden]="isOld" label="Save Trip"
+        (click)="saveTrip()"></button>
+    </div>
   </div>
 </div>

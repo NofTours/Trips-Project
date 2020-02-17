@@ -47,7 +47,8 @@ export class TripComponent implements OnInit {
   saveTrip()
   {
     // debugger
-    alert("in save trip");
+    // alert("in save trip");
+    debugger
     this.tripService.saveTrip();
     // this.route.navigate(['/endPage']);
 // this.tripSites[0].Equipment.length
