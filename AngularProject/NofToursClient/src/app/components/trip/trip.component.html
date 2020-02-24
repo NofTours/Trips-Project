@@ -1,11 +1,16 @@
 <div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
   <div [hidden]="isOld" class="alert alert-info">
-    <div>{{this.email}},</div>
+    <div>{{this.client.ContactName}},</div>
     <div>please review your trip...</div><br>
   </div>
   <p-card>
     <div class="p-grid">
       <div class="p-col-12 ui-card-title">{{this.trip.date|  date:'EEEE dd.MM.yy'}}</div>
+      <div class="p-col-6">Leaving Address: </div>
+      <div class="p-col-6">{{this.client.LeavingAddress}}</div>
+
+      <div class="p-col-6">Num Of People In Group: </div>
+      <div class="p-col-6">{{this.client.NumPeople}}</div>
 
       <div class="p-col-6">Begin time: </div>
       <div class="p-col-6">{{this.trip.beginTime}}</div>

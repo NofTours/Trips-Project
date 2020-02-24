@@ -15,14 +15,14 @@ export class RegisterComponent implements OnInit {
   @ViewChild("signupForm",{static:false}) form: NgForm;
 
   constructor(private userService: UsersService, private route: Router,private dataSharingService: DataSharingService) {
-    this.newUser = new CommonClient("", "", "", "", "");
+    this.newUser = new CommonClient(0, "", "", "", "","","","");
     this.validForm = false;
   }
   submitted = false;
   auth = false;
   newUser: CommonClient;
   validForm: boolean;  
-
+  client:CommonClient;
   ngOnInit() {
     sessionStorage.clear();
   }
@@ -35,11 +35,15 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         if (data == true)
         {
-          sessionStorage.setItem("UserEmail",this.newUser.email);
+          sessionStorage.setItem("UserEmail",this.newUser.Email);
           this.auth = true;
           this.validForm = true;
           this.dataSharingService.isUserLoggedIn.next(true);
-          this.route.navigate(['/viewTrips']);//* TODO create correct link to MyTrips page   
+          this.userService.getUser(sessionStorage.getItem("UserEmail")).subscribe(response => {
+            this.client=response, this.dataSharingService.client.next(this.client);
+            this.route.navigate(['/viewTrips']),err => { console.log(err);}
+          });
+         //* TODO create correct link to MyTrips page   
         }                     
         // else{
         // this.gotResponse = true;

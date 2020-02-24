@@ -1,3 +1,9 @@
 p{
     font-size: larger;
 }
+
+.btn-color
+{
+    background-color:#007ad9 ;
+    color: white;
+}

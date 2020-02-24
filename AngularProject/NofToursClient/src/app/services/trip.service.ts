@@ -5,24 +5,30 @@ import { CommonSite } from '../models/site/commonSite';
 import { Time } from '@angular/common';
 import { UsersService } from './users.service';
 import { Router } from '@angular/router';
+import { CommonClient } from '../models/user/CommonClient';
+import { DataSharingService } from './data-sharing.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TripService {
+export class TripService{
  trip:trip;
  email:string;
  time:string[];
  hourTimeSlice:number;
  minuteTimeSlice:number;
  selectedSites:CommonSite[];
+ client:CommonClient;
  baseUrl = "http://localhost:55109";
 
-  constructor(private http: HttpClient,private userService:UsersService,private route:Router) 
+  constructor(private http: HttpClient,private usersService:UsersService,private route:Router,private dataSharingService:DataSharingService) 
   {   
     this.trip=new trip(0,new Date()," "," "," "," ",new Array<number>());
     this.hourTimeSlice=0;
     this.minuteTimeSlice=0;
+    this.dataSharingService.client.subscribe( value => {
+      this.client = value;
+     });;
     // this.email= sessionStorage.getItem("UserEmail");
     // this.saveClientIdToTrip();
    }
@@ -38,9 +44,7 @@ export class TripService {
   }
   saveClientIdToTrip()
   {
-    this.userService.getUserId(sessionStorage.getItem("UserEmail")).subscribe(response => {
-      this.trip.clientId = response, err => { console.log(err);}
-    });
+    this.trip.clientId=this.client.ClientId;
   }
   saveSitesToTrip(selectedSites: CommonSite[])
   {
@@ -60,7 +64,6 @@ export class TripService {
    this.trip.bookingStatus="Booked";
    //alert(this.trip.totalTripHours);
   }
-
   getTrip()
   {
     return this.trip;

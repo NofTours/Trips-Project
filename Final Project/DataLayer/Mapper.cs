@@ -29,6 +29,7 @@ namespace DataLayer
         {
             CommonClient commonClient = new CommonClient()
             {
+                ClientId=dBClient.ClientId,
                 ContactName = dBClient.ContactName,
                 Email = dBClient.Email,
                 Phone1 = dBClient.Phone1,

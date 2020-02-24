@@ -32,9 +32,9 @@ export class UserUpdatesComponent implements OnInit, OnChanges {
     this.changeLog.push(log.join(', '));
 
     if(this.userUpdatesAdded!=undefined)
-       this.add = this.userUpdatesAdded.contactName + " user was added.";
+       this.add = this.userUpdatesAdded.ContactName + " user was added.";
     if(this.userUpdatesDeleted!=undefined)    
-      this.delete = this.userUpdatesDeleted.contactName + " user was deleted.";
+      this.delete = this.userUpdatesDeleted.ContactName + " user was deleted.";
   }
   constructor() { }
   ngOnInit() {

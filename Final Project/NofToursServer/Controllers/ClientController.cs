@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BusinessLayer;
+using CommonLayer;
 
 namespace NofToursServer.Controllers
 {
@@ -17,16 +18,24 @@ namespace NofToursServer.Controllers
         }
 
         // GET: api/Client/5
-        public int Get(string email)
+        public CommonClient Get(string email)
         {
-            return UserManager.GetUserIdByEmail(email);
+            return  UserManager.GetUserByEmail(email);
         }
 
         // POST: api/Client
-        public int Post([FromBody]string email)
+        public CommonClient Post([FromBody]string email)
         {
-            return UserManager.GetUserIdByEmail(email);
+            return UserManager.GetUserByEmail(email);
         }
+
+        [Route("api/Client/SaveAddressAndNum")]
+        [HttpPost]
+        public Boolean SaveAddressAndNum([FromBody]Data data)
+        {
+            return UserManager.SaveAddressAndNum(data);
+        }
+
 
         // PUT: api/Client/5
         public void Put(int id, [FromBody]string value)

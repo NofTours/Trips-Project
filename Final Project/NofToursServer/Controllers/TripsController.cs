@@ -24,6 +24,8 @@ namespace NofToursServer.Controllers
             return TripManager.RetrieveTripsByClient(email);
         }
 
+
+
         // POST: api/Trips
         public Boolean Post([FromBody]CommonTrip trip)
         { 

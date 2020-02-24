@@ -20,6 +20,7 @@ namespace NofToursServer.Controllers
 
         [Route("api/Site/GetSitesBySiteId")]
         [HttpPost]
+      
         public ICollection<CommonSite> GetSitesBySiteId([FromBody] int []id)
         {
             return SiteManager.RetrieveSitesById(id);

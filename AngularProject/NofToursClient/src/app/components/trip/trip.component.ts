@@ -6,6 +6,8 @@ import { TripService } from 'src/app/services/trip.service';
 import { SitesService } from 'src/app/services/sites.service';
 import { element } from 'protractor';
 import { Router } from '@angular/router';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { CommonClient } from 'src/app/models/user/CommonClient';
 
 @Component({
   selector: 'app-trip',
@@ -18,10 +20,12 @@ export class TripComponent implements OnInit {
  trip:trip;
  tripSites:CommonSite[];
  isOld:boolean;
- email:string;
-  constructor(private tripService:TripService,private siteService:SitesService,private route: Router) {
+ client:CommonClient;
+  constructor(private tripService:TripService,private dataSharingService:DataSharingService,private siteService:SitesService,private route: Router) {
     this.tripSites=[];
-    this.email=sessionStorage.getItem("UserEmail");
+    this.dataSharingService.client.subscribe( value => {
+      this.client = value;
+  });;
    }
 
   ngOnInit() {

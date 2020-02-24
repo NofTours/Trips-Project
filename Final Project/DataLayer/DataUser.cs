@@ -76,11 +76,11 @@ namespace DataLayer
             return true;//* User added succeessfully           
         }
 
-        public static int GetUserIdByEmail(string email)
+        public static CommonClient GetUserByEmail(string email)
         {
             dbEntities db = new dbEntities();
-            int id = (from c in db.Clients where c.Email == email select c.ClientId).FirstOrDefault();
-            return id;
+            Clients client = (from c in db.Clients where c.Email == email select c).FirstOrDefault();
+            return Mapper.UserToCommon( client);
         }
 
         public static Clients GetUserById(int id)
@@ -88,6 +88,22 @@ namespace DataLayer
             dbEntities db = new dbEntities();
             Clients client = (from c in db.Clients where c.ClientId == id select c).FirstOrDefault();
             return client;
+        }
+
+        public static Boolean SaveAddressAndNum(Data data)
+        {
+            dbEntities db = new dbEntities();
+            Clients client = (from c in db.Clients where c.Email == data.Email select c).FirstOrDefault();
+            try { 
+            client.NumPeople = data.NumOfPeople.ToString();
+            client.LeavingAddress = data.Address;
+            db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

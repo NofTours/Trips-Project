@@ -30,7 +30,6 @@ export class SitesService {
 
   getSitesById(id:number[]):Observable<CommonSite[]>
   {
-    debugger
     return this.http.post<CommonSite[]>(this.baseUrl + "/api/Site/GetSitesBySiteId",id);
   }
 

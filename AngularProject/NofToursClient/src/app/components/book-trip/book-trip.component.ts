@@ -10,6 +10,10 @@ import { element } from 'protractor';
 import {
   mapKeys
   } from 'lodash/fp'
+import { UsersService } from 'src/app/services/users.service';
+import { Data } from 'src/app/models/Data/Data';
+import { CommonClient } from 'src/app/models/user/CommonClient';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 @Component({
   selector: 'app-book-trip',
   templateUrl: './book-trip.component.html',
@@ -20,10 +24,13 @@ export class BookTripComponent implements OnInit {
   numOfPeople:number;
   leavingAddress:Text;
   hidden:boolean;
-  constructor(private SitesService: SitesService,private route: Router,
+  info:Data;
+  client:CommonClient;
+  constructor(private userService: UsersService,private dataSharingService:DataSharingService,private route: Router,
     private tripService:TripService) {   
       this.hidden=true;
-     
+      this.dataSharingService.client.subscribe( value => {
+        this.client = value;});
   }
 
   ngOnInit() {
@@ -35,7 +42,13 @@ export class BookTripComponent implements OnInit {
   }
   continue()
   {
-   this.route.navigate(['/sites']);
+
+     this.info=new Data(sessionStorage.getItem("UserEmail"),String(this.leavingAddress),this.numOfPeople.toString());
+     this.client.LeavingAddress=this.info.Address;
+     this.client.NumPeople=this.info.NumOfPeople;
+     this.dataSharingService.client.next(this.client);
+      this.userService.saveAdrressAndPeople(this.info);
+
   }
 
   

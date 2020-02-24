@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { CommonClient } from 'src/app/models/user/CommonClient';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,14 @@ export class LoginComponent implements OnInit {
     this.email="";
     this.password="";
     this.validForm = false;
+    this.client=new CommonClient(0, "", "", "", "","","","");
   }
   email:string;
   password:string;
   validForm:boolean;
   submitted = false;
   gotResponse = false;
-
+  client:CommonClient;
   ngOnInit() {
   }
 
@@ -36,7 +38,11 @@ export class LoginComponent implements OnInit {
           {
             sessionStorage.setItem("UserEmail",this.email);
             this.dataSharingService.isUserLoggedIn.next(true);
-            this.route.navigate(['/booktrip']);//* TODO create correct link to MyTrips page   
+            this.userService.getUser(sessionStorage.getItem("UserEmail")).subscribe(response => {
+              this.client=response,this.dataSharingService.client.next(this.client);
+              this.route.navigate(['/booktrip']),err => { console.log(err);}
+            });
+            ;//* TODO create correct link to MyTrips page   
           }                     
           else{
           this.gotResponse = true;

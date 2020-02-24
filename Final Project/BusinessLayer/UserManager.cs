@@ -40,9 +40,16 @@ namespace BusinessLayer
             //return false;
         }
 
-        public static int GetUserIdByEmail(string email)
+        public static CommonClient GetUserByEmail(string email)
         {
-            return DataUser.GetUserIdByEmail(email);
+            return DataUser.GetUserByEmail(email);
         }
+
+        public static Boolean SaveAddressAndNum(Data data)
+        {
+            return DataUser.SaveAddressAndNum(data);
+        }
+
+        
     }
 }

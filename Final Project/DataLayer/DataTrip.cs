@@ -32,7 +32,7 @@ namespace DataLayer
         public static IEnumerable<CommonTrip> RetrieveTripsByClient(string email)
         {
             dbEntities db = new dbEntities();
-            int clientId =DataUser.GetUserIdByEmail(email);
+            int clientId =DataUser.GetUserByEmail(email).ClientId;
             var trips = (from t in db.Trips where t.ClientId == clientId select t).ToList<Trips>();
             List<CommonTrip> clientTrips = new List<CommonTrip>();
             foreach(Trips t in trips)
