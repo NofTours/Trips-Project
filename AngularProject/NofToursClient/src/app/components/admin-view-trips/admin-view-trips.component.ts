@@ -114,9 +114,7 @@ export class AdminViewTripsComponent implements OnInit {
 
     clearSearch()
     {         
-       this.trips=new Array<trip>();
-       this.rangeDates=new Array<Date>(); 
-        // location.reload();        
+       this.trips=new Array<trip>();       
         this.searchHidden=false;
         this.clearSearchHidden=true;
     }
