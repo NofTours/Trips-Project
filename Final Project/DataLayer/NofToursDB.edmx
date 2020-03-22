@@ -68,6 +68,9 @@
           <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TotalTripHours" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Polyline" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LeavingAdrress" Type="nvarchar(max)" />
+          <Property Name="NumOfPeople" Type="int" />
+          <Property Name="Cost" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TripSite">
           <Key>
@@ -256,6 +259,9 @@
           <Property Name="Polyline" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TripSite" Relationship="dbModel.FK_TripSite_ToTrips" FromRole="Trips" ToRole="TripSite" />
           <NavigationProperty Name="Clients" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
+          <Property Name="LeavingAdrress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumOfPeople" Type="Int32" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TripSite">
           <Key>
@@ -394,6 +400,9 @@
           <EntitySetMapping Name="Trips">
             <EntityTypeMapping TypeName="dbModel.Trips">
               <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="NumOfPeople" ColumnName="NumOfPeople" />
+                <ScalarProperty Name="LeavingAdrress" ColumnName="LeavingAdrress" />
                 <ScalarProperty Name="Polyline" ColumnName="Polyline" />
                 <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
                 <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />

@@ -1,0 +1,56 @@
+<!-- <p>admin-view-trips works!</p>
+<div class="ui-g-12 ui-md-4">
+    <h3>Range</h3>
+    <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" 
+    [disabledDates]="invalidDates" [disabledDays]="[6]" [readonlyInput]="true" [minDate]="minDate"></p-calendar>
+    <button type="button"  pButton label="Search" (click)="viewOrderedTrips()"></button>   
+</div>
+<div class="p-grid">
+    <div class="p-col-3" *ngFor="let trip of trips">
+       <app-trip [trip]="trip"></app-trip>
+    </div>
+ </div> -->
+ <br><br>
+ <div class="ui-table-globalfilter-container">
+    <p-calendar #calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" 
+    [disabledDates]="invalidDates" [disabledDays]="[6]" [readonlyInput]="true" [minDate]="minDate" showButtonBar="true"></p-calendar>
+    <br><br>
+    <div>
+        <button type="button" [hidden]="searchHidden" pButton label="Search" (click)="viewOrderedTrips()"></button>
+        <button type="button" [hidden]="clearSearchHidden" pButton label="Clear Search"
+            (click)="clearSearch();"></button>
+    </div>   
+</div>
+<br><br><br><br><br><br>
+ <p-table #dt  styleClass="ui-table-cars" [value]="trips" [paginator]="true" [rows]="10" selectionMode="single">
+    <ng-template pTemplate="caption">
+        List of Trips       
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th >Client Id</th>
+            <th >Date</th>
+            <th  >Begin Time</th>
+            <th  >Total Trip Hours</th>
+            <th >Leaving Adrress</th>
+            <th >Num Of People</th>
+            <th >Cost</th>
+            <th >Sites</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-trip>
+        <tr>
+            <td>{{trip.clientId}}</td>
+            <td>{{trip.date|  date:'EEEE dd.MM.yy'}}</td>
+            <td>{{trip.beginTime}}</td>
+            <td>{{trip.totalTripHours}}</td>
+            <td>{{trip.leavingAdrress}}</td>
+            <td>{{trip.numOfPeople}}</td>
+            <td>{{trip.cost}}</td>
+            <!-- <td>
+                <div *ngFor="let site of getTripSites(trip.tripSites)">
+                {{site.Name}}</div>     
+            </td> -->
+        </tr>
+    </ng-template>
+</p-table>

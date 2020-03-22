@@ -180,7 +180,9 @@ namespace DataLayer
                 Date = commonTrip.Date,
                 TotalTripHours = commonTrip.TotalTripHours,
                 Polyline = commonTrip.Polyline,
-
+                LeavingAdrress= commonTrip.LeavingAdrress,
+                NumOfPeople = commonTrip.NumOfPeople,
+                Cost = commonTrip.Cost
             };
             trip.TripSite = new List<TripSite>();
             foreach (int siteId in commonTrip.TripSites)
@@ -207,7 +209,10 @@ namespace DataLayer
                 BookingStatus = trip.BookingStatus,
                 Date = trip.Date,
                 TotalTripHours = trip.TotalTripHours,
-                Polyline = trip.Polyline
+                Polyline = trip.Polyline,
+                LeavingAdrress = trip.LeavingAdrress,
+                NumOfPeople = trip.NumOfPeople,
+                Cost = trip.Cost
             };
             commonTrip.TripSites = new List<int>();
             foreach (TripSite ts in trip.TripSite)

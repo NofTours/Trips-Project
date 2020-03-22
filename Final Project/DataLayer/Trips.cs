@@ -27,6 +27,9 @@ namespace DataLayer
         public string BookingStatus { get; set; }
         public string TotalTripHours { get; set; }
         public string Polyline { get; set; }
+        public string LeavingAdrress { get; set; }
+        public Nullable<int> NumOfPeople { get; set; }
+        public int Cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TripSite> TripSite { get; set; }

@@ -42,13 +42,13 @@ export class BookTripComponent implements OnInit {
   }
   continue()
   {
-
-     this.info=new Data(sessionStorage.getItem("UserEmail"),String(this.leavingAddress),this.numOfPeople.toString());
-     this.client.LeavingAddress=this.info.Address;
-     this.client.NumPeople=this.info.NumOfPeople;
-     this.dataSharingService.client.next(this.client);
-      this.userService.saveAdrressAndPeople(this.info);
-
+    this.tripService.saveAdrressAndPeople(String(this.leavingAddress),this.numOfPeople);
+    this.route.navigate(['/sites']);
+    //  this.info=new Data(sessionStorage.getItem("UserEmail"),String(this.leavingAddress),this.numOfPeople.toString());
+    //  this.client.LeavingAddress=this.info.Address;
+    //  this.client.NumPeople=this.info.NumOfPeople;
+    //  this.dataSharingService.client.next(this.client);
+    //   this.userService.saveAdrressAndPeople(this.info);
   }
 
   

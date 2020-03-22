@@ -63,6 +63,9 @@
     <Property Name="BookingStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="TotalTripHours" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Polyline" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LeavingAdrress" Type="nvarchar(max)" />
+    <Property Name="NumOfPeople" Type="int" />
+    <Property Name="Cost" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TripSite">
     <Key>

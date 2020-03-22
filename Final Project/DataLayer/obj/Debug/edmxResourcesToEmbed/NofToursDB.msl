@@ -46,6 +46,9 @@
     <EntitySetMapping Name="Trips">
       <EntityTypeMapping TypeName="dbModel.Trips">
         <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="NumOfPeople" ColumnName="NumOfPeople" />
+          <ScalarProperty Name="LeavingAdrress" ColumnName="LeavingAdrress" />
           <ScalarProperty Name="Polyline" ColumnName="Polyline" />
           <ScalarProperty Name="TotalTripHours" ColumnName="TotalTripHours" />
           <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />

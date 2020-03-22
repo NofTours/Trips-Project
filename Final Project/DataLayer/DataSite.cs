@@ -85,12 +85,6 @@ namespace DataLayer
             List<Sites> retrievedSites = new List<Sites>();
             foreach (int i in id)
             {
-                //using (dbEntities db = new dbEntities())
-                //{
-
-                //    var site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
-                //    retrievedSites.Add(site);
-                //}  
                 var site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
                 retrievedSites.Add(site);
             }

@@ -23,7 +23,7 @@ export class TripService{
 
   constructor(private http: HttpClient,private usersService:UsersService,private route:Router,private dataSharingService:DataSharingService) 
   {   
-    this.trip=new trip(0,new Date()," "," "," "," ",new Array<number>());
+    this.trip=new trip(0,new Date()," "," "," "," ","",0,0,new Array<number>());
     this.hourTimeSlice=0;
     this.minuteTimeSlice=0;
     this.dataSharingService.client.subscribe( value => {
@@ -63,6 +63,12 @@ export class TripService{
    this.trip.totalTripHours=this.pad(this.hourTimeSlice)+":"+this.pad(this.minuteTimeSlice)+":00";
    this.trip.bookingStatus="Booked";
    //alert(this.trip.totalTripHours);
+  }
+
+  saveAdrressAndPeople(address:string,num:number)
+  {
+  this.trip.leavingAdrress=address;
+  this.trip.numOfPeople=num;
   }
   getTrip()
   {

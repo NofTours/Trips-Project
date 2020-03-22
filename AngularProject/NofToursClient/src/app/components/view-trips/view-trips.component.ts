@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TripService } from 'src/app/services/trip.service';
 import { trip } from 'src/app/models/trip/trip';
+import { CommonClient } from 'src/app/models/user/CommonClient';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 
 @Component({
   selector: 'app-view-trips',
@@ -10,10 +12,12 @@ import { trip } from 'src/app/models/trip/trip';
 })
 export class ViewTripsComponent implements OnInit {
   clientTrips: trip[];
-  email: string;
-  constructor(private route: Router, private tripService: TripService) {
+  client:CommonClient;
+  constructor(private route: Router,private dataSharingService:DataSharingService, private tripService: TripService) {
     this.clientTrips = [];
-    this.email = sessionStorage.getItem("UserEmail");
+    this.dataSharingService.client.subscribe( value => {
+      this.client = value;
+  });;
   }
 
 

@@ -40,7 +40,10 @@ export class LoginComponent implements OnInit {
             this.dataSharingService.isUserLoggedIn.next(true);
             this.userService.getUser(sessionStorage.getItem("UserEmail")).subscribe(response => {
               this.client=response,this.dataSharingService.client.next(this.client);
-              this.route.navigate(['/booktrip']),err => { console.log(err);}
+              debugger;
+              if(this.client.ContactName=="admin")              
+              this.route.navigate(['/viewAdmin']);
+              else this.route.navigate(['/booktrip']),err => { console.log(err);}
             });
             ;//* TODO create correct link to MyTrips page   
           }                     

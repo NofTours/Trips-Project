@@ -85,6 +85,9 @@
     <Property Name="Polyline" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TripSite" Relationship="dbModel.FK_TripSite_ToTrips" FromRole="Trips" ToRole="TripSite" />
     <NavigationProperty Name="Clients" Relationship="dbModel.FK_Trips_ToClients" FromRole="Trips" ToRole="Clients" />
+    <Property Name="LeavingAdrress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumOfPeople" Type="Int32" />
+    <Property Name="Cost" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TripSite">
     <Key>

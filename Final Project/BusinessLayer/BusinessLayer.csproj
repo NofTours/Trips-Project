@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminManager.cs" />
     <Compile Include="SiteManager.cs" />
     <Compile Include="TripManager.cs" />
     <Compile Include="UserManager.cs" />

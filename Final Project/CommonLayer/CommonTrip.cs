@@ -15,6 +15,9 @@ namespace CommonLayer
         public string BookingStatus { get; set; }
         public string TotalTripHours { get; set; }
         public string Polyline { get; set; }
+        public string LeavingAdrress { get; set; }
+        public int? NumOfPeople { get; set; }
+        public int Cost { get; set; }
         public ICollection<int> TripSites { get; set; }
     }
 }
