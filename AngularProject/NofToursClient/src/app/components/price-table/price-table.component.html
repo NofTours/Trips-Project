@@ -1,0 +1,15 @@
+<p>price-table works!</p>
+<p-table [value]="pricesInfo">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Num of people in group</th>
+            <th>Price per hour</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-price>
+        <tr>
+            <td>{{this.getPrevious(price)}} - {{price.numOfPeople}}</td>
+            <td>{{price.price}} per person</td>
+        </tr>
+    </ng-template>   
+</p-table>

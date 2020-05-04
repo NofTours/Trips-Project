@@ -47,6 +47,7 @@ import { EndpageComponent } from './components/endpage/endpage.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {GalleriaModule} from 'primeng/galleria';
 import { AdminViewTripsComponent } from './components/admin-view-trips/admin-view-trips.component';
+import { PriceTableComponent } from './components/price-table/price-table.component';
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -60,8 +61,8 @@ export const ROUTES: Routes = [
   {path: 'viewTrips', component: ViewTripsComponent},
   {path: 'calendar', component: CalendarComponent},
   {path: 'endPage', component: EndpageComponent},
-  {path: 'viewAdmin', component: AdminViewTripsComponent}
-
+  {path: 'viewAdmin', component: AdminViewTripsComponent},
+  {path: 'pricesTable', component: PriceTableComponent}
 ];
 
 @NgModule({
@@ -87,7 +88,8 @@ export const ROUTES: Routes = [
     ViewTripsComponent,
     CalendarComponent,
     EndpageComponent,
-    AdminViewTripsComponent  
+    AdminViewTripsComponent,
+    PriceTableComponent  
   ],
   imports: [
     BrowserModule,

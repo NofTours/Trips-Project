@@ -7,6 +7,7 @@ import { UsersService } from './users.service';
 import { Router } from '@angular/router';
 import { CommonClient } from '../models/user/CommonClient';
 import { DataSharingService } from './data-sharing.service';
+import { PricesService } from './prices.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class TripService{
  client:CommonClient;
  baseUrl = "http://localhost:55109";
 
-  constructor(private http: HttpClient,private usersService:UsersService,private route:Router,private dataSharingService:DataSharingService) 
+  constructor(private http: HttpClient,private usersService:UsersService,private route:Router,
+    private dataSharingService:DataSharingService, private pricesService: PricesService) 
   {   
     this.trip=new trip(0,new Date()," "," "," "," ","",0,0,new Array<number>());
     this.hourTimeSlice=0;
@@ -62,7 +64,26 @@ export class TripService{
     }
    this.trip.totalTripHours=this.pad(this.hourTimeSlice)+":"+this.pad(this.minuteTimeSlice)+":00";
    this.trip.bookingStatus="Booked";
+   this.saveCost();
    //alert(this.trip.totalTripHours);
+  }
+
+  saveCost()
+  {
+     
+    var found=false;
+    this.selectedSites.forEach(site => {
+      this.trip.cost+=site.Price*Number(this.trip.numOfPeople);
+    });
+    
+    this.pricesService.getPrices().forEach(info => {
+      debugger;
+      if(this.trip.numOfPeople<=info.numOfPeople&& found==false)
+      {
+      this.trip.cost+=info.price*this.hourTimeSlice*this.trip.numOfPeople;
+      found=true;
+     }
+    });
   }
 
   saveAdrressAndPeople(address:string,num:number)
