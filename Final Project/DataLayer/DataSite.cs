@@ -83,17 +83,22 @@ namespace DataLayer
         {
             dbEntities db = new dbEntities();
             List<Sites> retrievedSites = new List<Sites>();
-            foreach (int i in id)
+            if (id != null)
             {
-                var site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
-                retrievedSites.Add(site);
+
+                foreach (int i in id)
+                {
+                    var site = (from s in db.Sites where s.SiteId == i select s).FirstOrDefault();
+                    retrievedSites.Add(site);
+                }
+                List<CommonSite> siteList = new List<CommonSite>();
+                foreach (Sites site in retrievedSites)
+                {
+                    siteList.Add(Mapper.SiteToCommon(site));
+                }
+                return siteList;
             }
-            List<CommonSite> siteList = new List<CommonSite>();
-            foreach (Sites site in retrievedSites)
-            {
-                siteList.Add(Mapper.SiteToCommon(site));
-            }
-            return siteList;
+            return null;
         }
 
         public static List<string> RetrieveCategories()

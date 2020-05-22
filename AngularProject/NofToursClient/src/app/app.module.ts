@@ -95,7 +95,7 @@ export const ROUTES: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES),
+    RouterModule.forRoot(ROUTES,{anchorScrolling: 'enabled'}),
     NgbModule,
     HttpClientModule,
     DragDropModule,

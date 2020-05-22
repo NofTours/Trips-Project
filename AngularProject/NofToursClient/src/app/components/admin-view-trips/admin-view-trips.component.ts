@@ -77,14 +77,17 @@ export class AdminViewTripsComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
+    this.siteService.getAllSites().subscribe(response => {
+      this.sites=response, err => 
+      { console.log(err);
+        console.log(response);
+      };
+     })
   }
 
   viewOrderedTrips()
   {
-    this.rangeDates.forEach(element => {
-      if(element!=null)
-      alert(element); 
-      })
       this.adminService.viewTrips(this.rangeDates).subscribe(response => {
         response.forEach(element => {//change properties of each element to lowercase in order to fit trip object
           Object.keys(element).forEach(k => {
@@ -95,7 +98,7 @@ export class AdminViewTripsComponent implements OnInit {
           this.trips.push(element);
         }), err => { console.log(err); }
         this.trips.forEach(element => {
-          alert(element.leavingAdrress);
+          // alert(element.leavingAdrress);
 
         });
     });
@@ -103,13 +106,17 @@ export class AdminViewTripsComponent implements OnInit {
     this.clearSearchHidden=false;
   }
 
-  getTripSites(tripSites:number[])
+   getTripSiteName(tripSite:number)
     {
-      debugger;
-      this.siteService.getSitesById(tripSites).subscribe(response => {
-        this.sites=response, err => { console.log(err);};
-       })
-      return this.sites;
+      var site:CommonSite;
+      if (this.sites!=null)
+      {
+        site = this.sites.find(x => x.SiteId === tripSite);        
+      }
+      if (site!=null)
+        return site.Name;
+      else 
+        return "";           
     }
 
     clearSearch()
