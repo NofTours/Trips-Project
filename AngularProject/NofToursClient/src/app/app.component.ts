@@ -9,7 +9,7 @@ import { MenuItem } from 'primeng/api/menuitem';
 })
 export class AppComponent {
   adminName = '';
-  title = 'NofToursClient';
+  title = 'NofTours';
   ngOnInit() {
     
    Date.prototype.toJSON = function () {

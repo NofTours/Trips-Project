@@ -5,8 +5,10 @@
         <div appWarning *ngIf="gotResponse==true">
           Email or password are incorrect.
         </div>
-        <p>
+        <p [ngStyle]="{'color':(submitted==true)?'red':'black'}">
+          <strong>
           Sign in:
+          </strong>          
         </p>
         <div>
           Email:
