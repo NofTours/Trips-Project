@@ -8,6 +8,7 @@ import { element } from 'protractor';
 import { Router } from '@angular/router';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { CommonClient } from 'src/app/models/user/CommonClient';
+import { Message } from 'primeng/api/message';
 
 @Component({
   selector: 'app-trip',
@@ -16,6 +17,8 @@ import { CommonClient } from 'src/app/models/user/CommonClient';
 })
 export class TripComponent implements OnInit {
  sites:CommonSite[];
+ 
+
  @Input()
  trip:trip;
  tripSites:CommonSite[];
@@ -50,11 +53,11 @@ export class TripComponent implements OnInit {
 
   saveTrip()
   {
-    // debugger
-    // alert("in save trip");
-    debugger
+     debugger  
     this.tripService.saveTrip();
-    // this.route.navigate(['/endPage']);
-// this.tripSites[0].Equipment.length
+        
+   
   }
+
+ 
 }

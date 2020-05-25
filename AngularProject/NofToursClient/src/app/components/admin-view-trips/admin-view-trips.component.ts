@@ -121,7 +121,8 @@ export class AdminViewTripsComponent implements OnInit {
 
     clearSearch()
     {         
-       this.trips=new Array<trip>();       
+       this.trips=new Array<trip>(); 
+             
         this.searchHidden=false;
         this.clearSearchHidden=true;
     }

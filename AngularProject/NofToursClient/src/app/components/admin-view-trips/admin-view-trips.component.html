@@ -1,63 +1,67 @@
-<!-- <p>admin-view-trips works!</p>
-<div class="ui-g-12 ui-md-4">
-    <h3>Range</h3>
-    <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" 
-    [disabledDates]="invalidDates" [disabledDays]="[6]" [readonlyInput]="true" [minDate]="minDate"></p-calendar>
-    <button type="button"  pButton label="Search" (click)="viewOrderedTrips()"></button>   
-</div>
-<div class="p-grid">
-    <div class="p-col-3" *ngFor="let trip of trips">
-       <app-trip [trip]="trip"></app-trip>
-    </div>
- </div> -->
-<div class="p-grid">
-    <p-card class="ui-g-10 ui-md-10 p-col-11 search" header="Choose the range of dates:">
-        <div class="p-grid p-justify-start">
-            <div class="p-col-2">
-                <p-calendar p-col-5 #calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"
-                    [disabledDates]="invalidDates" [disabledDays]="[6]" [readonlyInput]="true" [minDate]="minDate"
-                    showButtonBar="true">
-                </p-calendar>
-            </div>
-            <div>
-                <div class="p-col-2">
-                    <button type="button" [hidden]="searchHidden" pButton label="Search"
-                        (click)="viewOrderedTrips()"></button>
-                    <button type="button" [hidden]="clearSearchHidden" pButton label="Clear Search"
-                        (click)="clearSearch();"></button>
+
+
+ <br><br>
+ <div>Hello Admin!</div>  
+<p-tabView>
+    <p-tabPanel header="View Trips">
+        <div class="p-grid">
+            <p-card class="ui-g-10 ui-md-10 p-col-11 search" header="Choose the range of dates:">
+                <div class="p-grid p-justify-center">
+                    <div class="p-col-5">
+                        <p-calendar class="cl"  #calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"
+                            [disabledDates]="invalidDates" [disabledDays]="[6]"  [minDate]="minDate"
+                            [showButtonBar]="false" >
+                        </p-calendar>
+                    </div>
+                    <div>
+                        <div class="p-col-2">
+                            <button type="button" [hidden]="searchHidden" pButton label="Search"
+                                (click)="viewOrderedTrips()"></button>
+                            <button type="button" [hidden]="clearSearchHidden" pButton label="Clear Search"
+                                (click)="clearSearch();"></button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </p-card>
         </div>
-    </p-card>
-    <p-table #dt styleClass="ui-table-cars" [value]="trips" [paginator]="true" [rows]="10" selectionMode="single">
-        <ng-template pTemplate="caption">
-            List of Trips
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Client Id</th>
-                <th>Date</th>
-                <th>Begin Time</th>
-                <th>Total Trip Hours</th>
-                <th>Leaving Adrress</th>
-                <th>Num Of People</th>
-                <th>Cost</th>
-                <th>Sites</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-trip>
-            <tr>
-                <td>{{trip.clientId}}</td>
-                <td>{{trip.date|  date:'EEEE dd.MM.yy'}}</td>
-                <td>{{trip.beginTime}}</td>
-                <td>{{trip.totalTripHours}}</td>
-                <td>{{trip.leavingAdrress}}</td>
-                <td>{{trip.numOfPeople}}</td>
-                <td>{{trip.cost}}</td>
-                <td>   
-                <div *ngFor="let tripSite of trip.tripSites">
-                {{getTripSiteName(tripSite)}}</div>     
-            </td>
-            </tr>
-        </ng-template>
-    </p-table>
+        <p-table #dt styleClass="ui-table-cars" [value]="trips" [paginator]="true" [rows]="10" selectionMode="single">
+            <ng-template pTemplate="caption">
+                List of Trips
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Client Id</th>
+                    <th>Date</th>
+                    <th>Begin Time</th>
+                    <th>Total Trip Hours</th>
+                    <th>Leaving Adrress</th>
+                    <th>Num Of People</th>
+                    <th>Cost</th>
+                    <th>Sites</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-trip>
+                <tr>
+                    <td>{{trip.clientId}}</td>
+                    <td>{{trip.date|  date:'EEEE dd.MM.yy'}}</td>
+                    <td>{{trip.beginTime}}</td>
+                    <td>{{trip.totalTripHours}}</td>
+                    <td>{{trip.leavingAdrress}}</td>
+                    <td>{{trip.numOfPeople}}</td>
+                    <td>{{trip.cost}}</td>
+                    <td>   
+                    <div *ngFor="let tripSite of trip.tripSites">
+                    {{getTripSiteName(tripSite)}}</div>     
+                </td>
+                </tr>
+            </ng-template>
+        </p-table> 
+      
+    </p-tabPanel>
+    <p-tabPanel header="Add Site">
+        Content 2
+    </p-tabPanel>
+    <p-tabPanel header="Header 3">
+        Content 3
+    </p-tabPanel>
+</p-tabView>

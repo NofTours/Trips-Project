@@ -48,6 +48,10 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {GalleriaModule} from 'primeng/galleria';
 import { AdminViewTripsComponent } from './components/admin-view-trips/admin-view-trips.component';
 import { PriceTableComponent } from './components/price-table/price-table.component';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {TabViewModule} from 'primeng/tabview';
+
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -112,7 +116,10 @@ export const ROUTES: Routes = [
     MenuModule,
     CalendarModule,
     NgxMaterialTimepickerModule,
-    GalleriaModule
+    GalleriaModule,
+    MessagesModule,
+    MessageModule,
+    TabViewModule
   ],
   providers: [TripService,SitesService,UsersService,DataSharingService],
   bootstrap: [AppComponent]

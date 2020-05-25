@@ -1,4 +1,5 @@
-<div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
+
+  <div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
   <div [hidden]="isOld" class="alert alert-info">
     <div>{{this.client.ContactName}},</div>
     <div>please review your trip...</div><br>
@@ -14,6 +15,7 @@
 
       <div class="p-col-6">Begin time: </div>
       <div class="p-col-6">{{this.trip.beginTime}}</div>
+
 
       <div class="p-col-6">Booking status: </div>
       <div class="p-col-6">{{this.trip.bookingStatus}}</div>
@@ -47,3 +49,4 @@
     </div>
   </div>
 </div>
+

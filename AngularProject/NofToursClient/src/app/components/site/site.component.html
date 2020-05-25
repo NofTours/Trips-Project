@@ -1,5 +1,5 @@
 
-<div class="p-grid" >
+<div class="p-grid" style="position: absolute;">
     <p-card class="ui-g-10 ui-md-10 p-col-11 search"   header="Search for sites...">
         <div class="p-grid p-justify-start">
             <div class="p-col-2">
@@ -27,7 +27,7 @@
     <!-- <div class="ui-g"> -->
     <div class="ui-g-5 ui-md-5 drop-column">
         <div class="ui-g-5 ui-md-5 drag-column">
-            <p-dataView [value]="availableSites" [paginator]="true" paginatorPosition="both" rows="2" filterBy="Name"
+            <p-dataView [value]="availableSites" [paginator]="true" paginatorPosition="top" [rows]="2"  filterBy="Name"
                 #dv dragdrop="true" pDraggable="sites">
                 <p-header>
                     <input type="search" pInputText placeholder="Search by name"
