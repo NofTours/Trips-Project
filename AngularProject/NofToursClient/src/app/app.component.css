@@ -1,6 +1,6 @@
 .navclr
 {
-    background-color: #75491b;;
+    background-color:#d9ebf9;
 }
 .navlinkclr
 {
@@ -17,14 +17,14 @@ a.navbar-brand:hover{
 }
  .navbar-nav .active>.nav-link:hover{
     /* color: rgb(99, 84, 81); */
-    /* color: #007ad9; */
-    color: white;
+    color: #007ad9;
+    /* color: white; */
     font-size: larger;
 }
 
 .navbar-nav .active>.nav-link{
     /* color: rgb(232, 163, 146); */
-    /* color: #007ad9; */
-    color: white;
+    color: #007ad9;
+    /* color: white; */
 }
 
