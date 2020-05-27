@@ -19,6 +19,7 @@ namespace DataLayer
             try
             {
                 db.Trips.Add(newTrip);
+                db.Calendar.Add(new Calendar { Date=trip.Date,DayStatus="booked"});
                 db.SaveChanges();
                 return true;
             }

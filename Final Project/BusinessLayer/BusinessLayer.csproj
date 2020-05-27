@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminManager.cs" />
+    <Compile Include="CalendarManager.cs" />
     <Compile Include="SiteManager.cs" />
     <Compile Include="TripManager.cs" />
     <Compile Include="UserManager.cs" />

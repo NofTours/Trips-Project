@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     Contact Name:
-                    <input [(ngModel)]="newUser.contactName" name="contactName" #cname="ngModel" required
+                    <input [(ngModel)]="newUser.ContactName" name="contactName" #cname="ngModel" required
                         class="form-control mb-4">
                 </div>
                 <div appWarning *ngIf="(!submitted||(submitted&&email.value!=''))&&email.invalid&&email.touched">
@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     Email:
-                    <input [(ngModel)]="newUser.email" name="email" #email="ngModel" email required
+                    <input [(ngModel)]="newUser.Email" name="email" #email="ngModel" email required
                         class="form-control mb-4" placeholder="example@example.com">
                 </div>
                 <div appWarning
@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     Phone 1:
-                    <input [(ngModel)]="newUser.phone1" name="phone1"
+                    <input [(ngModel)]="newUser.Phone1" name="phone1"
                         oninput="this.value=this.value.replace(/[^0-9]/g,'');" #phone1="ngModel" minlength="7" required
                         class="form-control mb-4">
                 </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div>
                     Phone 2:
-                    <input [(ngModel)]="newUser.phone2" name="phone2" class="form-control mb-4"
+                    <input [(ngModel)]="newUser.Phone2" name="phone2" class="form-control mb-4"
                         placeholder="Optional - phone number in Israel"
                         oninput="this.value=this.value.replace(/[^0-9]/g,'');" #phone2="ngModel" minlength="7">
                 </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div>
                     Password:
-                    <input type="password" [(ngModel)]="newUser.password" name="password" #password1="ngModel"
+                    <input type="password" [(ngModel)]="newUser.Password" name="password" #password1="ngModel"
                         required minlength="8" class="form-control mb-4">
                     Confirm Password:
                     

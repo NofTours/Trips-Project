@@ -5,20 +5,21 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CommonLayer;
+using BusinessLayer;
 namespace NofToursServer.Controllers
 {
     public class CalendarController : ApiController
     {
         // GET: api/Calendar
-        public IEnumerable<string> Get()
+        public List<DateTime> Get()
         {
-            return new string[] { "value1", "value2" };
+            return CalendarManager.GetDates();
         }
 
         // GET: api/Calendar/5
-        public string Get(int id)
+        public List<DateTime> Get(int id)
         {
-            return "value";
+            return CalendarManager.GetDates();
         }
 
         // POST: api/Calendar

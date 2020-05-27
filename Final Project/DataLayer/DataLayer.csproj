@@ -60,6 +60,7 @@
       <DependentUpon>NofToursDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAdmin.cs" />
+    <Compile Include="DataCalendar.cs" />
     <Compile Include="DataEquipment.cs" />
     <Compile Include="DataSite.cs" />
     <Compile Include="DataTrip.cs" />

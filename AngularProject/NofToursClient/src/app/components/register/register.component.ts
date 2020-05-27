@@ -39,9 +39,10 @@ export class RegisterComponent implements OnInit {
           this.auth = true;
           this.validForm = true;
           this.dataSharingService.isUserLoggedIn.next(true);
+          debugger
           this.userService.getUser(sessionStorage.getItem("UserEmail")).subscribe(response => {
             this.client=response, this.dataSharingService.client.next(this.client);
-            this.route.navigate(['/viewTrips']),err => { console.log(err);}
+            this.route.navigate(['/booktrip']),err => { console.log(err);}
           });
          //* TODO create correct link to MyTrips page   
         }                     

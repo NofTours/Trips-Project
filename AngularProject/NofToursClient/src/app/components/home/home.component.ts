@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,12 +9,23 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { 
+  isUserLoggedIn:boolean;
+  constructor(private dataSharingService: DataSharingService,private route:Router) { 
+   
 
   }
     ngOnInit() {
 
+    }
+
+    move()
+    {
+      this.dataSharingService.isUserLoggedIn.subscribe( value => {
+        this.isUserLoggedIn = value; });
+        debugger
+      if(this.isUserLoggedIn==true)
+        this.route.navigate(['/booktrip']);
+       else this.route.navigate(['/login']);
     }
   }
 
