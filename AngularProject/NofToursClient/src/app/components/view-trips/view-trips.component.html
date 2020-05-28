@@ -15,9 +15,7 @@
 </div>
 <br>
 <div class="p-grid">
-   <div class="p-col-3">
-      <div *ngFor="let trip of clientTrips" class="p-col-3">
-         <app-trip [trip]="trip"></app-trip>
-      </div>
+   <div *ngFor="let trip of clientTrips" class="p-col-3">
+      <app-trip [trip]="trip"></app-trip>
    </div>
 </div>
