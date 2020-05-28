@@ -1,11 +1,23 @@
-<div class="alert alert-info">
-   <div *ngIf="clientTrips.length>0">{{this.client.ContactName}}, your saved trips are:</div>
-   <div *ngIf="clientTrips.length==0">Sorry {{this.email}}, you don't have any trips planned yet...</div>
+<br>
+<br>
+<div class="alert alert-success" *ngIf="clientTrips.length>0">
+   <div class="text-capitalize">{{this.client.ContactName}},</div>
+   <div>Your saved trips are:</div>
+</div>
+<div *ngIf="clientTrips.length==0">
+   <div class="alert alert-danger">
+      <div class="text-capitalize">Sorry {{this.client.ContactName}},</div>
+      <div>You don't have any trips planned yet...</div>
+   </div>
+   <button class="btn btn-color btn-xl " (click)="move()">Plan your trip to Israel Today!</button>
+   <br>
    <br>
 </div>
+<br>
 <div class="p-grid">
-   <div class="p-col-3" *ngFor="let trip of clientTrips">
-      <app-trip [trip]="trip"></app-trip>
+   <div class="p-col-3">
+      <div *ngFor="let trip of clientTrips" class="p-col-3">
+         <app-trip [trip]="trip"></app-trip>
+      </div>
    </div>
-   <!-- why does it not recognize it as trip type?? -->
 </div>

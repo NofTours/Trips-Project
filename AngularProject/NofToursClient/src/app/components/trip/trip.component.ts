@@ -31,7 +31,7 @@ export class TripComponent implements OnInit {
   });;
    }
 
-  ngOnInit() {
+  ngOnInit() {        
     if(this.trip==null)
     {
      this.trip=this.tripService.getTrip();
@@ -49,6 +49,7 @@ export class TripComponent implements OnInit {
   //     this.tripSites.push(response), err => { console.log(err);};
   //    })
   //  });}
+       
   }
 
   saveTrip()

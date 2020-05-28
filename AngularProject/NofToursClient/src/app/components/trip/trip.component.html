@@ -1,8 +1,7 @@
-
-  <div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
-  <div [hidden]="isOld" class="alert alert-info">
-    <div>{{this.client.ContactName}},</div>
-    <div>please review your trip...</div><br>
+<div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
+  <div [hidden]="isOld" class="alert alert-success">
+    <div class="text-capitalize">{{this.client.ContactName}},</div>
+    <div>Please review your trip...</div>
   </div>
   <p-card>
     <div class="p-grid">
@@ -49,4 +48,3 @@
     </div>
   </div>
 </div>
-

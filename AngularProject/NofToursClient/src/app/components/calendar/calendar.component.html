@@ -2,10 +2,10 @@
 <p-calendar  [style]="{width: '70%'}"  [(ngModel)]="value"  dateFormat="dd.mm.yy" [inline]="true" (onSelect)="saveDateToTrip()"
 [disabledDates]="invalidDates" [disabledDays]="[6]" [readonlyInput]="true" [minDate]="minDate">
 <ng-template pTemplate="date" let-date>
-    <span [ngStyle]="{backgroundColor:'#7cc67c'}" style="border-radius:50%">{{date.day}}</span>
+    <span style="border-radius:50%;font-weight:600">{{date.day}}</span>
 </ng-template>
 <ng-template disabledDateTemplate let-date>
-    <span [ngStyle]="{backgroundColor:'blue'}" style="border-radius:50%">{{date.day}}</span>
+    <span [ngStyle]="{backgroundColor:'blue'}">{{date.day}}</span>
 </ng-template>
 <!-- <div  *ngFor="let date of invalidDates;"> 
   <span [ngStyle]="{backgroundColor:'blue'}" style="border-radius:50%">{{date.day}}</span> 

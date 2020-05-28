@@ -18,9 +18,10 @@ export class EndpageComponent implements OnInit {
         this.images.push({source:'../../../assets/img/Rosh Hanikra.jpg', alt:'Description for Image 5', title:'Title 5'});
         this.images.push({source:'../../../assets/img/bg.png', alt:'Description for Image 6', title:'Title 6'});
         this.msgs = [];
-        this.msgs.push({severity:'success', summary:'Success Message', detail:'Order submitted'})
+        this.msgs.push({severity:'success', summary:'Success!', detail:' We have placed your order.'})
 
     }
+    
 }
 
 

@@ -51,6 +51,8 @@ import { PriceTableComponent } from './components/price-table/price-table.compon
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {TabViewModule} from 'primeng/tabview';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 
 export const ROUTES: Routes = [
@@ -93,7 +95,8 @@ export const ROUTES: Routes = [
     CalendarComponent,
     EndpageComponent,
     AdminViewTripsComponent,
-    PriceTableComponent  
+    PriceTableComponent,
+    ReviewsComponent  
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,8 @@ export const ROUTES: Routes = [
     GalleriaModule,
     MessagesModule,
     MessageModule,
-    TabViewModule
+    TabViewModule,
+    ScrollPanelModule
   ],
   providers: [TripService,SitesService,UsersService,DataSharingService],
   bootstrap: [AppComponent]

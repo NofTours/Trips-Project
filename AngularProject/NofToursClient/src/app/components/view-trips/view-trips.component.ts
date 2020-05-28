@@ -13,6 +13,8 @@ import { DataSharingService } from 'src/app/services/data-sharing.service';
 export class ViewTripsComponent implements OnInit {
   clientTrips: trip[];
   client:CommonClient;
+  isUserLoggedIn:boolean;
+
   constructor(private route: Router,private dataSharingService:DataSharingService, private tripService: TripService) {
     this.clientTrips = [];
     this.dataSharingService.client.subscribe( value => {
@@ -34,5 +36,16 @@ export class ViewTripsComponent implements OnInit {
     })
 
   }
+
+    move()
+    {
+      this.dataSharingService.isUserLoggedIn.subscribe( value => {
+        this.isUserLoggedIn = value; });
+        debugger
+      if(this.isUserLoggedIn==true)
+        this.route.navigate(['/booktrip']);
+       else this.route.navigate(['/login']);
+    }
 }
+
 
