@@ -36,9 +36,6 @@ export class MenuComponent implements OnInit {
                 
                 this.dataSharingService.isUserLoggedIn.next(false);
                 sessionStorage.clear();
-                // alert(sessionStorage.length)
-                //event.originalEvent: Browser event
-                //event.item: menuitem metadata
             },routerLink:"home"}
           ]
       }];

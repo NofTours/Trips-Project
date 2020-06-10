@@ -20,6 +20,8 @@ export class TripService{
  minuteTimeSlice:number;
  selectedSites:CommonSite[];
  client:CommonClient;
+ sitecalcString:string;
+ tourcalcString:string;
  baseUrl = "http://localhost:55109";
 
   constructor(private http: HttpClient,private usersService:UsersService,private route:Router,
@@ -28,6 +30,8 @@ export class TripService{
     this.trip=new trip(0,new Date()," "," "," "," ","",0,0,new Array<number>());
     this.hourTimeSlice=0;
     this.minuteTimeSlice=0;
+    this.tourcalcString="";
+    this.sitecalcString="";
     this.dataSharingService.client.subscribe( value => {
       this.client = value;
      });;
@@ -72,8 +76,12 @@ export class TripService{
   {
      
     var found=false;
+   
     this.selectedSites.forEach(site => {
+      if(this.selectedSites.indexOf(site)>0)
+          this.sitecalcString+="+";
       this.trip.cost+=site.Price*Number(this.trip.numOfPeople);
+      this.sitecalcString+=site.Price.toString()+"*"+this.trip.numOfPeople.toString();
     });
     
     this.pricesService.getPrices().forEach(info => {
@@ -81,6 +89,7 @@ export class TripService{
       if(this.trip.numOfPeople<=info.numOfPeople&& found==false)
       {
       this.trip.cost+=info.price*this.hourTimeSlice*this.trip.numOfPeople;
+      this.tourcalcString+=info.price.toString()+"*"+this.hourTimeSlice.toString()+"*"+this.trip.numOfPeople.toString();
       found=true;
      }
     });
@@ -95,7 +104,14 @@ export class TripService{
   {
     return this.trip;
   }
-
+  getSiteCalc()
+  {
+    return this.sitecalcString;
+  }
+  getTourCalc()
+  {
+    return this.tourcalcString;
+  }
   getTripSites(){
     return this.selectedSites;
   }

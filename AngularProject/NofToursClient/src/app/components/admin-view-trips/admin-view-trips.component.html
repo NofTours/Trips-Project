@@ -59,9 +59,57 @@
       
     </p-tabPanel>
     <p-tabPanel header="Add Site">
-        Content 2
+        <div class="p-field p-grid">
+            <label for="addedSite[0].Name" class="p-col-fixed" style="width:100px">Name</label>
+            <div class="p-col">
+                <input id="Name" type="text" pInputText> 
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite[0].Area" class="p-col-fixed" style="width:100px">Area</label>
+            <div class="p-col">
+                <input id="Area" type="text" pInputText> 
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite[0].Price" class="p-col-fixed" style="width:100px">Price</label>
+            <div class="p-col">
+                <input id="Price" type="text" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite[0].OpeningHour" class="p-col-fixed" style="width:100px">Opening Hour</label>
+            <div class="p-col">
+                <input id="OpeningHour" type="text" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite[0].ClosingHour" class="p-col-fixed" style="width:100px">Closing Hour</label>
+            <div class="p-col">
+                <input id="ClosingHour" type="text" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite[0].Description" class="p-col-12" style="width:100px">Description</label>
+            <div class="p-col">
+                 <textarea id="Description" type="text" rows="2" pInputTextarea></textarea>
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite[0].Category" class="p-col-fixed" style="width:100px">Category</label>
+            <div class="p-col">
+                <input id="Category" type="text" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.EstimatedStay" class="p-col-fixed" style="width:100px">Estimated Stay</label>
+            <div class="p-col">
+                <input id="EstimatedStay" type="text" pInputText> 
+            </div>       
+        </div>
+        <button pButton type="button" label="Submit" (click)="saveSite()"></button>
     </p-tabPanel>
-    <p-tabPanel header="Header 3">
+    <!-- <p-tabPanel header="Header 3">
         Content 3
-    </p-tabPanel>
+    </p-tabPanel> -->
 </p-tabView>

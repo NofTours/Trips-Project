@@ -62,11 +62,13 @@ export class AdminViewTripsComponent implements OnInit {
   sites:CommonSite[];
   searchHidden:boolean;
   clearSearchHidden:boolean;
+  addedSite:CommonSite[];
   constructor( private adminService:AdminService, private siteService:SitesService) { 
     this.trips=[];
     this.sites=[];
     this.invalidDates=[];
     this.selectedDates=[];
+    this.addedSite=[];
     let today=new Date();
     this.minDate = new Date();
     let invalidDate = new Date();
@@ -125,6 +127,11 @@ export class AdminViewTripsComponent implements OnInit {
              
         this.searchHidden=false;
         this.clearSearchHidden=true;
+    }
+    saveSite()
+    {
+      debugger
+      alert("in save site");
     }
 
 }

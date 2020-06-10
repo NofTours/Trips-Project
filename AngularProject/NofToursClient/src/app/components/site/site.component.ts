@@ -81,10 +81,22 @@ export class SiteComponent implements OnInit {
         this.selectedSites = [...this.selectedSites, this.draggedSite];// whats ...?
         this.availableSites = this.availableSites.filter((val,i) => i!=draggedSiteIndex);
         this.draggedSite = null;
-        this.calculatedHeight= (Number(this.calculatedHeight.slice(0,this.calculatedHeight.length-2)) + 50).toString()+'px';
-        
+        this.calculatedHeight= (Number(this.calculatedHeight.slice
+        (0,this.calculatedHeight.length-2)) + 50).toString()+'px';       
      }
  }
+
+ findIndex(site: CommonSite) {
+    let index = -1;
+    for(let i = 0; i < this.availableSites.length; i++) {
+        if(site.Name === this.availableSites[i].Name) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
 
  dragEnd(event) {
      this.draggedSite = null;
@@ -93,17 +105,7 @@ export class SiteComponent implements OnInit {
  dragStart(event,site: CommonSite) {
     this.draggedSite = site;
 }
- findIndex(site: CommonSite) {
-     let index = -1;
-     for(let i = 0; i < this.availableSites.length; i++) {
-         if(site.Name === this.availableSites[i].Name) {
-             index = i;
-             break;
-         }
-     }
-     return index;
- }
-
+ 
 
 
 
@@ -111,6 +113,12 @@ dragStart2(event,site: CommonSite) {
     this.draggedSite2 = site;
 }
 
+drop2(event:any) {   
+    var prevIndex=(this.findIndex2(this.draggedSite2));
+    var currentIndex=(this.findIndexByName(event.target.childNodes[0].data));
+    this.moveItemInArray(this.selectedSites,prevIndex,currentIndex);
+ }
+ 
 findIndex2(site: CommonSite) {
    let index = -1;
    for(let i = 0; i < this.selectedSites.length; i++) {
@@ -132,11 +140,7 @@ findIndexByName(name: string) {
     }
     return index;
 }
- cdkdrop(event:any) {   
-    var prevIndex=(this.findIndex2(this.draggedSite2));
-    var currentIndex=(this.findIndexByName(event.target.childNodes[0].data));
-    this.moveItemInArray(this.selectedSites,prevIndex,currentIndex);
- }
+
   
   moveItemInArray(array:CommonSite[],index1:number,index2:number)
   {

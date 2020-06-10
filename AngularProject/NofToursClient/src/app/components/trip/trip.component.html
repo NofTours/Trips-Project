@@ -5,6 +5,8 @@
   </div>
   <p-card>
     <div class="p-grid">
+      <div [hidden]="passed">Old Trip</div>
+      <div>{{this.calc}}</div>
       <div class="p-col-12 ui-card-title">{{this.trip.date|  date:'EEEE dd.MM.yy'}}</div>
       <div class="p-col-6">Leaving Address: </div>
       <div class="p-col-6">{{this.trip.leavingAdrress}}</div>
@@ -22,7 +24,13 @@
       <div class="p-col-6">Total time:</div>
       <div class="p-col-6">{{this.trip.totalTripHours}}</div>
 
-      <div class="p-col-6">Cost:</div>
+      <div class="p-col-6" [hidden]="isOld">Site Cost: </div>
+      <div class="p-col-6" [hidden]="isOld">{{this.sitecalcString}}</div>
+
+      <div class="p-col-6" [hidden]="isOld">Tour Guide Cost: </div>
+      <div class="p-col-6" [hidden]="isOld">{{this.tourcalcString}}</div>
+
+      <div class="p-col-6">Total Cost:</div>
       <div class="p-col-6">{{this.trip.cost}}</div>
 
       <div class="p-col-6">Sites:</div>
