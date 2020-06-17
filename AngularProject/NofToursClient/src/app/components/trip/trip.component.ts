@@ -24,25 +24,39 @@ export class TripComponent implements OnInit {
  tripSites:CommonSite[];
  isOld:boolean;
  client:CommonClient;
+ passed:boolean;
+ today:Date;
+ tourcalcString:string;
+ sitecalcString:string;
   constructor(private tripService:TripService,private dataSharingService:DataSharingService,private siteService:SitesService,private route: Router) {
     this.tripSites=[];
+    this.passed=true;
+    this.today=new Date();
     this.dataSharingService.client.subscribe( value => {
       this.client = value;
+      
   });;
    }
 
   ngOnInit() {        
     if(this.trip==null)
     {
-     this.trip=this.tripService.getTrip();
+     this.trip=this.tripService.getTrip();  
      this.tripSites=this.tripService.getTripSites();
      this.isOld=false;
+     this.sitecalcString=this.tripService.getSiteCalc();
+     this.tourcalcString=this.tripService.getTourCalc();
    }
   else {
     this.siteService.getSitesById(this.trip.tripSites).subscribe(response => {
           this.tripSites=response, err => { console.log(err);};
          })
+         debugger
+         if(new Date(this.trip.date).getTime()<this.today.getTime())
+            this.passed=false;
          this.isOld=true;
+         this.sitecalcString=this.tripService.getSiteCalc();
+         this.tourcalcString=this.tripService.getTourCalc();
        };
   //   this.trip.tripSites.forEach(element => {
   //    this.siteService.getSitesById(element).subscribe(response => {

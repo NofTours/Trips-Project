@@ -11,7 +11,7 @@ namespace DataLayer
     
     class Hash
     {
-        static dbEntities db = new dbEntities();//i think this is a mistake...
+        static dbEntities db = new dbEntities();
         private const int SaltByteSize = 24;
         private const int HashByteSize = 24;
         private const int HasingIterationsCount = 10101;
@@ -26,7 +26,9 @@ namespace DataLayer
             }
         }
 
-        internal static string ComputeHash(string password, byte[] salt, int iterations = HasingIterationsCount, int hashByteSize = HashByteSize)
+        internal static string ComputeHash(string password, byte[] salt, 
+            int iterations = HasingIterationsCount, 
+            int hashByteSize = HashByteSize)
         {
             using (Rfc2898DeriveBytes hashGenerator = new Rfc2898DeriveBytes(password, salt))
             {

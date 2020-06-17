@@ -107,5 +107,23 @@ namespace DataLayer
             var categories = (from c in db.Sites select c.Category).Distinct().ToList();
             return categories;
         }
+
+        public static Boolean AddSite(CommonSite site)
+        {
+            dbEntities db = new dbEntities();
+
+            try
+            {
+               Sites newSite=Mapper.SiteToDB(site);
+                db.Sites.Add(newSite);
+                db.SaveChanges();
+               
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -11,10 +11,6 @@ namespace DataLayer
 {
     public static class DataUser
     {
-        
-        //static dbEntities db = new dbEntities();
-        //* TODO move to static function that will try to create connection to db.
-
         public static Boolean Login(string email, string password)
         {
             dbEntities db = new dbEntities();
@@ -51,7 +47,6 @@ namespace DataLayer
             return false;
         }
 
-        //* TODO - check online how to validate db w EF - before any work with it - maybe add transactions...
         public static Boolean Register(CommonClient user)
         {
             dbEntities db = new dbEntities();

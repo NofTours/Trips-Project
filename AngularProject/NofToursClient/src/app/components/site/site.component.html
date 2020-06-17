@@ -79,8 +79,8 @@
                                 </ng-template>
                                 <ng-template pTemplate="body" let-selectedSite>
                                     <tr pDraggable pDroppable (onDragStart)="dragStart2($event,selectedSite)"
-                                        (onDrop)="cdkdrop($event)" dragHandle=".drag-handler">
-                                        <td>{{this.findIndexByName(selectedSite.Name)}}</td>
+                                        (onDrop)="drop2($event)" dragHandle=".drag-handler">
+                                        <td>{{this.findIndexByName(selectedSite.Name)+1}}</td>
                                         <td class="drag-handler">{{selectedSite.Name}}</td>
                                         <td>{{selectedSite.Area}}</td>
                                         <td>{{selectedSite.Price}}</td>

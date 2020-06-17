@@ -1,7 +1,10 @@
 
+
+<p-messages [(value)]="msgs"></p-messages>
+
 <p class="items"><b>Select date:</b></p>
 <app-calendar class="center"></app-calendar>
-
+ 
 <!-- <form class="center"> -->
 <div class="items">
 <p><b>What address are we leaving from?</b></p>
@@ -20,7 +23,7 @@
     <div class="ui-g-4  ui-md-2">
         <div class="ui-inputgroup">
          <span class="ui-inputgroup-addon"><i class="pi pi-users" style="line-height: 1.25;"></i></span>
-         <input type="number" [(ngModel)]="numOfPeople" min="1" max="20">         
+         <input type="number" [(ngModel)]="numOfPeople" min="1" max="10">         
         </div>
     </div>
 </div>

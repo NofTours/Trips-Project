@@ -3,6 +3,8 @@ import { AdminService } from 'src/app/services/admin.service';
 import { trip } from 'src/app/models/trip/trip';
 import { SitesService } from 'src/app/services/sites.service';
 import { CommonSite } from 'src/app/models/site/commonSite';
+import { addedSite } from 'src/app/models/addedSite/addedSite';
+import { time } from 'console';
 
 @Component({
   selector: 'app-admin-view-trips',
@@ -62,6 +64,7 @@ export class AdminViewTripsComponent implements OnInit {
   sites:CommonSite[];
   searchHidden:boolean;
   clearSearchHidden:boolean;
+  addedSite:addedSite;
   constructor( private adminService:AdminService, private siteService:SitesService) { 
     this.trips=[];
     this.sites=[];
@@ -74,6 +77,7 @@ export class AdminViewTripsComponent implements OnInit {
     this.invalidDates = [today,invalidDate];
     this.searchHidden=false;
     this.clearSearchHidden=true;
+    this.addedSite=new addedSite("","","","",0,"","","","",["",""]);
   }
 
   ngOnInit() {
@@ -126,5 +130,18 @@ export class AdminViewTripsComponent implements OnInit {
         this.searchHidden=false;
         this.clearSearchHidden=true;
     }
-
+    saveSite()
+    {
+      debugger
+      // this.addedSite.openingHour+=":00";
+      // this.addedSite.estimatedStay+=":00";
+      // this.addedSite.closingHour+=":00";
+      alert("in save site"+this.addedSite.description);
+      this.adminService.addSite(this.addedSite).subscribe(data => {
+        if(data==true)
+          alert("added");
+      
+        });
+    };
+    
 }

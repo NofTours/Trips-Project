@@ -59,9 +59,57 @@
       
     </p-tabPanel>
     <p-tabPanel header="Add Site">
-        Content 2
+        <div class="p-field p-grid">
+            <label for="addedSite.name" class="p-col-fixed" style="width:100px">Name</label>
+            <div class="p-col">
+                <input  [(ngModel)]="addedSite.name" id="Name" type="text" pInputText> 
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.area" class="p-col-fixed" style="width:100px">Area</label>
+            <div class="p-col">
+                <input  [(ngModel)]="addedSite.area" id="Area" type="text" pInputText> 
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.price" class="p-col-fixed" style="width:100px">Price</label>
+            <div class="p-col">
+                <input [(ngModel)]="addedSite.price" id="Price" type="text" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.openingHour" class="p-col-fixed" style="width:100px">Opening Hour</label>
+            <div class="p-col">
+                <input [(ngModel)]="addedSite.openingHour" id="OpeningHour" type="time" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.closingHour" class="p-col-fixed" style="width:100px">Closing Hour</label>
+            <div class="p-col">
+                <input [(ngModel)]="addedSite.closingHour" id="ClosingHour" type="time" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.description" class="p-col-12" style="width:100px">Description</label>
+            <div class="p-col">
+                 <textarea [(ngModel)]="addedSite.description" id="Description" type="text" rows="2" pInputTextarea></textarea>
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.category" class="p-col-fixed" style="width:100px">Category</label>
+            <div class="p-col">
+                <input [(ngModel)]="addedSite.category" id="Category" type="text" pInputText> 
+            </div>       
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.estimatedStay" class="p-col-fixed" style="width:100px">Estimated Stay</label>
+            <div class="p-col">
+                <input  [(ngModel)]="addedSite.estimatedStay" id="EstimatedStay" type="time" pInputText> 
+            </div>       
+        </div>
+        <button pButton type="button" label="Submit" (click)="saveSite()"></button>
     </p-tabPanel>
-    <p-tabPanel header="Header 3">
+    <!-- <p-tabPanel header="Header 3">
         Content 3
-    </p-tabPanel>
+    </p-tabPanel> -->
 </p-tabView>

@@ -41,7 +41,6 @@ export class ViewTripsComponent implements OnInit {
     {
       this.dataSharingService.isUserLoggedIn.subscribe( value => {
         this.isUserLoggedIn = value; });
-        debugger
       if(this.isUserLoggedIn==true)
         this.route.navigate(['/booktrip']);
        else this.route.navigate(['/login']);

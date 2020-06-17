@@ -10,20 +10,27 @@ namespace NofToursServer.Controllers
 {
     public class AdminController : ApiController
     {
-        // GET: api/Admin
-        public IEnumerable<string> Get()
+        // GET: api/Admin/site
+        public Boolean Get(CommonSite site)
         {
-            return new string[] { "value1", "value2" };
+            return true;
+        }
+        // POST: api/Trips
+        public Boolean Post([FromBody]CommonSite site)
+        {
+            return AdminManager.AddSite(site);
         }
 
         // GET: api/Admin/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //public Boolean Get(CommonSite site)
+        //{
+        //    return true;
+        //}
 
-        // POST: api/Admin
-        public List<CommonTrip> Post([FromBody]DateTime[] dates)
+        //POST: api/Admin
+        [Route("api/Admin/ViewTrips")]
+        [HttpPost]
+        public List<CommonTrip> ViewTrips([FromBody]DateTime[] dates)
         {
             return AdminManager.viewTrips(dates);
         }
