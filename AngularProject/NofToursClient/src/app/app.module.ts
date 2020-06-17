@@ -53,6 +53,7 @@ import {MessageModule} from 'primeng/message';
 import {TabViewModule} from 'primeng/tabview';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ReviewsComponent } from './components/reviews/reviews.component';
+import { DatePipe } from '@angular/common';
 
 
 export const ROUTES: Routes = [
@@ -125,7 +126,7 @@ export const ROUTES: Routes = [
     TabViewModule,
     ScrollPanelModule
   ],
-  providers: [TripService,SitesService,UsersService,DataSharingService],
+  providers: [TripService,SitesService,UsersService,DataSharingService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

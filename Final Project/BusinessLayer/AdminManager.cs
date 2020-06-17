@@ -13,5 +13,10 @@ namespace BusinessLayer
         {
             return DataAdmin.viewTrips(dates);
         }
+
+        public static Boolean AddSite(CommonSite s)
+        {
+            return DataSite.AddSite(s);
+        }
     }
 }
