@@ -8,12 +8,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
 import { WarningDirective } from './directives/warning.directive';
-import { ButtonHoverDirective } from './directives/button-hover.directive';
 import { HttpClientModule } from '@angular/common/http'
 import { FilterPipe } from './pipes/filter.pipe';
 import { ShortStrPipe } from './pipes/short-str.pipe';
 import { UserComponent } from './components/user/user.component';
-import { BgColorDirective } from './directives/bg-color.directive';
 import { UserUpdatesComponent } from './components/user-updates/user-updates.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewcalendarComponent } from './components/newcalendar/newcalendar.component';
@@ -78,11 +76,9 @@ export const ROUTES: Routes = [
     RegisterComponent,
     HomeComponent,
     WarningDirective,
-    ButtonHoverDirective,
     FilterPipe,
     ShortStrPipe,
     UserComponent,
-    BgColorDirective,
     UserUpdatesComponent,
     NewcalendarComponent,
     ExampleComponent,
@@ -129,5 +125,3 @@ export const ROUTES: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-//platformBrowserDynamic().bootstrapModule(AppModule);
