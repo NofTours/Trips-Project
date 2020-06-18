@@ -6,6 +6,7 @@ import { Search } from 'src/app/models/Search/Search';
 import { Router } from '@angular/router';
 import { stringify } from 'querystring';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 //import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -47,6 +48,11 @@ export class SiteComponent implements OnInit {
  clearSearchHidden:boolean;
 
  calculatedHeight:string;
+
+ showWarn: boolean = false;
+
+ msgs: Message[] = [];
+
  
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
@@ -76,25 +82,25 @@ export class SiteComponent implements OnInit {
  }
 
  drop(event) {
-     if(this.draggedSite) {
-        let draggedSiteIndex = this.findIndex(this.draggedSite);
-        this.selectedSites = [...this.selectedSites, this.draggedSite];// whats ...?
+     if(this.findIndexInSelectedSites(this.draggedSite)==-1 &&   //Check if site isn't already selected.
+        this.draggedSite.Name){
+        let draggedSiteIndex = this.findIndexInAvailableSites(this.draggedSite);
+        this.selectedSites = [...this.selectedSites, this.draggedSite];       
         this.availableSites = this.availableSites.filter((val,i) => i!=draggedSiteIndex);
-        this.draggedSite = null;
         this.calculatedHeight= (Number(this.calculatedHeight.slice
-        (0,this.calculatedHeight.length-2)) + 50).toString()+'px';       
-     }
+        (0,this.calculatedHeight.length-2)) + 50).toString()+'px'; 
+       }
+    else
+    {
+      this.showWarn=true;
+      this.msgs.push({severity:'warn', summary:'You have already added this site!'});
+    }
+                   
+     this.draggedSite = null;
  }
 
- findIndex(site: CommonSite) {
-    let index = -1;
-    for(let i = 0; i < this.availableSites.length; i++) {
-        if(site.Name === this.availableSites[i].Name) {
-            index = i;
-            break;
-        }
-    }
-    return index;
+ findIndexInAvailableSites(site: CommonSite) {    
+    return this.availableSites.findIndex(x=>x.Name===site.Name);
 }
 
 
@@ -114,31 +120,18 @@ dragStart2(event,site: CommonSite) {
 }
 
 drop2(event:any) {   
-    var prevIndex=(this.findIndex2(this.draggedSite2));
+    var prevIndex=(this.findIndexInSelectedSites(this.draggedSite2));
     var currentIndex=(this.findIndexByName(event.target.childNodes[0].data));
     this.moveItemInArray(this.selectedSites,prevIndex,currentIndex);
  }
  
-findIndex2(site: CommonSite) {
-   let index = -1;
-   for(let i = 0; i < this.selectedSites.length; i++) {
-       if(site.Name === this.selectedSites[i].Name) {
-           index = i;
-           break;
-       }
-   }
-   return index;
+findIndexInSelectedSites(site: CommonSite) {
+  return this.selectedSites.findIndex(x=>x.Name===site.Name);
+
 }
 
 findIndexByName(name: string) {
-    let index = -1;
-    for(let i = 0; i < this.selectedSites.length; i++) {
-        if(name === this.selectedSites[i].Name) {
-            index = i;
-            break;
-        }
-    }
-    return index;
+  return this.selectedSites.findIndex(x=>x.Name===name);
 }
 
   
@@ -178,12 +171,19 @@ findIndexByName(name: string) {
   }
 
   saveSitesToTrip()
-{
+  {
     
     this.tripService.saveSitesToTrip(this.selectedSites);
-    // alert(this.tripService.getTripBeginTime()+this.tripService.getTripBookingStatus()+this.tripService.getTripTotalTripHours());
     this.route.navigate(['/trip']);
-}  
+  }  
+
+  deleteSite(name: string)
+  {
+    var i:number;
+    i=this.findIndexByName(name);      
+    this.availableSites.push(this.selectedSites.splice(i,1)[0]);
+    this.availableSites = this.availableSites;//to refresh the availableSites dataview
+  }
 }
 
 

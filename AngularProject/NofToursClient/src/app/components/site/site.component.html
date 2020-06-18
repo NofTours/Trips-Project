@@ -26,7 +26,6 @@
                         the
                         table!!</p-footer>
                 </p-card>
-            <!-- <div class="ui-g"> -->
             <div class="ui-g-5 ui-md-5 drop-column">
                 <div class="ui-g-5 ui-md-5 drag-column">
                     <p-dataView [value]="availableSites" [paginator]="true" paginatorPosition="top" [rows]="2"
@@ -50,31 +49,26 @@
                         </ng-template>
                     </p-dataView>
                 </div>
-                <!-- </div> -->
-                <!-- <br>
-<br> -->
                 <div class="ui-g-5 ui-md-5 drag-column">
+                    <p-messages *ngIf="showWarn" [(value)]="msgs"></p-messages>
                     <p-card pDroppable="sites" header="Your Sites -All the info you may need..."
                         subheader="You may reorder your trip by dragging site name!"
                         [style]="{width: '935px', height:calculatedHeight}" styleClass="ui-card-shadow">
                         <div class="ui-g-10 ui-md-10 drop-column" pDroppable="sites" (onDrop)="drop($event)"
                             [ngClass]="{'ui-highlight-car':drasggedSite}">
                             <p-table [value]="selectedSites">
-                                <!-- [style]="{width: '950px',height:'700px'}"  -->
-                                <!-- [hidden]="this.selectedSites.length<=0" -->
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th style='width:50px'>
-                                            <!-- Order in Trip -->
-                                        </th>
+                                        <th style='width:30px'></th>
                                         <th style='width:100px'>Name</th>
-                                        <th style='width:80px'>Area</th>
+                                        <th style='width:60px'>Area</th>
                                         <th style='width:60px'>Price</th>
                                         <th style='width:130px'>Category</th>
-                                        <th style='width:230px'>Description</th>
-                                        <th style='width:80px'>Opening Hour</th>
-                                        <th style='width:70px'>Closing Hour</th>
-                                        <th style='width:90px'>Estimated Stay</th>
+                                        <th style='width:130px'>Description</th>
+                                        <th style='width:120px'>Open from</th>
+                                        <th style='width:100px'>Closes at</th>
+                                        <th style='width:130px'>Estimated Stay</th>
+                                        <th style='width:50px'></th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-selectedSite>
@@ -89,6 +83,8 @@
                                         <td>{{selectedSite.OpeningHour}}</td>
                                         <td>{{selectedSite.ClosingHour}}</td>
                                         <td>{{selectedSite.EstimatedStay}}</td>
+                                        <td><button pButton class="ui-button-secondary"
+                                            icon="pi pi-trash" (click)="deleteSite(selectedSite.Name)"></button></td>                                        
                                     </tr>
                                 </ng-template>
                             </p-table>
@@ -98,17 +94,13 @@
                                 <li *ngFor="let selectedSite of selectedSites"></li>
                             </ul>
                         </div>
-                        <div class="ui-g-11 ui-md-11 p-grid p-justify-center" style="margin: 1em;">
+                        <div class="ui-g-11 ui-md-11 p-grid p-justify-center" style="margin: 2em;">
                             <button *ngIf="selectedSites&&selectedSites.length>0" pButton
-                                class="ui-button-raised ui-button-rounded ui-button-success" label="Next"
+                                class="ui-button-raised ui-button-rounded ui-button-secondary" label="Next"
                                 icon="pi pi-arrow-circle-right" (click)="saveSitesToTrip()"></button>
                         </div>
                     </p-card>
                 </div>
-
-                <!-- <ul>
-    <li *ngFor="let selectedSite of selectedSites">{{selectedSite.Equipment}}</li>
-</ul> -->
 
             </div>
         </div>
