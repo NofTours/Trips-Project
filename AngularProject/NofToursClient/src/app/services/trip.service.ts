@@ -24,6 +24,7 @@ export class TripService{
  tourcalcString:string;
  baseUrl = "http://localhost:55109";
  midCalc:number;
+ dateChosen=false;
   constructor(private http: HttpClient,private usersService:UsersService,private route:Router,
     private dataSharingService:DataSharingService, private pricesService: PricesService) 
   {   
@@ -40,6 +41,7 @@ export class TripService{
    }
 
    saveDateToTrip(chosenDate: Date){
+    this.dateChosen=true;
     if(chosenDate != null)
       this.trip.date = chosenDate;
   }
@@ -131,9 +133,13 @@ export class TripService{
     return this.email;
   }
 
+  getDateChosen()
+  {
+    return this.dateChosen;
+  }
+
   saveTrip()
   { 
-    debugger
     this.saveClientIdToTrip();
     if(this.trip.clientId!=0)
     {

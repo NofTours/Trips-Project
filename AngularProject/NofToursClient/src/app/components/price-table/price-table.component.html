@@ -1,4 +1,4 @@
-<div class="p-grid p-justify-center">
+<!-- <div class="p-grid p-justify-center">
     <p-card class="p-col-7 ptt">
         <p-table [value]="pricesInfo" class="pt">
             <ng-template pTemplate="header">
@@ -15,10 +15,9 @@
             </ng-template>
         </p-table>
     </p-card>
-</div>
+</div> -->
 
 <!-- <div class="p-grid p-justify-center">
-    <p-card class="p-col-7 ptt">
         <p-table [value]="pricesInfo" class="pt">
             <ng-template pTemplate="header">
                 <tr>
@@ -33,5 +32,32 @@
                 </tr>
             </ng-template>
         </p-table>
-    </p-card>
 </div> -->
+
+<section class="page-section cta footer-clr">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner text-center rounded">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Our Prices</span>
+            </h2>
+            <p-table [value]="pricesInfo" class="pt">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Num of people in group</th>
+                        <th>Price per hour</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-price>
+                    <tr>
+                        <td>{{this.getPrevious(price)}} - {{price.numOfPeople}}</td>
+                        <td>{{price.price}}₪</td>
+                    </tr>
+                </ng-template>
+            </p-table> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

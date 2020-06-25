@@ -34,7 +34,7 @@ export class CalendarComponent implements OnInit {
        
        this.invalidDates.push(new Date(element));
      });
-     debugger
+
       this.invalidDates.push(today),this.invalidDates.push(invalidDate), err => { console.log(err);
        
       };

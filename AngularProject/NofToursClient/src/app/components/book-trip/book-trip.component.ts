@@ -62,7 +62,7 @@ export class BookTripComponent implements OnInit {
   
 
   saveDateToTrip(chosenDate: Date){
-    this.dateChosen=true;
+   this.dateChosen=true;
    this.tripService.saveDateToTrip(chosenDate);
   }
   showToast() {
@@ -71,14 +71,9 @@ export class BookTripComponent implements OnInit {
   continue()
   {
     this.tripService.saveAdrressAndPeople(String(this.leavingAddress+" "+this.houseNum),this.numOfPeople);
-    if(this.houseNum==null||this.leavingAddress==null||this.dateChosen==false||this.numOfPeople==0)
+    if(this.houseNum==null||this.leavingAddress==null||this.tripService.getDateChosen()==false||this.numOfPeople==0)
         this.showToast();
     else this.route.navigate(['/sites']);
-    //  this.info=new Data(sessionStorage.getItem("UserEmail"),String(this.leavingAddress),this.numOfPeople.toString());
-    //  this.client.LeavingAddress=this.info.Address;
-    //  this.client.NumPeople=this.info.NumOfPeople;
-    //  this.dataSharingService.client.next(this.client);
-    //   this.userService.saveAdrressAndPeople(this.info);
   }
 
   

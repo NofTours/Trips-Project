@@ -175,7 +175,7 @@ findIndexByName(name: string) {
 
   saveSitesToTrip()
   {
-    
+    debugger
     this.tripService.saveSitesToTrip(this.selectedSites);
     this.route.navigate(['/trip']);
   }  
