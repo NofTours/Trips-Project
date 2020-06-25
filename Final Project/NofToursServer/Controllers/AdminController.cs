@@ -10,10 +10,10 @@ namespace NofToursServer.Controllers
 {
     public class AdminController : ApiController
     {
-        // GET: api/Admin/site
-        public Boolean Get(CommonSite site)
+        // GET: api/Admin
+        public List<CommonEquipment> Get()
         {
-            return true;
+            return AdminManager.GetEquipment();
         }
         // POST: api/Trips
         public Boolean Post([FromBody]CommonSite site)

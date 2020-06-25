@@ -1,14 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trip } from 'src/app/models/trip/trip';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { CommonSite } from 'src/app/models/site/commonSite';
 import { TripService } from 'src/app/services/trip.service';
 import { SitesService } from 'src/app/services/sites.service';
-import { element } from 'protractor';
 import { Router } from '@angular/router';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
-import { CommonClient } from 'src/app/models/user/CommonClient';
-import { Message } from 'primeng/api/message';
+import { CommonClient } from 'src/app/models/user/CommonClient';;
+import { MessageService } from 'primeng/api';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-trip',
@@ -17,8 +16,6 @@ import { Message } from 'primeng/api/message';
 })
 export class TripComponent implements OnInit {
  sites:CommonSite[];
- 
-
  @Input()
  trip:trip;
  tripSites:CommonSite[];
@@ -28,17 +25,21 @@ export class TripComponent implements OnInit {
  today:Date;
  tourcalcString:string;
  sitecalcString:string;
-  constructor(private tripService:TripService,private dataSharingService:DataSharingService,private siteService:SitesService,private route: Router) {
+ new=false;
+  constructor(private tripService:TripService,private dataSharingService:DataSharingService,private siteService:SitesService
+    ,private messageService: MessageService) {
     this.tripSites=[];
     this.passed=true;
     this.today=new Date();
+   // this.messageService.add({key: 'trip',severity:'info', summary:'Please Notice', detail:'Travel Time not included in time calculation'});
     this.dataSharingService.client.subscribe( value => {
       this.client = value;
-      
+      this.showInfo();
   });;
+  
    }
 
-  ngOnInit() {        
+  ngOnInit() {  
     if(this.trip==null)
     {
      this.trip=this.tripService.getTrip();  
@@ -51,27 +52,31 @@ export class TripComponent implements OnInit {
     this.siteService.getSitesById(this.trip.tripSites).subscribe(response => {
           this.tripSites=response, err => { console.log(err);};
          })
-         debugger
+       
          if(new Date(this.trip.date).getTime()<this.today.getTime())
             this.passed=false;
          this.isOld=true;
          this.sitecalcString=this.tripService.getSiteCalc();
          this.tourcalcString=this.tripService.getTourCalc();
-       };
-  //   this.trip.tripSites.forEach(element => {
-  //    this.siteService.getSitesById(element).subscribe(response => {
-  //     this.tripSites.push(response), err => { console.log(err);};
-  //    })
-  //  });}
-       
+       };   
   }
+  ngAfterViewInit() {
+    
+    setTimeout(() => {
+      if(!this.isOld)
+        this.messageService.add(
+            {key: 'tc', severity: 'info', summary: 'Please Notice', detail: 'Time calcuation excludes travel time'}
+  );
+    })
+}
+  showInfo() {
+
+    this.messageService.add({severity:'info', summary: 'Info Message', detail:'PrimeNG rocks'});
+}
 
   saveTrip()
   {
-     debugger  
-    this.tripService.saveTrip();
-        
-   
+    this.tripService.saveTrip();  
   }
 
  

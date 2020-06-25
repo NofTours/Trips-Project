@@ -36,5 +36,7 @@ export class SitesService {
   getCategories()
   {
     return this.http.get<string[]>(this.baseUrl + "/api/Site/id?="+1); 
-  }
+  } 
+
+  
 }

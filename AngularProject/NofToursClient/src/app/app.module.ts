@@ -32,7 +32,6 @@ import {ListboxModule} from 'primeng/listbox';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
 import { MenuComponent } from './components/menu/menu.component';
 import { DataSharingService } from './services/data-sharing.service';
 import { TripService } from './services/trip.service';
@@ -48,11 +47,14 @@ import { AdminViewTripsComponent } from './components/admin-view-trips/admin-vie
 import { PriceTableComponent } from './components/price-table/price-table.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {MessageService} from 'primeng/api';
 import {TabViewModule} from 'primeng/tabview';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { DatePipe } from '@angular/common';
-
+import {MultiSelectModule} from 'primeng/multiselect';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ToastModule} from 'primeng/toast';
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -120,9 +122,12 @@ export const ROUTES: Routes = [
     MessagesModule,
     MessageModule,
     TabViewModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    MultiSelectModule,
+    FileUploadModule,
+    ToastModule   
   ],
-  providers: [TripService,SitesService,UsersService,DataSharingService,DatePipe],
+  providers: [TripService,SitesService,UsersService,DataSharingService,DatePipe,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

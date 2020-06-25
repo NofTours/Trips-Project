@@ -11,7 +11,7 @@
           <span class="section-heading-upper">Touring Israel</span>
           <span class="section-heading-lower">Done right</span>
         </h2>
-        <p class="mb-3">Join us for an experience you'll ever forget...
+        <p class="mb-3">Join us for an experience you'll never forget...
         </p>
         <div class="intro-button mx-auto">
           <button class="btn btn-color btn-xl " (click)="move()">Plan your trip to Israel Today!</button>
@@ -40,9 +40,24 @@
   </div>
 </section>
 
+<section class="page-section cta footer-clr">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <div class="cta-inner text-center rounded">
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Our Prices</span>
+          </h2>
+            <app-price-table></app-price-table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <app-reviews></app-reviews>
 
-<app-price-table></app-price-table>
+<!-- <app-price-table></app-price-table> -->
 <footer class="footer text-faded text-center py-5 footer-clr ">
   <div class="container">
     <p class="m-0 small">Copyright &copy; NofTours 2019</p>

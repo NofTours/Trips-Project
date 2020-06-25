@@ -1,4 +1,5 @@
 import { Time } from "@angular/common";
+import { equipment } from "../equipment/equipment";
 
 export class addedSite{
     
@@ -13,8 +14,7 @@ export class addedSite{
         category:string;
         estimatedStay:string;// in c# nullable timespan
         equipment:string[];
-        // equipment?
-        // tripCommonSite?
+      
     
     
         constructor(

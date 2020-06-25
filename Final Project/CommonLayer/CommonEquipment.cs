@@ -8,7 +8,7 @@ namespace CommonLayer
 {
     public class CommonEquipment
     {
-        public int CodeEquipment { get; set; }
+        public int EquipmentId { get; set; }
         public string Name { get; set; }
     }
 }

@@ -23,7 +23,7 @@ export class TripService{
  sitecalcString:string;
  tourcalcString:string;
  baseUrl = "http://localhost:55109";
-
+ midCalc:number;
   constructor(private http: HttpClient,private usersService:UsersService,private route:Router,
     private dataSharingService:DataSharingService, private pricesService: PricesService) 
   {   
@@ -78,21 +78,32 @@ export class TripService{
     var found=false;
    
     this.selectedSites.forEach(site => {
-      if(this.selectedSites.indexOf(site)>0)
+      if(site.Price>0)
+      {
+      if(this.selectedSites.indexOf(site)>0&&this.trip.cost!=0)
           this.sitecalcString+="+";
       this.trip.cost+=site.Price*Number(this.trip.numOfPeople);
-      this.sitecalcString+=site.Price.toString()+"*"+this.trip.numOfPeople.toString();
+      this.sitecalcString+=site.Price.toString()+"x"+this.trip.numOfPeople.toString();
+    }
+   
     });
+    this.midCalc=this.trip.cost;
+    this.sitecalcString+="="+this.trip.cost.toString();
     
     this.pricesService.getPrices().forEach(info => {
-      debugger;
+ 
       if(this.trip.numOfPeople<=info.numOfPeople&& found==false)
       {
-      this.trip.cost+=info.price*this.hourTimeSlice*this.trip.numOfPeople;
-      this.tourcalcString+=info.price.toString()+"*"+this.hourTimeSlice.toString()+"*"+this.trip.numOfPeople.toString();
+      this.trip.cost+=info.price*this.hourTimeSlice+(this.minuteTimeSlice/60)*info.price;
       found=true;
+      if(this.minuteTimeSlice==0)
+      this.tourcalcString+=info.price.toString()+"x"+this.hourTimeSlice.toString()+"="+(this.trip.cost-this.midCalc).toString();
+       else this.tourcalcString+=info.price.toString()+"x"+this.hourTimeSlice.toString()+"+"+(this.minuteTimeSlice/60).toString()+"x"+info.price.toString()+"="+(this.trip.cost-this.midCalc).toString();
      }
-    });
+    }
+   
+    );
+    
   }
 
   saveAdrressAndPeople(address:string,num:number)

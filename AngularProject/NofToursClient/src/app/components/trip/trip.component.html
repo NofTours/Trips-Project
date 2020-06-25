@@ -1,13 +1,19 @@
+<p-toast position="center"></p-toast>
+
 <div [ngClass]="{'p-col-4': !isOld, 'p-offset-4': !isOld}">
   <div [hidden]="isOld" class="alert alert-success">
-    <div class="text-capitalize">{{this.client.ContactName}},</div>
-    <div>Please review your trip...</div>
-  </div>
+    <div class="text-capitalize">{{this.client.ContactName}}</div>
+     <div>Please review your trip...</div>   
+   </div>
+
+ 
   <p-card>
-    <div class="p-grid">
-      <div [hidden]="passed">Old Trip</div>
+    
+    <div [ngClass]="((passed==true))?'p-grid':'p-grid bgGrey'" >
+  
       <div>{{this.calc}}</div>
       <div class="p-col-12 ui-card-title">{{this.trip.date|  date:'EEEE dd.MM.yy'}}</div>
+      <p-toast key="tc" position="top-right"  baseZIndex="1"></p-toast>
       <div class="p-col-6">Leaving Address: </div>
       <div class="p-col-6">{{this.trip.leavingAdrress}}</div>
 
@@ -21,7 +27,7 @@
       <div class="p-col-6">Booking status: </div>
       <div class="p-col-6">{{this.trip.bookingStatus}}</div>
 
-      <div class="p-col-6">Total time:</div>
+      <div class="p-col-6">Touring time:</div>
       <div class="p-col-6">{{this.trip.totalTripHours}}</div>
 
       <div class="p-col-6" [hidden]="isOld">Site Cost: </div>
@@ -31,7 +37,7 @@
       <div class="p-col-6" [hidden]="isOld">{{this.tourcalcString}}</div>
 
       <div class="p-col-6">Total Cost:</div>
-      <div class="p-col-6">{{this.trip.cost}}</div>
+      <div class="p-col-6">{{this.trip.cost}}₪</div>
 
       <div class="p-col-6">Sites:</div>
       <div class="p-col-10" style="margin-left: 3em;" *ngFor="let site of tripSites">
@@ -47,12 +53,13 @@
           {{equipment}}
         </div>
       </div>
-    </div>
+    </div> 
   </p-card>
   <div class="p-grid">
     <div style="margin-top: 1em;" class="p-col-4 p-offset-4">
       <button pButton class="ui-button-raised ui-button-rounded" icon="pi pi-save" [hidden]="isOld" label="Save Trip"
         (click)="saveTrip()"></button>
     </div>
+  
   </div>
 </div>

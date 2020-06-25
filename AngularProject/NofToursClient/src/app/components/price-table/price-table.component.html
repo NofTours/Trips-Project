@@ -10,9 +10,28 @@
             <ng-template pTemplate="body" let-price>
                 <tr>
                     <td>{{this.getPrevious(price)}} - {{price.numOfPeople}}</td>
-                    <td>{{price.price}} per person</td>
+                    <td>{{price.price}}₪</td>
                 </tr>
             </ng-template>
         </p-table>
     </p-card>
 </div>
+
+<!-- <div class="p-grid p-justify-center">
+    <p-card class="p-col-7 ptt">
+        <p-table [value]="pricesInfo" class="pt">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Num of people in group</th>
+                    <th>Price per hour</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-price>
+                <tr>
+                    <td>{{this.getPrevious(price)}} - {{price.numOfPeople}}</td>
+                    <td>{{price.price}}$</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
+</div> -->

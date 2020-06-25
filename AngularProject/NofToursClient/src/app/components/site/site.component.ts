@@ -6,7 +6,7 @@ import { Search } from 'src/app/models/Search/Search';
 import { Router } from '@angular/router';
 import { stringify } from 'querystring';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Message } from 'primeng/api/message';
 
 //import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -53,7 +53,7 @@ export class SiteComponent implements OnInit {
 
  msgs: Message[] = [];
 
- 
+ allSites:CommonSite[];
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
         {name: 'North'},
@@ -67,10 +67,10 @@ export class SiteComponent implements OnInit {
            this.categories.push({name:element})}) ,err => { console.log(err);}           
            this.selectedSites = [];
            this.siteService.getAllSites().subscribe(response => {
-            this.availableSites = response, err => { console.log(err);}
+            this.availableSites = response,this.allSites=response, err => { console.log(err);}
           })
      })  
-     
+     this.msgs=[];
      this.searchInfo=new Search("none","none","none");
      this.searchHidden=false;
      this.clearSearchHidden=true;
@@ -82,6 +82,7 @@ export class SiteComponent implements OnInit {
  }
 
  drop(event) {
+    //  if(this.draggedSite.OpeningHour)
      if(this.findIndexInSelectedSites(this.draggedSite)==-1 &&   //Check if site isn't already selected.
         this.draggedSite.Name){
         let draggedSiteIndex = this.findIndexInAvailableSites(this.draggedSite);
@@ -93,7 +94,7 @@ export class SiteComponent implements OnInit {
     else
     {
       this.showWarn=true;
-      this.msgs.push({severity:'warn', summary:'You have already added this site!'});
+      this.msgs.push({severity:'warn', summary:'Notice!', detail:'You have already added this site!'});
     }
                    
      this.draggedSite = null;
@@ -154,6 +155,7 @@ findIndexByName(name: string) {
   }
   search()
   {
+
     this.siteService.getSitesBySearch(this.searchInfo).subscribe(response => {
     this.availableSites = response, err => { console.log(err); };
    })
@@ -168,6 +170,7 @@ findIndexByName(name: string) {
       this.searchInfo.Category="none";
       this.searchHidden=false;
       this.clearSearchHidden=true;
+      this.availableSites=this.allSites;
   }
 
   saveSitesToTrip()

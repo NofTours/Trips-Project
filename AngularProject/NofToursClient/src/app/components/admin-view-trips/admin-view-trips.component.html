@@ -1,14 +1,14 @@
 
 
  <br><br>
- <div>Hello Admin!</div>  
+ <div>Hello Admin!</div>
 <p-tabView>
     <p-tabPanel header="View Trips">
         <div class="p-grid">
             <p-card class="ui-g-10 ui-md-10 p-col-11 search" header="Choose the range of dates:">
                 <div class="p-grid p-justify-center">
                     <div class="p-col-5">
-                        <p-calendar class="cl"  #calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"
+                        <p-calendar class="cl"  #calendar baseZIndex="1" [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"
                             [disabledDates]="invalidDates" [disabledDays]="[6]"  [minDate]="minDate"
                             [showButtonBar]="false" >
                         </p-calendar>
@@ -59,6 +59,8 @@
       
     </p-tabPanel>
     <p-tabPanel header="Add Site">
+        <p-toast key="admin" position="bottom-center"></p-toast> 
+
         <div class="p-field p-grid">
             <label for="addedSite.name" class="p-col-fixed" style="width:100px">Name</label>
             <div class="p-col">
@@ -68,7 +70,15 @@
         <div class="p-field p-grid">
             <label for="addedSite.area" class="p-col-fixed" style="width:100px">Area</label>
             <div class="p-col">
-                <input  [(ngModel)]="addedSite.area" id="Area" type="text" pInputText> 
+                <p-dropdown  [options]="areas"  placeholder="Select an area"
+                optionLabel="name" [(ngModel)]="selectedArea"></p-dropdown>
+                <!-- <input   id="Area" type="text" pInputText>  -->
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.area" class="p-col-fixed" style="width:100px">Address</label>
+            <div class="p-col">
+                <input  [(ngModel)]="addedSite.addressGMaps" id="Area" type="text" pInputText> 
             </div>
         </div>
         <div class="p-field p-grid">
@@ -92,12 +102,12 @@
         <div class="p-field p-grid">
             <label for="addedSite.description" class="p-col-12" style="width:100px">Description</label>
             <div class="p-col">
-                 <textarea [(ngModel)]="addedSite.description" id="Description" type="text" rows="2" pInputTextarea></textarea>
+                 <textarea [(ngModel)]="addedSite.description" id="Description" type="text" rows="4" pInputTextarea></textarea>
             </div>       
         </div>
         <div class="p-field p-grid">
             <label for="addedSite.category" class="p-col-fixed" style="width:100px">Category</label>
-            <div class="p-col">
+            <div class="p-col">  
                 <input [(ngModel)]="addedSite.category" id="Category" type="text" pInputText> 
             </div>       
         </div>
@@ -107,6 +117,21 @@
                 <input  [(ngModel)]="addedSite.estimatedStay" id="EstimatedStay" type="time" pInputText> 
             </div>       
         </div>
+        <div class="p-field p-grid">
+            <label for="addedSite.equipment" class="p-col-fixed" style="width:100px" >Equipment</label>
+            <div class="p-col">    
+                <p-multiSelect defaultLabel="Select equipment" [tooltipPosition]="bottom" [options]="equipment" [(ngModel)]="chosenEquipment" optionLabel="Name"></p-multiSelect>
+            </div>       
+        </div>
+        <!-- <div class="p-field p-grid">
+            <label for="addedSite.equipment" class="p-col-fixed" style="width:100px" >Upload Photo</label>
+            <div class="p-col">    
+                <label for="file">Choose File</label>
+                <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+                <p-fileUpload name="{{addedSite.name}}" url="src/assets" (onUpload)="onBasicUpload($event)"
+                accept="image/*"></p-fileUpload>
+            </div>       
+        </div> -->
         <button pButton type="button" label="Submit" (click)="saveSite()"></button>
     </p-tabPanel>
     <!-- <p-tabPanel header="Header 3">

@@ -4,6 +4,7 @@ import { TripService } from 'src/app/services/trip.service';
 import { trip } from 'src/app/models/trip/trip';
 import { CommonClient } from 'src/app/models/user/CommonClient';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-view-trips',
@@ -15,7 +16,7 @@ export class ViewTripsComponent implements OnInit {
   client:CommonClient;
   isUserLoggedIn:boolean;
 
-  constructor(private route: Router,private dataSharingService:DataSharingService, private tripService: TripService) {
+  constructor(private route: Router,private dataSharingService:DataSharingService,private messageService: MessageService, private tripService: TripService) {
     this.clientTrips = [];
     this.dataSharingService.client.subscribe( value => {
       this.client = value;
@@ -36,6 +37,14 @@ export class ViewTripsComponent implements OnInit {
     })
 
   }
+  ngAfterViewInit() {
+    
+    setTimeout(() => {
+        this.messageService.add(
+            {key: 't', severity: 'info', summary: 'Please Notice', detail: 'Time calcuation excludes travel time'}
+  );
+    })
+}
 
     move()
     {

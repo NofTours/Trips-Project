@@ -15,6 +15,8 @@
 </div>
 <br>
 <div class="p-grid">
+   <p-toast key="t" position="top-right"  baseZIndex="1"></p-toast>
+   
    <div *ngFor="let trip of clientTrips" class="p-col-3">
       <app-trip [trip]="trip"></app-trip>
    </div>

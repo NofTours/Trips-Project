@@ -4,8 +4,11 @@ import { trip } from 'src/app/models/trip/trip';
 import { SitesService } from 'src/app/services/sites.service';
 import { CommonSite } from 'src/app/models/site/commonSite';
 import { addedSite } from 'src/app/models/addedSite/addedSite';
-import { time } from 'console';
-
+import { equipment } from 'src/app/models/equipment/equipment';
+import {MessageService} from 'primeng/api';
+interface area {
+  name: string;
+}
 @Component({
   selector: 'app-admin-view-trips',
   templateUrl: './admin-view-trips.component.html',
@@ -51,6 +54,7 @@ import { time } from 'console';
         }
     `]
 })
+
 export class AdminViewTripsComponent implements OnInit {
 
   rangeDates: Date[];
@@ -65,7 +69,19 @@ export class AdminViewTripsComponent implements OnInit {
   searchHidden:boolean;
   clearSearchHidden:boolean;
   addedSite:addedSite;
-  constructor( private adminService:AdminService, private siteService:SitesService) { 
+  equipment:equipment[];
+  chosenEquipment:equipment[];
+  areas:area[];
+  fileToUpload: File = null;
+  selectedArea:area;
+  
+  constructor( private adminService:AdminService, private siteService:SitesService,private messageService: MessageService) { 
+    this.areas=[
+      {name: 'North'},
+      {name: 'South'},
+      {name: 'East'},
+      {name: 'West'}
+    ];
     this.trips=[];
     this.sites=[];
     this.invalidDates=[];
@@ -77,7 +93,11 @@ export class AdminViewTripsComponent implements OnInit {
     this.invalidDates = [today,invalidDate];
     this.searchHidden=false;
     this.clearSearchHidden=true;
-    this.addedSite=new addedSite("","","","",0,"","","","",["",""]);
+    this.addedSite=new addedSite("","","","",0,"","","","",new Array<string>());
+    this.adminService.getEquipment().subscribe(response=>{
+  this.equipment=response}
+  );
+ 
   }
 
   ngOnInit() {
@@ -125,23 +145,39 @@ export class AdminViewTripsComponent implements OnInit {
 
     clearSearch()
     {         
-       this.trips=new Array<trip>(); 
-             
+       this.trips=new Array<trip>();             
         this.searchHidden=false;
         this.clearSearchHidden=true;
     }
+    showToast() {
+      this.messageService.add({key:'admin',severity:'success', summary:'Success', detail:'Site was added to data-base'});
+  }
     saveSite()
     {
-      debugger
-      // this.addedSite.openingHour+=":00";
-      // this.addedSite.estimatedStay+=":00";
-      // this.addedSite.closingHour+=":00";
-      alert("in save site"+this.addedSite.description);
+      
+       this.addedSite.area=this.selectedArea.name;
+      this.chosenEquipment.forEach(element => {
+        this.addedSite.equipment.push(element.Name);
+      });
       this.adminService.addSite(this.addedSite).subscribe(data => {
         if(data==true)
-          alert("added");
+          this.showToast();
       
         });
     };
+
+    
+
+    handleFileInput(files: FileList)
+    {
+      this.fileToUpload = files.item(0);
+      
+    }
+
+    onBasicUpload(event:any)
+    {
+      debugger
+      
+    }
     
 }

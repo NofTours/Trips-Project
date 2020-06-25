@@ -7,6 +7,8 @@ import { CommonClient } from 'src/app/models/user/CommonClient';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Message } from 'primeng/api/message';
 import { DatePipe } from '@angular/common';
+import { AddressesService } from 'src/app/services/addresses.service';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -23,9 +25,13 @@ export class BookTripComponent implements OnInit {
   client:CommonClient;
   msgs: Message[] = [];
   datesString:string;
-
+  houseNum:Text;
+  dateChosen=false;
+  // roadNames:string[];
+  // cityNames:string[];
+  found=false;
   constructor(private userService: UsersService,private dataSharingService:DataSharingService,private route: Router,
-    private tripService:TripService,private datePipe: DatePipe) {   
+    private tripService:TripService,private datePipe: DatePipe, private messageService: MessageService) {   
       this.hidden=true;
       this.datesString="You have ordered trips in: ";
       this.dataSharingService.client.subscribe( value => {
@@ -38,16 +44,14 @@ export class BookTripComponent implements OnInit {
               element[k[0].toLowerCase() + k.slice(1)] = value;
             });
             if(new Date(element.date).getTime()>new Date().getTime())
-            {
-                  alert(element.date);
-                  debugger
-                  
-                  this.datesString+=" "+this.datePipe.transform(element.date, "dd-MM-yyyy"); 
-                  alert(this.datesString) 
+            {                                
+                  this.datesString+=" "+this.datePipe.transform(element.date, "dd-MM-yyyy");  
+                  this.found=true;
             }         
             
             })
-            this.msgs.push({severity:'info', summary:'Remember!', detail:this.datesString});
+            if(this.found==true)
+              this.msgs.push({severity:'info', summary:'Remember!', detail:this.datesString});
             ;})
        
 
@@ -58,12 +62,18 @@ export class BookTripComponent implements OnInit {
   
 
   saveDateToTrip(chosenDate: Date){
+    this.dateChosen=true;
    this.tripService.saveDateToTrip(chosenDate);
   }
+  showToast() {
+    this.messageService.add({key:'req',severity:'warn', summary:'Notice!', detail:"All fields are required!"});
+}
   continue()
   {
-    this.tripService.saveAdrressAndPeople(String(this.leavingAddress),this.numOfPeople);
-    this.route.navigate(['/sites']);
+    this.tripService.saveAdrressAndPeople(String(this.leavingAddress+" "+this.houseNum),this.numOfPeople);
+    if(this.houseNum==null||this.leavingAddress==null||this.dateChosen==false||this.numOfPeople==0)
+        this.showToast();
+    else this.route.navigate(['/sites']);
     //  this.info=new Data(sessionStorage.getItem("UserEmail"),String(this.leavingAddress),this.numOfPeople.toString());
     //  this.client.LeavingAddress=this.info.Address;
     //  this.client.NumPeople=this.info.NumOfPeople;

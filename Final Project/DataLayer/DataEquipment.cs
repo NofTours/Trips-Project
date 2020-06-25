@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonLayer;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -40,5 +41,20 @@ namespace DataLayer
 
          return -1;
         }
+
+        public static List<CommonEquipment> GetEquipment()
+        {
+            dbEntities db = new dbEntities();
+            List<Equipment> eq = (from e in db.Equipment select e).ToList();
+            List<CommonEquipment> ceq = new List<CommonEquipment>();
+            foreach (var e in eq)
+            {
+                ceq.Add(Mapper.EquipmentToCommon(e));
+
+            }
+            return ceq;
+                       
+        }
+
     }
 }

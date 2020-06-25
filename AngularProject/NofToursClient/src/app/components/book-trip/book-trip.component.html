@@ -12,9 +12,13 @@
    <div class="ui-g-4  ui-md-2">
        <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
-        <input type="text" [(ngModel)]="leavingAddress"><br>        
-       </div>
+        <input type="text" [(ngModel)]="leavingAddress" placeholder="Street Name">  
+        <div class="ui-inputgroup" style="padding-left: 10px;">
+            <span class="ui-inputgroup-addon"><i>123</i></span>
+            <input type="text" style="width: 70px;" [(ngModel)]="houseNum" placeholder="Number"> 
+        </div>       
    </div>
+</div>
 </div>
 
 
@@ -23,7 +27,7 @@
     <div class="ui-g-4  ui-md-2">
         <div class="ui-inputgroup">
          <span class="ui-inputgroup-addon"><i class="pi pi-users" style="line-height: 1.25;"></i></span>
-         <input type="number" [(ngModel)]="numOfPeople" min="1" max="10">         
+         <input type="number" [(ngModel)]="numOfPeople" min="1" max="22">         
         </div>
     </div>
 </div>
@@ -32,8 +36,9 @@
 <p><b>Choose when to start:</b></p>
 <app-time-picker></app-time-picker>
 <br>
- 
+
  <div class="intro-button mx-auto">
+    <p-toast key="req" position="bottom-center"></p-toast> 
     <button class="btn  btn-xl btn-color" (click)="continue()">All set, let's continue -></button>
 </div>
 <br>

@@ -18,5 +18,11 @@ namespace BusinessLayer
         {
             return DataSite.AddSite(s);
         }
+
+        public static List<CommonEquipment> GetEquipment()
+        {
+          return DataEquipment.GetEquipment();
+           
+        }
     }
 }
