@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { stringify } from 'querystring';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { Message } from 'primeng/api/message';
+import { element } from 'protractor';
 
 //import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -54,6 +55,9 @@ export class SiteComponent implements OnInit {
  msgs: Message[] = [];
 
  allSites:CommonSite[];
+
+ sitesAreas: number[]=[0,0,0,0];
+
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
         {name: 'North'},
@@ -90,6 +94,7 @@ export class SiteComponent implements OnInit {
         this.availableSites = this.availableSites.filter((val,i) => i!=draggedSiteIndex);
         this.calculatedHeight= (Number(this.calculatedHeight.slice
         (0,this.calculatedHeight.length-2)) + 50).toString()+'px'; 
+        this.checkSitesArea(this.draggedSite);
        }
     else
     {
@@ -182,10 +187,37 @@ findIndexByName(name: string) {
 
   deleteSite(name: string)
   {
+    var site:CommonSite;
     var i:number;
-    i=this.findIndexByName(name);      
+    i=this.findIndexByName(name);     
+    site=this.selectedSites[i];    
+    this.sitesAreas[this.areas.findIndex(x=>x.name===site.Area)]--; 
     this.availableSites.push(this.selectedSites.splice(i,1)[0]);
     this.availableSites = this.availableSites;//to refresh the availableSites dataview
+  }
+
+  checkSitesArea(site: CommonSite){
+    var area1='', area2='';
+    var i=0;
+    debugger;
+    i=this.areas.findIndex(x=>x.name===site.Area);
+    this.sitesAreas[i]++;
+    
+    if (this.sitesAreas[0]>0&&this.sitesAreas[1]>0){
+      area1='up north';
+      area2='down south';
+    }
+    else if (this.sitesAreas[2]>0&&this.sitesAreas[3]>0){
+      area1='in the east';
+      area2='in the west';
+    }
+    if ((area1!='')&&(area2!='')){
+      this.msgs=[];
+      this.msgs.push({severity:'info', summary:'Notice!', detail:
+          'You have chosen sites ' + area1 + ' and ' + area2 +
+          '. We recommend choosing sites with close proximity.'});
+      this.showWarn=true;
+    }
   }
 }
 
