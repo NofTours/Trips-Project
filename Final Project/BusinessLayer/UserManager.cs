@@ -50,6 +50,10 @@ namespace BusinessLayer
             return DataUser.SaveAddressAndNum(data);
         }
 
-        
+        public static CommonClient GetUserById(int id)
+        {
+            return DataUser.GetUserById(id);
+        }
+
     }
 }

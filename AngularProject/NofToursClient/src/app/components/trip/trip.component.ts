@@ -26,9 +26,11 @@ export class TripComponent implements OnInit {
  tourcalcString:string;
  sitecalcString:string;
  new=false;
+ equipment:string[];
   constructor(private tripService:TripService,private dataSharingService:DataSharingService,private siteService:SitesService
     ,private messageService: MessageService) {
     this.tripSites=[];
+    this.equipment=[];
     this.passed=true;
     this.today=new Date();
    // this.messageService.add({key: 'trip',severity:'info', summary:'Please Notice', detail:'Travel Time not included in time calculation'});
@@ -47,10 +49,11 @@ export class TripComponent implements OnInit {
      this.isOld=false;
      this.sitecalcString=this.tripService.getSiteCalc();
      this.tourcalcString=this.tripService.getTourCalc();
+     this.addEquipment();
    }
   else {
     this.siteService.getSitesById(this.trip.tripSites).subscribe(response => {
-          this.tripSites=response, err => { console.log(err);};
+          this.tripSites=response,this.addEquipment(), err => { console.log(err);};
          })
        
          if(new Date(this.trip.date).getTime()<this.today.getTime())
@@ -58,7 +61,9 @@ export class TripComponent implements OnInit {
          this.isOld=true;
          this.sitecalcString=this.tripService.getSiteCalc();
          this.tourcalcString=this.tripService.getTourCalc();
-       };   
+         
+       };
+ 
   }
   ngAfterViewInit() {
     
@@ -69,6 +74,19 @@ export class TripComponent implements OnInit {
   );
     })
 }
+
+  addEquipment()
+  {
+    
+    if(this.tripSites.length>0) 
+    this.tripSites.forEach(site => {
+      debugger
+   site.Equipment.forEach(eq => {
+     if(this.equipment.indexOf(eq)==-1)
+        this.equipment.push(eq);
+   });
+ }); 
+  }
   showInfo() {
 
     this.messageService.add({severity:'info', summary: 'Info Message', detail:'PrimeNG rocks'});

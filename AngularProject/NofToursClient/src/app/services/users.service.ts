@@ -40,6 +40,12 @@ export class UsersService implements OnInit{
     return this.http.get<CommonClient>(this.baseUrl + "/api/Client/?email="+email);
   }
 
+  getUserById(id:number): Observable<CommonClient>
+  {
+    debugger
+    return this.http.get<CommonClient>(this.baseUrl + "/api/client/GetUserById/?id="+id);
+  }
+
   saveAdrressAndPeople(info:Data)
   {
     this.http.post<boolean>(this.baseUrl+"/api/Client/SaveAddressAndNum",info).subscribe(data => {

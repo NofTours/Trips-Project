@@ -6,6 +6,8 @@ import { CommonSite } from 'src/app/models/site/commonSite';
 import { addedSite } from 'src/app/models/addedSite/addedSite';
 import { equipment } from 'src/app/models/equipment/equipment';
 import {MessageService} from 'primeng/api';
+import { UsersService } from 'src/app/services/users.service';
+import { CommonClient } from 'src/app/models/user/CommonClient';
 interface area {
   name: string;
 }
@@ -74,8 +76,13 @@ export class AdminViewTripsComponent implements OnInit {
   areas:area[];
   fileToUpload: File = null;
   selectedArea:area;
+  clients:CommonClient[]=[];
+  showDtl=false;
+  currClient:CommonClient;
   
-  constructor( private adminService:AdminService, private siteService:SitesService,private messageService: MessageService) { 
+  
+  constructor( private adminService:AdminService, private siteService:SitesService,
+    private messageService: MessageService,private userService:UsersService) { 
     this.areas=[
       {name: 'North'},
       {name: 'South'},
@@ -101,7 +108,6 @@ export class AdminViewTripsComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this.siteService.getAllSites().subscribe(response => {
       this.sites=response, err => 
       { console.log(err);
@@ -122,12 +128,19 @@ export class AdminViewTripsComponent implements OnInit {
           this.trips.push(element);
         }), err => { console.log(err); }
         this.trips.forEach(element => {
-          // alert(element.leavingAdrress);
-
+          this.userService.getUserById(element.clientId).subscribe(response => {
+            this.clients.push(response);
+          });
         });
     });
     this.searchHidden=true;
     this.clearSearchHidden=false;
+  }
+  getClientDetails(clientID:number)
+  {
+    debugger
+    this.currClient=this.clients.find(x=>x.ClientId===clientID);
+    this.showDtl=true;
   }
 
    getTripSiteName(tripSite:number)

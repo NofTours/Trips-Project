@@ -11,10 +11,12 @@ namespace NofToursServer.Controllers
 {
     public class ClientController : ApiController
     {
+        [Route("api/client/GetUserById")]
+        [HttpGet]
         // GET: api/Client
-        public IEnumerable<string> Get()
+        public CommonClient GetUserById(int id)
         {
-            return new string[] { "value1", "value2" };
+            return UserManager.GetUserById(id);
         }
 
         // GET: api/Client/5

@@ -78,11 +78,12 @@ namespace DataLayer
             return Mapper.UserToCommon( client);
         }
 
-        public static Clients GetUserById(int id)
+        public static CommonClient GetUserById(int id)
         {
             dbEntities db = new dbEntities();
             Clients client = (from c in db.Clients where c.ClientId == id select c).FirstOrDefault();
-            return client;
+            CommonClient commonClient = Mapper.UserToCommon(client);
+            return commonClient;
         }
 
         public static Boolean SaveAddressAndNum(Data data)

@@ -1,7 +1,15 @@
+<br>
+<br>
+<div class="p-grid">
+    <div class="p-offset-3 p-col-6">
+      <div style="text-align: center;" class="font_8">
+        <strong>
+          <p style="font-size: x-large;">Welcome, admin.</p>
+        </strong>
+      </div>
+    </div>
+</div>
 
-
- <br><br>
- <div>Hello Admin!</div>
 <p-tabView>
     <p-tabPanel header="View Trips">
         <div class="p-grid">
@@ -30,19 +38,27 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Client Id</th>
-                    <th>Date</th>
-                    <th>Begin Time</th>
-                    <th>Total Trip Hours</th>
-                    <th>Leaving Adrress</th>
-                    <th>Num Of People</th>
-                    <th>Cost</th>
-                    <th>Sites</th>
+                    <th style='width:100px' >Client</th>
+                    <th style='width:100px'>Date</th>
+                    <th style='width:80px'>Begin Time</th>
+                    <th style='width:80px'>Total Trip Hours</th>
+                    <th style='width:100px'>Leaving Adrress</th>
+                    <th style='width:50px'>Num Of People</th>
+                    <th style='width:60px'>Cost</th>
+                    <th style='width:100px'>Sites</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-trip>
                 <tr>
-                    <td>{{trip.clientId}}</td>
+                    <td><button *ngIf="!(showDtl&&currClient.ClientId===trip.clientId)" pButton class="ui-button-secondary"
+                        icon="pi pi-user" (click)="getClientDetails(trip.clientId)"></button>
+                        <div *ngIf="showDtl&&currClient.ClientId===trip.clientId">
+                            <p>{{currClient.ContactName}}</p>
+                            <p>{{currClient.Email}}</p>
+                            <p>{{currClient.Phone1}}</p>
+                            <p>{{currClient.Phone2}}</p>
+                        </div>
+                    </td>
                     <td>{{trip.date|  date:'EEEE dd.MM.yy'}}</td>
                     <td>{{trip.beginTime}}</td>
                     <td>{{trip.totalTripHours}}</td>
