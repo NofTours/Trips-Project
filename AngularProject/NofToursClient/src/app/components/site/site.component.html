@@ -26,6 +26,8 @@
                         the
                         table!!</p-footer>
                 </p-card>
+                
+            <p-messages class="p-col-11" *ngIf="showWarn" [(value)]="msgs"></p-messages>
             <div class="ui-g-5 ui-md-5 drop-column">
                 <div class="ui-g-5 ui-md-5 drag-column">
                     <p-dataView [value]="availableSites" [paginator]="true" paginatorPosition="top" [rows]="2"
@@ -48,9 +50,8 @@
 
                         </ng-template>
                     </p-dataView>
-                </div>
+                </div>                
                 <div class="ui-g-5 ui-md-5 drag-column">
-                    <p-messages *ngIf="showWarn" [(value)]="msgs"></p-messages>
                     <p-card pDroppable="sites" header="Your Sites -All the info you may need..."
                         subheader="You may reorder your trip by dragging site name!"
                         [style]="{width: '935px', height:calculatedHeight}" styleClass="ui-card-shadow">

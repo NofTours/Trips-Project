@@ -147,8 +147,8 @@ export class TripService{
       console.log(data);
       if (data == true)
       {
-        this.route.navigate(['/endPage']);}
-        
+        this.route.navigate(['/endPage']);
+        window.scrollTo(0, 0)};        
       }
       );
   }
