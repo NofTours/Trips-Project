@@ -54,8 +54,9 @@ export class TripService{
   {
     this.trip.clientId=this.client.ClientId;
   }
-  saveSitesToTrip(selectedSites: CommonSite[])
+  saveSitesToTrip(selectedSites: CommonSite[], approxTravelTime: number)
   {
+    debugger;
      this.selectedSites=selectedSites;
      selectedSites.forEach(site => {
      this.trip.tripSites.push(site.SiteId);
@@ -68,6 +69,7 @@ export class TripService{
       this.hourTimeSlice+=Math.floor(this.minuteTimeSlice/60);
       this.minuteTimeSlice-=Math.floor(this.minuteTimeSlice/60)*60;
     }
+   this.hourTimeSlice += approxTravelTime;
    this.trip.totalTripHours=this.pad(this.hourTimeSlice)+":"+this.pad(this.minuteTimeSlice)+":00";
    this.trip.bookingStatus="Booked";
    this.saveCost();
