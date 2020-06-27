@@ -70,7 +70,8 @@ export class TripComponent implements OnInit {
     setTimeout(() => {
       if(!this.isOld)
         this.messageService.add(
-            {key: 'tc', severity: 'info', summary: 'Please Notice', detail: 'Time calcuation excludes travel time'}
+            {key: 'tc', severity: 'info', summary: 'Please Notice', detail: 'Time calculation is approximate '+
+             ' and may change due to traffic situation.'}
   );
     })
 }

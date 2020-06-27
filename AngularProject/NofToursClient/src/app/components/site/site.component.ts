@@ -58,6 +58,8 @@ export class SiteComponent implements OnInit {
 
  sitesAreas: number[]=[0,0,0,0];
 
+ approxTravelTime: number = 0;
+
  constructor(private route: Router,private siteService: SitesService,private tripService: TripService) {
     this.areas=[
         {name: 'North'},
@@ -181,7 +183,7 @@ findIndexByName(name: string) {
   saveSitesToTrip()
   {
     debugger
-    this.tripService.saveSitesToTrip(this.selectedSites);
+    this.tripService.saveSitesToTrip(this.selectedSites, this.approxTravelTime);
     this.route.navigate(['/trip']);
   }  
 
@@ -198,11 +200,11 @@ findIndexByName(name: string) {
 
   checkSitesArea(site: CommonSite){
     var area1='', area2='';
-    var i=0;
+    var i=0, travelTime=0;
     debugger;
     i=this.areas.findIndex(x=>x.name===site.Area);
     this.sitesAreas[i]++;
-    
+
     if (this.sitesAreas[0]>0&&this.sitesAreas[1]>0){
       area1='up north';
       area2='down south';
@@ -218,6 +220,15 @@ findIndexByName(name: string) {
           '. We recommend choosing sites with close proximity.'});
       this.showWarn=true;
     }
+    if (this.sitesAreas[0]>0) 
+    travelTime += 6;  //north - 6 
+    if (this.sitesAreas[1]>0) 
+    travelTime += 4;  //south - 4
+    if (this.sitesAreas[2]>0) 
+    travelTime += 3;  //east - 3
+    if (this.sitesAreas[3]>0) 
+    travelTime += 3;  //west - 3
+    this.approxTravelTime = travelTime;
   }
 }
 
