@@ -55,6 +55,10 @@ import { DatePipe } from '@angular/common';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ToastModule} from 'primeng/toast';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { ContactInfoComponent } from './components/contact-info/contact-info.component';
+
+
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -69,7 +73,10 @@ export const ROUTES: Routes = [
   {path: 'calendar', component: CalendarComponent},
   {path: 'endPage', component: EndpageComponent},
   {path: 'viewAdmin', component: AdminViewTripsComponent},
-  {path: 'pricesTable', component: PriceTableComponent}
+  {path: 'pricesTable', component: PriceTableComponent},
+  {path: 'contact', component: ContactInfoComponent},
+
+  
 ];
 
 @NgModule({
@@ -95,7 +102,8 @@ export const ROUTES: Routes = [
     EndpageComponent,
     AdminViewTripsComponent,
     PriceTableComponent,
-    ReviewsComponent  
+    ReviewsComponent,
+    ContactInfoComponent  
   ],
   imports: [
     BrowserModule,
@@ -125,7 +133,8 @@ export const ROUTES: Routes = [
     ScrollPanelModule,
     MultiSelectModule,
     FileUploadModule,
-    ToastModule   
+    ToastModule,
+    DynamicDialogModule  
   ],
   providers: [TripService,SitesService,UsersService,DataSharingService,DatePipe,MessageService],
   bootstrap: [AppComponent]

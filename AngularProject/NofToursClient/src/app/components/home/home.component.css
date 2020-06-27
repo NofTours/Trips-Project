@@ -9,6 +9,14 @@
     font-size: larger;
 }
 
+.float {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
 .clr{
     
     background-color:#007ad9 ; 

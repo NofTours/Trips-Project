@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Router } from '@angular/router';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 
 @Component({
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   isUserLoggedIn:boolean;
+  ref: DynamicDialogRef;
+
   constructor(private dataSharingService: DataSharingService,private route:Router) { 
    
 
@@ -27,5 +31,6 @@ export class HomeComponent implements OnInit {
         this.route.navigate(['/booktrip']);
        else this.route.navigate(['/login']);
     }
+
   }
 
